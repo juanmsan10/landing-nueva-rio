@@ -442,6 +442,19 @@
     .glow-card::before { z-index: 1; }
 
     /* ── ENHANCED FASE DOTS ──────────────────── */
+    #metodo::before { display: none; }
+    #metodo .section-label,
+    #metodo .section-h2,
+    #metodo .section-sub { text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+    #metodo .section-label {
+      background: rgba(126,244,116,0.08);
+      border: 1px solid rgba(126,244,116,0.35);
+      border-radius: 8px;
+      padding: 6px 16px;
+      display: inline-flex;
+    }
+    #metodo .container > .section-label { display: flex; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto; }
+    #metodo .section-label::before { display: none; }
     .fase-dot { position: relative; }
     .fase-dot-ring {
       position: absolute; inset: -6px;
@@ -784,7 +797,6 @@
       </div>
     </div>
 
-    <div class="solucion-tag reveal reveal-delay-2" style="margin-top:3rem;">Sprint de Orden Operativo</div>
   </div>
 </section>
 
