@@ -143,6 +143,65 @@
     .solucion-intro { font-size: 1.05rem; color: var(--t2); line-height: 1.8; font-weight: 300; max-width: none; margin-bottom: 1rem; white-space: nowrap; }
     .solucion-intro strong { font-weight: 600; color: var(--t); }
     .solucion-tag { display: inline-block; font-family: var(--mono); font-size: 15px; color: var(--lbl); background: var(--icon-bg); padding: 10px 20px; border-radius: 20px; margin-top: 1rem; margin-bottom: 1.5rem; }
+
+    /* ── PRODUCT GRID ─────────────────────────── */
+    .prod-headline {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.03em;
+      text-align: center; max-width: 700px; margin: 0 auto 1.25rem; color: var(--t);
+    }
+    .prod-headline em { font-style: italic; color: var(--g); }
+    .prod-sub {
+      font-size: 18px; color: #b0b0ac; text-align: center;
+      font-weight: 300; margin-bottom: 4rem;
+    }
+    .prod-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+      position: relative; z-index: 1;
+    }
+    .prod-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+      opacity: 0; transform: translateY(20px);
+    }
+    .prod-card.appeared { opacity: 1; transform: translateY(0); }
+    .prod-card.flash { box-shadow: 0 0 0 1px rgba(126,244,116,0.4); }
+    .prod-card:hover {
+      border-color: rgba(126,244,116,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 40px rgba(126,244,116,0.06);
+    }
+    .prod-card-visual {
+      padding: 1.5rem 1.5rem 0; display: flex; align-items: center; justify-content: center;
+    }
+    .prod-card-visual svg { width: 100%; height: auto; max-height: 160px; }
+    .prod-card-title {
+      padding: 1.25rem 1.5rem 1.5rem;
+      font-size: 18px; font-weight: 600; color: var(--t);
+    }
+
+    /* Pills */
+    .prod-pill {
+      position: absolute; z-index: 0;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px; padding: 6px 16px;
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      font-family: var(--sans); white-space: nowrap;
+      animation: pill-float 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pill-float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .pp1 { top: 5%;  left: -60px; animation-delay: 0s; }
+    .pp2 { top: 35%; right: -70px; animation-delay: 0.7s; }
+    .pp3 { bottom: 25%; left: -50px; animation-delay: 1.4s; }
+    .pp4 { top: 10%; right: -55px; animation-delay: 2.1s; }
+    .pp5 { bottom: 8%; left: -40px; animation-delay: 0.35s; }
+    .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .nivel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
@@ -241,6 +300,8 @@
       .diag-step-title { font-size: 20px; }
       .diag-step-desc { font-size: 17px; line-height: 1.7; }
       .pq-grid { grid-template-columns: 1fr; }
+      .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .prod-pill { display: none; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -268,6 +329,9 @@
       .pain-item { padding: 1.75rem; }
       .solucion-intro { font-size: 1.35rem; line-height: 1.35; white-space: normal; }
       .solucion-tag { font-size: 19px; padding: 18px 24px; line-height: 1.5; margin-bottom: calc(1.5rem + 10px); }
+      .prod-headline { font-size: 2rem; }
+      .prod-sub { font-size: 20px; margin-bottom: 2.5rem; }
+      .prod-card-title { font-size: 20px; }
       .mobile-br { display: block; }
       .nivel-card { padding: calc(1.75rem + 20px) 1.75rem; }
       .nivel-num { min-height: 0; padding: 0.42rem 0.72rem; font-size: 15px; }
@@ -577,27 +641,153 @@
   </div>
 </section>
 
-<!-- ░░ SOLUCIÓN — light ░░ -->
-<section class="light-s" id="solucion">
-  <div class="container">
-    <div class="section-label reveal">Cómo lo resolvemos</div>
-    <h2 class="section-h2 reveal reveal-delay-1">Del caos al <em>sistema.</em></h2>
-    <p class="solucion-intro reveal reveal-delay-2">No dejamos un PDF con recomendaciones.<br class="mobile-br"> Instalamos el sistema y lo dejamos funcionando.<br><strong>La tecnología no es el punto de partida, los resultados sí.</strong></p>
-    <div class="solucion-tag reveal reveal-delay-2">Sprint de Orden Operativo</div>
-    <div class="niveles">
-      <div class="nivel-card glow-card n1 reveal reveal-delay-1">
-        <div class="nivel-title">Análisis operativo</div>
-        <div class="nivel-sub">Entendemos cómo funciona hoy tu proceso: dónde se frena, dónde se pierde tiempo, dónde se repite trabajo y qué depende demasiado de quién.</div>
-      </div>
-      <div class="nivel-card glow-card n2 reveal reveal-delay-2">
-        <div class="nivel-title">Rediseño e implementación</div>
-        <div class="nivel-sub">Diseñamos una nueva forma de ejecutar con pasos claros, responsables definidos, controles mínimos y seguimiento visible. Y lo aterrizamos con tu equipo, no en un documento.</div>
-      </div>
-      <div class="nivel-card glow-card n3 reveal reveal-delay-3">
-        <div class="nivel-title">Automatización y agentes</div>
-        <div class="nivel-sub">Solo cuando el proceso está ordenado, metemos tecnología para acelerar lo repetitivo, reducir la carga manual y darle visibilidad al flujo. Nunca antes.</div>
+<!-- ░░ SOLUCIÓN — dark grid de producto ░░ -->
+<section class="dark-s" id="solucion">
+  <div class="sec-grid"></div>
+  <div class="sec-glow c"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <h2 class="prod-headline reveal">Todo lo que necesitas para que tu operación <em>funcione sin ti.</em></h2>
+    <p class="prod-sub reveal reveal-delay-1">No dejamos un PDF. Instalamos el sistema completo.</p>
+
+    <div class="prod-grid-wrap" style="position:relative;">
+      <!-- Pills flotantes -->
+      <div class="prod-pill pp1 reveal">Responsables claros</div>
+      <div class="prod-pill pp2 reveal">Cero improvisación</div>
+      <div class="prod-pill pp3 reveal">SOPs definidos</div>
+      <div class="prod-pill pp4 reveal">Flujos documentados</div>
+      <div class="prod-pill pp5 reveal">Decisiones trazables</div>
+      <div class="prod-pill pp6 reveal">KPIs visibles</div>
+
+      <!-- Grid 2×2 -->
+      <div class="prod-grid">
+        <div class="prod-card glow-card">
+          <div class="prod-card-visual">
+            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Flowchart -->
+              <rect x="100" y="10" width="80" height="28" rx="14" stroke="#7ef474" stroke-width="1.2" opacity="0.7"/>
+              <text x="140" y="28" text-anchor="middle" fill="#7ef474" font-size="10" font-family="IBM Plex Mono" opacity="0.8">Inicio</text>
+              <line x1="140" y1="38" x2="140" y2="52" stroke="#7ef474" stroke-width="1" opacity="0.4"/>
+              <rect x="80" y="52" width="120" height="28" rx="6" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="rgba(255,255,255,0.03)"/>
+              <text x="140" y="70" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" font-family="IBM Plex Sans">Recibir solicitud</text>
+              <line x1="140" y1="80" x2="140" y2="94" stroke="#7ef474" stroke-width="1" opacity="0.4"/>
+              <polygon points="140,94 120,114 160,114" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="rgba(255,255,255,0.03)"/>
+              <text x="140" y="109" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="IBM Plex Sans">Válida?</text>
+              <line x1="120" y1="114" x2="60" y2="136" stroke="#7ef474" stroke-width="1" opacity="0.3"/>
+              <line x1="160" y1="114" x2="220" y2="136" stroke="#7ef474" stroke-width="1" opacity="0.3"/>
+              <rect x="20" y="130" width="80" height="22" rx="6" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="rgba(126,244,116,0.06)"/>
+              <text x="60" y="144" text-anchor="middle" fill="#7ef474" font-size="9" font-family="IBM Plex Sans" opacity="0.8">Procesar</text>
+              <rect x="180" y="130" width="80" height="22" rx="6" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="rgba(255,255,255,0.03)"/>
+              <text x="220" y="144" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="IBM Plex Sans">Escalar</text>
+            </svg>
+          </div>
+          <div class="prod-card-title">Mapa de proceso</div>
+        </div>
+
+        <div class="prod-card glow-card">
+          <div class="prod-card-visual">
+            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Kanban board -->
+              <text x="30" y="18" fill="rgba(255,255,255,0.4)" font-size="9" font-family="IBM Plex Mono" letter-spacing="0.08em">PENDIENTE</text>
+              <text x="110" y="18" fill="rgba(255,255,255,0.4)" font-size="9" font-family="IBM Plex Mono" letter-spacing="0.08em">EN CURSO</text>
+              <text x="200" y="18" fill="#7ef474" font-size="9" font-family="IBM Plex Mono" letter-spacing="0.08em" opacity="0.7">LISTO</text>
+              <line x1="95" y1="6" x2="95" y2="155" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <line x1="185" y1="6" x2="185" y2="155" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <!-- Col 1 -->
+              <rect x="10" y="28" width="75" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <rect x="16" y="36" width="30" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+              <rect x="16" y="44" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+              <rect x="10" y="66" width="75" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <rect x="16" y="74" width="40" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+              <rect x="16" y="82" width="55" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+              <rect x="10" y="104" width="75" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <rect x="16" y="112" width="35" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+              <!-- Col 2 -->
+              <rect x="105" y="28" width="70" height="38" rx="6" fill="rgba(126,244,116,0.06)" stroke="rgba(126,244,116,0.2)" stroke-width="0.8"/>
+              <rect x="111" y="36" width="35" height="4" rx="2" fill="rgba(126,244,116,0.4)"/>
+              <rect x="111" y="44" width="48" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+              <rect x="111" y="51" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+              <rect x="105" y="72" width="70" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <rect x="111" y="80" width="42" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+              <!-- Col 3 -->
+              <rect x="195" y="28" width="75" height="28" rx="6" fill="rgba(126,244,116,0.04)" stroke="rgba(126,244,116,0.15)" stroke-width="0.8"/>
+              <rect x="201" y="36" width="38" height="4" rx="2" fill="rgba(126,244,116,0.3)"/>
+              <rect x="201" y="44" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+              <rect x="195" y="62" width="75" height="28" rx="6" fill="rgba(126,244,116,0.04)" stroke="rgba(126,244,116,0.15)" stroke-width="0.8"/>
+              <rect x="201" y="70" width="44" height="4" rx="2" fill="rgba(126,244,116,0.3)"/>
+              <!-- Checkmarks col 3 -->
+              <circle cx="258" cy="42" r="6" fill="rgba(126,244,116,0.15)"/>
+              <polyline points="255,42 257,44 261,40" stroke="#7ef474" stroke-width="1.2" fill="none" opacity="0.7"/>
+              <circle cx="258" cy="76" r="6" fill="rgba(126,244,116,0.15)"/>
+              <polyline points="255,76 257,78 261,74" stroke="#7ef474" stroke-width="1.2" fill="none" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="prod-card-title">Tablero de control</div>
+        </div>
+
+        <div class="prod-card glow-card">
+          <div class="prod-card-visual">
+            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Document with checklist -->
+              <rect x="70" y="8" width="140" height="145" rx="8" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
+              <rect x="82" y="20" width="70" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+              <rect x="82" y="32" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.07)"/>
+              <line x1="82" y1="44" x2="198" y2="44" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+              <!-- Checklist items -->
+              <rect x="82" y="54" width="12" height="12" rx="3" stroke="#7ef474" stroke-width="1" fill="rgba(126,244,116,0.08)"/>
+              <polyline points="85,60 88,63 93,57" stroke="#7ef474" stroke-width="1.3" fill="none"/>
+              <rect x="100" y="56" width="80" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+              <rect x="100" y="64" width="55" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+              <rect x="82" y="78" width="12" height="12" rx="3" stroke="#7ef474" stroke-width="1" fill="rgba(126,244,116,0.08)"/>
+              <polyline points="85,84 88,87 93,81" stroke="#7ef474" stroke-width="1.3" fill="none"/>
+              <rect x="100" y="80" width="90" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+              <rect x="100" y="88" width="60" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+              <rect x="82" y="102" width="12" height="12" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
+              <rect x="100" y="104" width="70" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+              <rect x="100" y="112" width="45" height="3" rx="1.5" fill="rgba(255,255,255,0.05)"/>
+              <rect x="82" y="126" width="12" height="12" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
+              <rect x="100" y="128" width="85" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+              <rect x="100" y="136" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.05)"/>
+            </svg>
+          </div>
+          <div class="prod-card-title">Playbook del equipo</div>
+        </div>
+
+        <div class="prod-card glow-card">
+          <div class="prod-card-visual">
+            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Chart -->
+              <line x1="30" y1="140" x2="260" y2="140" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              <line x1="30" y1="140" x2="30" y2="15" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              <!-- Grid lines -->
+              <line x1="30" y1="110" x2="260" y2="110" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" stroke-dasharray="4 4"/>
+              <line x1="30" y1="80" x2="260" y2="80" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" stroke-dasharray="4 4"/>
+              <line x1="30" y1="50" x2="260" y2="50" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" stroke-dasharray="4 4"/>
+              <!-- Bars -->
+              <rect x="50" y="95" width="24" height="45" rx="4" fill="rgba(255,255,255,0.08)"/>
+              <rect x="90" y="75" width="24" height="65" rx="4" fill="rgba(255,255,255,0.08)"/>
+              <rect x="130" y="60" width="24" height="80" rx="4" fill="rgba(126,244,116,0.15)"/>
+              <rect x="170" y="45" width="24" height="95" rx="4" fill="rgba(126,244,116,0.25)"/>
+              <rect x="210" y="30" width="24" height="110" rx="4" fill="rgba(126,244,116,0.4)"/>
+              <!-- Trend line -->
+              <polyline points="62,90 102,70 142,55 182,40 222,25" stroke="#7ef474" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Dots on trend -->
+              <circle cx="142" cy="55" r="3" fill="#7ef474" opacity="0.5"/>
+              <circle cx="182" cy="40" r="3" fill="#7ef474" opacity="0.7"/>
+              <circle cx="222" cy="25" r="3.5" fill="#7ef474" opacity="0.9"/>
+              <!-- Labels -->
+              <text x="62" y="152" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="IBM Plex Mono">S1</text>
+              <text x="102" y="152" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="IBM Plex Mono">S2</text>
+              <text x="142" y="152" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="IBM Plex Mono">S3</text>
+              <text x="182" y="152" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="IBM Plex Mono">S4</text>
+              <text x="222" y="152" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="IBM Plex Mono">S5</text>
+            </svg>
+          </div>
+          <div class="prod-card-title">Métricas y seguimiento</div>
+        </div>
       </div>
     </div>
+
+    <div class="solucion-tag reveal reveal-delay-2" style="margin-top:3rem;">Sprint de Orden Operativo</div>
   </div>
 </section>
 
@@ -987,6 +1177,7 @@
   setupCardGrid('.pain-grid .pain-item');
   setupCardGrid('.niveles .nivel-card');
   setupCardGrid('.diag-grid .diag-step-card');
+  setupCardGrid('.prod-grid .prod-card');
 
   // ── [5] FASES SEQUENTIAL ANIMATION ────────────
   (function(){
