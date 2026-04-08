@@ -150,9 +150,9 @@
       font-weight: 600; line-height: 1.15; letter-spacing: -0.03em;
       text-align: center; max-width: 700px; margin: 0 auto 1.25rem; color: var(--t);
     }
-    .prod-headline em { font-style: italic; color: var(--g); }
+    .prod-headline em { font-style: normal; color: var(--g); }
     .prod-sub {
-      font-size: 18px; color: #b0b0ac; text-align: center;
+      font-size: 21px; color: #b0b0ac; text-align: center;
       font-weight: 300; margin-bottom: 4rem;
     }
     .prod-grid {
@@ -185,12 +185,13 @@
     /* Pills */
     .prod-pill {
       position: absolute; z-index: 0;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(126,244,116,0.06); border: 1px solid rgba(126,244,116,0.18);
       border-radius: 999px; padding: 6px 16px;
-      font-size: 13px; color: rgba(255,255,255,0.5);
+      font-size: 13px; color: rgba(255,255,255,0.7);
       font-family: var(--sans); white-space: nowrap;
       animation: pill-float 4s ease-in-out infinite;
       pointer-events: none;
+      box-shadow: 0 0 12px rgba(126,244,116,0.04);
     }
     @keyframes pill-float {
       0%,100% { transform: translateY(0); }
@@ -200,7 +201,7 @@
     .pp2 { top: 35%; right: -70px; animation-delay: 0.7s; }
     .pp3 { bottom: 25%; left: -50px; animation-delay: 1.4s; }
     .pp4 { top: 10%; right: -55px; animation-delay: 2.1s; }
-    .pp5 { bottom: 8%; left: -40px; animation-delay: 0.35s; }
+    .pp5 { top: 60%; left: -55px; animation-delay: 0.35s; }
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -646,7 +647,7 @@
   <div class="sec-grid"></div>
   <div class="sec-glow c"></div>
   <div class="container" style="position:relative;z-index:1;">
-    <h2 class="prod-headline reveal">Todo lo que necesitas para que tu operación <em>funcione sin ti.</em></h2>
+    <h2 class="prod-headline reveal">Todo lo que necesitas para que tu operación <em>sea predecible y efectiva.</em></h2>
     <p class="prod-sub reveal reveal-delay-1">No dejamos un PDF. Instalamos el sistema completo.</p>
 
     <div class="prod-grid-wrap" style="position:relative;">
@@ -662,8 +663,7 @@
       <div class="prod-grid">
         <div class="prod-card glow-card">
           <div class="prod-card-visual">
-            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Flowchart -->
+            <svg viewBox="15 2 250 155" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="100" y="10" width="80" height="28" rx="14" stroke="#7ef474" stroke-width="1.2" opacity="0.7"/>
               <text x="140" y="28" text-anchor="middle" fill="#7ef474" font-size="10" font-family="IBM Plex Mono" opacity="0.8">Inicio</text>
               <line x1="140" y1="38" x2="140" y2="52" stroke="#7ef474" stroke-width="1" opacity="0.4"/>
@@ -685,8 +685,7 @@
 
         <div class="prod-card glow-card">
           <div class="prod-card-visual">
-            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Kanban board -->
+            <svg viewBox="2 0 276 158" fill="none" xmlns="http://www.w3.org/2000/svg">
               <text x="30" y="18" fill="rgba(255,255,255,0.4)" font-size="9" font-family="IBM Plex Mono" letter-spacing="0.08em">PENDIENTE</text>
               <text x="110" y="18" fill="rgba(255,255,255,0.4)" font-size="9" font-family="IBM Plex Mono" letter-spacing="0.08em">EN CURSO</text>
               <text x="200" y="18" fill="#7ef474" font-size="9" font-family="IBM Plex Mono" letter-spacing="0.08em" opacity="0.7">LISTO</text>
@@ -726,8 +725,7 @@
 
         <div class="prod-card glow-card">
           <div class="prod-card-visual">
-            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Document with checklist -->
+            <svg viewBox="55 0 170 158" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="70" y="8" width="140" height="145" rx="8" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
               <rect x="82" y="20" width="70" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
               <rect x="82" y="32" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.07)"/>
@@ -749,13 +747,12 @@
               <rect x="100" y="136" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.05)"/>
             </svg>
           </div>
-          <div class="prod-card-title">Playbook del equipo</div>
+          <div class="prod-card-title">Manuales de ejecución</div>
         </div>
 
         <div class="prod-card glow-card">
           <div class="prod-card-visual">
-            <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Chart -->
+            <svg viewBox="18 8 250 152" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="30" y1="140" x2="260" y2="140" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
               <line x1="30" y1="140" x2="30" y2="15" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
               <!-- Grid lines -->
