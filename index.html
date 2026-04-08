@@ -206,15 +206,10 @@
 
     /* ── IA SECTION (cinematic) ────────────────── */
     .ia-section { position: relative; overflow: hidden; padding: 8rem 3rem; }
-    .ia-section::before { display: none; }
-    .ia-noise {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      opacity: 0.04; mix-blend-mode: overlay; pointer-events: none;
-    }
     .ia-glow-bg {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       width: 600px; height: 600px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(126,244,116,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(30,112,24,0.06) 0%, transparent 70%);
       opacity: 0; transition: opacity 1s ease;
     }
     .ia-section.ia-active .ia-glow-bg { opacity: 1; }
@@ -222,16 +217,16 @@
       font-size: clamp(2.8rem, 6vw, 4.5rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
       text-align: center; margin-bottom: 1.5rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 100%);
+      background: linear-gradient(180deg, rgba(26,26,24,0.95) 0%, rgba(26,26,24,0.4) 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .ia-headline em {
       font-style: normal;
-      background: linear-gradient(180deg, #7ef474 0%, rgba(126,244,116,0.6) 100%);
+      background: linear-gradient(180deg, #1e7018 0%, rgba(30,112,24,0.5) 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .ia-sub {
-      font-size: 20px; color: #b0b0ac; text-align: center;
+      font-size: 20px; color: #4e4e4a; text-align: center;
       font-weight: 300; max-width: 620px; margin: 0 auto 4rem; line-height: 1.7;
     }
 
@@ -254,14 +249,14 @@
     .ia-figure-glow {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(126,244,116,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(30,112,24,0.1) 0%, transparent 70%);
       opacity: 0; transition: opacity 0.8s ease 0.8s;
       pointer-events: none;
     }
     .ia-section.ia-active .ia-figure-glow { opacity: 1; }
     @keyframes ia-pulse {
-      0%,100% { transform: scale(1); opacity: 0.08; }
-      50% { transform: scale(1.4); opacity: 0.15; }
+      0%,100% { transform: scale(1); opacity: 0.06; }
+      50% { transform: scale(1.4); opacity: 0.12; }
     }
     .ia-pulse-core { transform-origin: 150px 130px; animation: ia-pulse 3s ease-in-out infinite; }
 
@@ -272,10 +267,10 @@
     }
     .ia-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(30,112,24,0.06); border: 1px solid rgba(30,112,24,0.15);
       border-radius: 8px; padding: 8px 16px;
       font-size: 12px; font-family: var(--mono); letter-spacing: 0.15em;
-      text-transform: uppercase; color: rgba(255,255,255,0.65);
+      text-transform: uppercase; color: #4e4e4a;
       opacity: 0; transform: translateX(-20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
@@ -295,9 +290,9 @@
       max-width: 700px; margin: 0 auto 3rem;
     }
     .ia-action-pill {
-      background: rgba(126,244,116,0.06); border: 1px solid rgba(126,244,116,0.15);
+      background: rgba(30,112,24,0.06); border: 1px solid rgba(30,112,24,0.12);
       border-radius: 999px; padding: 8px 18px;
-      font-size: 14px; color: rgba(255,255,255,0.6);
+      font-size: 14px; color: #4e4e4a;
       opacity: 0; transform: translateY(12px);
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
@@ -313,14 +308,14 @@
     .ia-cta-btn {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 16px 36px; border-radius: 999px;
-      background: rgba(126,244,116,0.08); border: 1px solid rgba(126,244,116,0.4);
-      color: #7ef474; font-size: 14px; font-weight: 700; font-family: var(--sans);
+      background: rgba(30,112,24,0.06); border: 1px solid rgba(30,112,24,0.35);
+      color: #1e7018; font-size: 14px; font-weight: 700; font-family: var(--sans);
       letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase;
       transition: all 0.3s;
     }
     .ia-cta-btn:hover {
-      background: rgba(126,244,116,0.15);
-      box-shadow: 0 0 40px rgba(126,244,116,0.15);
+      background: rgba(30,112,24,0.12);
+      box-shadow: 0 0 40px rgba(30,112,24,0.1);
       transform: translateY(-2px);
     }
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
@@ -929,116 +924,6 @@
   </div>
 </section>
 
-<!-- ░░ HUMANOS CON IA — cinematic dark ░░ -->
-<section class="dark-s ia-section" id="ia">
-  <!-- Noise texture -->
-  <svg class="ia-noise" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/></filter>
-    <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
-  </svg>
-  <div class="ia-glow-bg"></div>
-  <div class="container" style="position:relative;z-index:1;">
-
-    <!-- Headline -->
-    <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
-    <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
-
-    <!-- Central figure -->
-    <div class="ia-figure-wrap reveal reveal-delay-2" id="ia-figure">
-      <!-- Shadow layer -->
-      <div class="ia-figure-shadow">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Gear outer -->
-          <path d="M150 40 L162 65 L185 55 L180 80 L205 82 L192 102 L215 112 L197 126 L212 148 L190 150 L195 175 L172 168 L165 192 L150 178 L135 192 L128 168 L105 175 L110 150 L88 148 L103 126 L85 112 L108 102 L95 82 L120 80 L115 55 L138 65 Z" stroke="rgba(126,244,116,0.15)" stroke-width="1" fill="rgba(126,244,116,0.02)"/>
-          <!-- Inner circle -->
-          <circle cx="150" cy="130" r="55" stroke="rgba(126,244,116,0.12)" stroke-width="1" fill="none"/>
-          <!-- Neural nodes -->
-          <circle cx="150" cy="105" r="4" fill="rgba(126,244,116,0.1)"/>
-          <circle cx="130" cy="125" r="3" fill="rgba(126,244,116,0.08)"/>
-          <circle cx="170" cy="125" r="3" fill="rgba(126,244,116,0.08)"/>
-          <circle cx="135" cy="150" r="3.5" fill="rgba(126,244,116,0.08)"/>
-          <circle cx="165" cy="150" r="3.5" fill="rgba(126,244,116,0.08)"/>
-          <circle cx="150" cy="140" r="5" fill="rgba(126,244,116,0.1)"/>
-          <!-- Neural connections -->
-          <line x1="150" y1="105" x2="130" y2="125" stroke="rgba(126,244,116,0.06)" stroke-width="0.8"/>
-          <line x1="150" y1="105" x2="170" y2="125" stroke="rgba(126,244,116,0.06)" stroke-width="0.8"/>
-          <line x1="130" y1="125" x2="150" y2="140" stroke="rgba(126,244,116,0.06)" stroke-width="0.8"/>
-          <line x1="170" y1="125" x2="150" y2="140" stroke="rgba(126,244,116,0.06)" stroke-width="0.8"/>
-          <line x1="150" y1="140" x2="135" y2="150" stroke="rgba(126,244,116,0.06)" stroke-width="0.8"/>
-          <line x1="150" y1="140" x2="165" y2="150" stroke="rgba(126,244,116,0.06)" stroke-width="0.8"/>
-        </svg>
-      </div>
-      <!-- Revealed layer -->
-      <div class="ia-figure-reveal">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Gear outer -->
-          <path d="M150 40 L162 65 L185 55 L180 80 L205 82 L192 102 L215 112 L197 126 L212 148 L190 150 L195 175 L172 168 L165 192 L150 178 L135 192 L128 168 L105 175 L110 150 L88 148 L103 126 L85 112 L108 102 L95 82 L120 80 L115 55 L138 65 Z" stroke="#7ef474" stroke-width="1.5" fill="rgba(126,244,116,0.04)"/>
-          <!-- Inner circle -->
-          <circle cx="150" cy="130" r="55" stroke="rgba(126,244,116,0.4)" stroke-width="1.2" fill="rgba(126,244,116,0.03)"/>
-          <!-- Neural nodes -->
-          <circle cx="150" cy="105" r="5" fill="#7ef474" opacity="0.8"/>
-          <circle cx="130" cy="125" r="4" fill="#7ef474" opacity="0.6"/>
-          <circle cx="170" cy="125" r="4" fill="#7ef474" opacity="0.6"/>
-          <circle cx="135" cy="150" r="4" fill="#7ef474" opacity="0.5"/>
-          <circle cx="165" cy="150" r="4" fill="#7ef474" opacity="0.5"/>
-          <circle cx="150" cy="140" r="6" fill="#7ef474" opacity="0.9"/>
-          <!-- Pulsing core -->
-          <circle cx="150" cy="130" r="18" fill="rgba(126,244,116,0.08)" class="ia-pulse-core"/>
-          <!-- Neural connections -->
-          <line x1="150" y1="105" x2="130" y2="125" stroke="#7ef474" stroke-width="1.2" opacity="0.5"/>
-          <line x1="150" y1="105" x2="170" y2="125" stroke="#7ef474" stroke-width="1.2" opacity="0.5"/>
-          <line x1="130" y1="125" x2="150" y2="140" stroke="#7ef474" stroke-width="1.2" opacity="0.5"/>
-          <line x1="170" y1="125" x2="150" y2="140" stroke="#7ef474" stroke-width="1.2" opacity="0.5"/>
-          <line x1="150" y1="140" x2="135" y2="150" stroke="#7ef474" stroke-width="1" opacity="0.4"/>
-          <line x1="150" y1="140" x2="165" y2="150" stroke="#7ef474" stroke-width="1" opacity="0.4"/>
-          <!-- Outer spokes to badges -->
-          <line x1="105" y1="110" x2="60" y2="85" stroke="#7ef474" stroke-width="0.6" opacity="0.2" stroke-dasharray="4 4"/>
-          <line x1="195" y1="110" x2="240" y2="85" stroke="#7ef474" stroke-width="0.6" opacity="0.2" stroke-dasharray="4 4"/>
-          <line x1="105" y1="155" x2="55" y2="185" stroke="#7ef474" stroke-width="0.6" opacity="0.2" stroke-dasharray="4 4"/>
-          <line x1="195" y1="155" x2="245" y2="185" stroke="#7ef474" stroke-width="0.6" opacity="0.2" stroke-dasharray="4 4"/>
-          <!-- Bolt descending (top center) -->
-          <path d="M153 55 L147 72 L155 72 L149 88" stroke="#7ef474" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.9"/>
-        </svg>
-      </div>
-      <!-- Glow behind -->
-      <div class="ia-figure-glow"></div>
-    </div>
-
-    <!-- Badges -->
-    <div class="ia-badges" id="ia-badges">
-      <div class="ia-badge ia-b-left">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7ef474" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        TRABAJO 24/7
-      </div>
-      <div class="ia-badge ia-b-right">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7ef474" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        MEMORIA INFINITA
-      </div>
-      <div class="ia-badge ia-b-left">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7ef474" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        EQUIPO ×3
-      </div>
-      <div class="ia-badge ia-b-right">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7ef474" stroke-width="1.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        TAREAS AUTOMATIZADAS
-      </div>
-    </div>
-
-    <!-- Action pills -->
-    <div class="ia-actions" id="ia-actions">
-      <div class="ia-action-pill">⚡ Automatiza seguimientos</div>
-      <div class="ia-action-pill">🤖 Despliega agentes</div>
-      <div class="ia-action-pill">📊 Genera reportes</div>
-      <div class="ia-action-pill">🔄 Elimina tareas repetitivas</div>
-    </div>
-
-    <!-- CTA -->
-    <div class="ia-cta-wrap" id="ia-cta">
-      <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
-    </div>
-  </div>
-</section>
-
 <!-- ░░ MÉTODO — dark ░░ -->
 <section class="dark-s" id="metodo">
   <div class="sec-grid"></div>
@@ -1069,6 +954,92 @@
         <div class="fase-title">Implementación</div>
         <div class="fase-desc">Acompañamos a tu equipo a ejecutar el nuevo proceso en la realidad. Reuniones semanales, ajustes sobre la marcha y desbloqueo de decisiones. Esto no es teoría, es apropiación.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ HUMANOS CON IA — light ░░ -->
+<section class="light-s ia-section" id="ia">
+  <div class="ia-glow-bg"></div>
+  <div class="container" style="position:relative;z-index:1;">
+
+    <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
+    <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
+
+    <div class="ia-figure-wrap reveal reveal-delay-2" id="ia-figure">
+      <div class="ia-figure-shadow">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M150 40 L162 65 L185 55 L180 80 L205 82 L192 102 L215 112 L197 126 L212 148 L190 150 L195 175 L172 168 L165 192 L150 178 L135 192 L128 168 L105 175 L110 150 L88 148 L103 126 L85 112 L108 102 L95 82 L120 80 L115 55 L138 65 Z" stroke="rgba(30,112,24,0.12)" stroke-width="1" fill="rgba(30,112,24,0.02)"/>
+          <circle cx="150" cy="130" r="55" stroke="rgba(30,112,24,0.1)" stroke-width="1" fill="none"/>
+          <circle cx="150" cy="105" r="4" fill="rgba(30,112,24,0.08)"/>
+          <circle cx="130" cy="125" r="3" fill="rgba(30,112,24,0.06)"/>
+          <circle cx="170" cy="125" r="3" fill="rgba(30,112,24,0.06)"/>
+          <circle cx="135" cy="150" r="3.5" fill="rgba(30,112,24,0.06)"/>
+          <circle cx="165" cy="150" r="3.5" fill="rgba(30,112,24,0.06)"/>
+          <circle cx="150" cy="140" r="5" fill="rgba(30,112,24,0.08)"/>
+          <line x1="150" y1="105" x2="130" y2="125" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
+          <line x1="150" y1="105" x2="170" y2="125" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
+          <line x1="130" y1="125" x2="150" y2="140" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
+          <line x1="170" y1="125" x2="150" y2="140" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
+          <line x1="150" y1="140" x2="135" y2="150" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
+          <line x1="150" y1="140" x2="165" y2="150" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <div class="ia-figure-reveal">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M150 40 L162 65 L185 55 L180 80 L205 82 L192 102 L215 112 L197 126 L212 148 L190 150 L195 175 L172 168 L165 192 L150 178 L135 192 L128 168 L105 175 L110 150 L88 148 L103 126 L85 112 L108 102 L95 82 L120 80 L115 55 L138 65 Z" stroke="#1e7018" stroke-width="1.5" fill="rgba(30,112,24,0.04)"/>
+          <circle cx="150" cy="130" r="55" stroke="rgba(30,112,24,0.35)" stroke-width="1.2" fill="rgba(30,112,24,0.03)"/>
+          <circle cx="150" cy="105" r="5" fill="#1e7018" opacity="0.8"/>
+          <circle cx="130" cy="125" r="4" fill="#1e7018" opacity="0.6"/>
+          <circle cx="170" cy="125" r="4" fill="#1e7018" opacity="0.6"/>
+          <circle cx="135" cy="150" r="4" fill="#1e7018" opacity="0.5"/>
+          <circle cx="165" cy="150" r="4" fill="#1e7018" opacity="0.5"/>
+          <circle cx="150" cy="140" r="6" fill="#1e7018" opacity="0.9"/>
+          <circle cx="150" cy="130" r="18" fill="rgba(30,112,24,0.06)" class="ia-pulse-core"/>
+          <line x1="150" y1="105" x2="130" y2="125" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
+          <line x1="150" y1="105" x2="170" y2="125" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
+          <line x1="130" y1="125" x2="150" y2="140" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
+          <line x1="170" y1="125" x2="150" y2="140" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
+          <line x1="150" y1="140" x2="135" y2="150" stroke="#1e7018" stroke-width="1" opacity="0.3"/>
+          <line x1="150" y1="140" x2="165" y2="150" stroke="#1e7018" stroke-width="1" opacity="0.3"/>
+          <line x1="105" y1="110" x2="60" y2="85" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
+          <line x1="195" y1="110" x2="240" y2="85" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
+          <line x1="105" y1="155" x2="55" y2="185" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
+          <line x1="195" y1="155" x2="245" y2="185" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
+          <path d="M153 55 L147 72 L155 72 L149 88" stroke="#1e7018" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="ia-figure-glow"></div>
+    </div>
+
+    <div class="ia-badges" id="ia-badges">
+      <div class="ia-badge ia-b-left">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        TRABAJO 24/7
+      </div>
+      <div class="ia-badge ia-b-right">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        MEMORIA INFINITA
+      </div>
+      <div class="ia-badge ia-b-left">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        EQUIPO ×3
+      </div>
+      <div class="ia-badge ia-b-right">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        TAREAS AUTOMATIZADAS
+      </div>
+    </div>
+
+    <div class="ia-actions" id="ia-actions">
+      <div class="ia-action-pill">⚡ Automatiza seguimientos</div>
+      <div class="ia-action-pill">🤖 Despliega agentes</div>
+      <div class="ia-action-pill">📊 Genera reportes</div>
+      <div class="ia-action-pill">🔄 Elimina tareas repetitivas</div>
+    </div>
+
+    <div class="ia-cta-wrap" id="ia-cta">
+      <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
     </div>
   </div>
 </section>
