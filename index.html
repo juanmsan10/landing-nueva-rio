@@ -204,15 +204,8 @@
     .pp5 { top: 60%; left: -55px; animation-delay: 0.35s; }
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
 
-    /* ── IA SECTION (cinematic) ────────────────── */
+    /* ── IA SECTION (terminal cursor) ─────────── */
     .ia-section { position: relative; overflow: hidden; padding: 8rem 3rem; }
-    .ia-glow-bg {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 600px; height: 600px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(30,112,24,0.06) 0%, transparent 70%);
-      opacity: 0; transition: opacity 1s ease;
-    }
-    .ia-section.ia-active .ia-glow-bg { opacity: 1; }
     .ia-headline {
       font-size: clamp(2.8rem, 6vw, 4.5rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
@@ -230,59 +223,87 @@
       font-weight: 300; max-width: 620px; margin: 0 auto 4rem; line-height: 1.7;
     }
 
-    /* Figure */
-    .ia-figure-wrap {
-      position: relative; width: 280px; height: 280px;
-      margin: 0 auto 3rem;
+    /* Terminal stage */
+    .ia-stage {
+      position: relative; width: 100%; max-width: 700px;
+      height: 420px; margin: 0 auto 3rem;
     }
-    .ia-figure-shadow, .ia-figure-reveal {
-      position: absolute; inset: 0;
-    }
-    .ia-figure-shadow svg, .ia-figure-reveal svg { width: 100%; height: 100%; }
-    .ia-figure-reveal {
-      clip-path: circle(0% at 50% 45%);
-      transition: clip-path 1s cubic-bezier(0.23,1,0.32,1);
-    }
-    .ia-section.ia-active .ia-figure-reveal {
-      clip-path: circle(75% at 50% 45%);
-    }
-    .ia-figure-glow {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,112,24,0.1) 0%, transparent 70%);
-      opacity: 0; transition: opacity 0.8s ease 0.8s;
-      pointer-events: none;
-    }
-    .ia-section.ia-active .ia-figure-glow { opacity: 1; }
-    @keyframes ia-pulse {
-      0%,100% { transform: scale(1); opacity: 0.06; }
-      50% { transform: scale(1.4); opacity: 0.12; }
-    }
-    .ia-pulse-core { transform-origin: 150px 130px; animation: ia-pulse 3s ease-in-out infinite; }
 
-    /* Badges */
-    .ia-badges {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
-      max-width: 600px; margin: 0 auto 2rem;
+    /* Cursor + command */
+    .ia-terminal {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-family: var(--mono); font-size: 18px; color: #1e7018;
+      white-space: nowrap; z-index: 5;
     }
+    .ia-cursor-char {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: #1e7018; vertical-align: text-bottom;
+      animation: ia-blink 0.7s step-end infinite;
+    }
+    @keyframes ia-blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+    .ia-command { opacity: 0; }
+    .ia-prompt { color: rgba(30,112,24,0.5); }
+
+    /* Radial lines from center */
+    .ia-line {
+      position: absolute; top: 50%; left: 50%;
+      height: 1px; transform-origin: 0 0;
+      background: linear-gradient(90deg, rgba(30,112,24,0.3), rgba(30,112,24,0.05));
+      opacity: 0; z-index: 1;
+    }
+    .ia-line.line-in {
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Glow pulse at center */
+    .ia-center-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 120px; height: 120px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,112,24,0.12) 0%, transparent 70%);
+      opacity: 0; z-index: 0;
+      transition: opacity 0.6s ease;
+    }
+    .ia-center-glow.glow-in { opacity: 1; }
+    .ia-center-dot {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #1e7018; opacity: 0; z-index: 2;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 20px rgba(30,112,24,0.3);
+    }
+    .ia-center-dot.dot-in { opacity: 1; }
+
+    /* Badges positioned around */
     .ia-badge {
+      position: absolute; z-index: 3;
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(30,112,24,0.06); border: 1px solid rgba(30,112,24,0.15);
-      border-radius: 8px; padding: 8px 16px;
-      font-size: 12px; font-family: var(--mono); letter-spacing: 0.15em;
-      text-transform: uppercase; color: #4e4e4a;
-      opacity: 0; transform: translateX(-20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      background: rgba(30,112,24,0.05); border: 1px solid rgba(30,112,24,0.15);
+      border-radius: 8px; padding: 10px 18px;
+      font-size: 12px; font-family: var(--mono); letter-spacing: 0.12em;
+      text-transform: uppercase; color: #1a1a18;
+      opacity: 0; white-space: nowrap;
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .ia-badge.ia-b-right { transform: translateX(20px); }
-    .ia-badge.badge-in {
-      opacity: 1; transform: translateX(0);
-      animation: badge-float 5s ease-in-out infinite;
-    }
+    .ia-badge svg { flex-shrink: 0; }
+    .ia-badge.badge-in { opacity: 1; }
+    .ia-badge.badge-float { animation: badge-float 5s ease-in-out infinite; }
     @keyframes badge-float {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-6px); }
     }
+    /* Badge positions */
+    .ia-b0 { top: 8%; left: 2%; }
+    .ia-b1 { top: 5%; right: 2%; }
+    .ia-b2 { bottom: 18%; left: 0%; }
+    .ia-b3 { bottom: 15%; right: 0%; }
+
+    /* Connector lines from badges to center */
+    .ia-connector {
+      position: absolute; z-index: 1; pointer-events: none;
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .ia-connector.conn-in { opacity: 1; }
 
     /* Action pills */
     .ia-actions {
@@ -290,7 +311,7 @@
       max-width: 700px; margin: 0 auto 3rem;
     }
     .ia-action-pill {
-      background: rgba(30,112,24,0.06); border: 1px solid rgba(30,112,24,0.12);
+      background: rgba(30,112,24,0.05); border: 1px solid rgba(30,112,24,0.12);
       border-radius: 999px; padding: 8px 18px;
       font-size: 14px; color: #4e4e4a;
       opacity: 0; transform: translateY(12px);
@@ -419,7 +440,12 @@
       .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
       .prod-pill { display: none; }
       .ia-section { padding: 5rem 1.5rem; }
-      .ia-figure-wrap { width: 220px; height: 220px; }
+      .ia-stage { height: 350px; }
+      .ia-badge { font-size: 11px; padding: 8px 12px; }
+      .ia-b0 { top: 5%; left: 0; }
+      .ia-b1 { top: 2%; right: 0; }
+      .ia-b2 { bottom: 12%; left: 0; }
+      .ia-b3 { bottom: 8%; right: 0; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -452,9 +478,10 @@
       .prod-card-title { font-size: 20px; }
       .ia-headline { font-size: 2.6rem; }
       .ia-sub { font-size: 21px; }
-      .ia-figure-wrap { width: 200px; height: 200px; }
-      .ia-badges { gap: 0.75rem; }
-      .ia-badge { font-size: 11px; padding: 7px 12px; }
+      .ia-stage { height: 320px; }
+      .ia-terminal { font-size: 15px; }
+      .ia-badge { font-size: 10px; padding: 6px 10px; letter-spacing: 0.08em; position: relative; top: auto; left: auto; right: auto; bottom: auto; }
+      .ia-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; height: auto; gap: 1rem; padding: 2rem 0; }
       .ia-action-pill { font-size: 15px; }
       .ia-cta-btn { font-size: 15px; padding: 18px 32px; }
       .mobile-br { display: block; }
@@ -960,77 +987,44 @@
 
 <!-- ░░ HUMANOS CON IA — light ░░ -->
 <section class="light-s ia-section" id="ia">
-  <div class="ia-glow-bg"></div>
   <div class="container" style="position:relative;z-index:1;">
 
     <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
     <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
 
-    <div class="ia-figure-wrap reveal reveal-delay-2" id="ia-figure">
-      <div class="ia-figure-shadow">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M150 40 L162 65 L185 55 L180 80 L205 82 L192 102 L215 112 L197 126 L212 148 L190 150 L195 175 L172 168 L165 192 L150 178 L135 192 L128 168 L105 175 L110 150 L88 148 L103 126 L85 112 L108 102 L95 82 L120 80 L115 55 L138 65 Z" stroke="rgba(30,112,24,0.12)" stroke-width="1" fill="rgba(30,112,24,0.02)"/>
-          <circle cx="150" cy="130" r="55" stroke="rgba(30,112,24,0.1)" stroke-width="1" fill="none"/>
-          <circle cx="150" cy="105" r="4" fill="rgba(30,112,24,0.08)"/>
-          <circle cx="130" cy="125" r="3" fill="rgba(30,112,24,0.06)"/>
-          <circle cx="170" cy="125" r="3" fill="rgba(30,112,24,0.06)"/>
-          <circle cx="135" cy="150" r="3.5" fill="rgba(30,112,24,0.06)"/>
-          <circle cx="165" cy="150" r="3.5" fill="rgba(30,112,24,0.06)"/>
-          <circle cx="150" cy="140" r="5" fill="rgba(30,112,24,0.08)"/>
-          <line x1="150" y1="105" x2="130" y2="125" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
-          <line x1="150" y1="105" x2="170" y2="125" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
-          <line x1="130" y1="125" x2="150" y2="140" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
-          <line x1="170" y1="125" x2="150" y2="140" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
-          <line x1="150" y1="140" x2="135" y2="150" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
-          <line x1="150" y1="140" x2="165" y2="150" stroke="rgba(30,112,24,0.05)" stroke-width="0.8"/>
-        </svg>
-      </div>
-      <div class="ia-figure-reveal">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M150 40 L162 65 L185 55 L180 80 L205 82 L192 102 L215 112 L197 126 L212 148 L190 150 L195 175 L172 168 L165 192 L150 178 L135 192 L128 168 L105 175 L110 150 L88 148 L103 126 L85 112 L108 102 L95 82 L120 80 L115 55 L138 65 Z" stroke="#1e7018" stroke-width="1.5" fill="rgba(30,112,24,0.04)"/>
-          <circle cx="150" cy="130" r="55" stroke="rgba(30,112,24,0.35)" stroke-width="1.2" fill="rgba(30,112,24,0.03)"/>
-          <circle cx="150" cy="105" r="5" fill="#1e7018" opacity="0.8"/>
-          <circle cx="130" cy="125" r="4" fill="#1e7018" opacity="0.6"/>
-          <circle cx="170" cy="125" r="4" fill="#1e7018" opacity="0.6"/>
-          <circle cx="135" cy="150" r="4" fill="#1e7018" opacity="0.5"/>
-          <circle cx="165" cy="150" r="4" fill="#1e7018" opacity="0.5"/>
-          <circle cx="150" cy="140" r="6" fill="#1e7018" opacity="0.9"/>
-          <circle cx="150" cy="130" r="18" fill="rgba(30,112,24,0.06)" class="ia-pulse-core"/>
-          <line x1="150" y1="105" x2="130" y2="125" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
-          <line x1="150" y1="105" x2="170" y2="125" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
-          <line x1="130" y1="125" x2="150" y2="140" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
-          <line x1="170" y1="125" x2="150" y2="140" stroke="#1e7018" stroke-width="1.2" opacity="0.4"/>
-          <line x1="150" y1="140" x2="135" y2="150" stroke="#1e7018" stroke-width="1" opacity="0.3"/>
-          <line x1="150" y1="140" x2="165" y2="150" stroke="#1e7018" stroke-width="1" opacity="0.3"/>
-          <line x1="105" y1="110" x2="60" y2="85" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
-          <line x1="195" y1="110" x2="240" y2="85" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
-          <line x1="105" y1="155" x2="55" y2="185" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
-          <line x1="195" y1="155" x2="245" y2="185" stroke="#1e7018" stroke-width="0.6" opacity="0.15" stroke-dasharray="4 4"/>
-          <path d="M153 55 L147 72 L155 72 L149 88" stroke="#1e7018" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
-        </svg>
-      </div>
-      <div class="ia-figure-glow"></div>
-    </div>
+    <!-- Terminal stage -->
+    <div class="ia-stage" id="ia-stage">
+      <!-- Center glow -->
+      <div class="ia-center-glow" id="ia-glow"></div>
+      <div class="ia-center-dot" id="ia-dot"></div>
 
-    <div class="ia-badges" id="ia-badges">
-      <div class="ia-badge ia-b-left">
+      <!-- Terminal cursor -->
+      <div class="ia-terminal" id="ia-terminal">
+        <span class="ia-command" id="ia-cmd"></span><span class="ia-cursor-char" id="ia-cursor">|</span>
+      </div>
+
+      <!-- Lines will be injected by JS -->
+
+      <!-- Badges -->
+      <div class="ia-badge ia-b0" data-text="TRABAJO 24/7" data-delay="0">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        TRABAJO 24/7
+        <span class="ia-badge-text"></span>
       </div>
-      <div class="ia-badge ia-b-right">
+      <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA" data-delay="1">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        MEMORIA INFINITA
+        <span class="ia-badge-text"></span>
       </div>
-      <div class="ia-badge ia-b-left">
+      <div class="ia-badge ia-b2" data-text="EQUIPO ×3" data-delay="2">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        EQUIPO ×3
+        <span class="ia-badge-text"></span>
       </div>
-      <div class="ia-badge ia-b-right">
+      <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS" data-delay="3">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        TAREAS AUTOMATIZADAS
+        <span class="ia-badge-text"></span>
       </div>
     </div>
 
+    <!-- Action pills -->
     <div class="ia-actions" id="ia-actions">
       <div class="ia-action-pill">⚡ Automatiza seguimientos</div>
       <div class="ia-action-pill">🤖 Despliega agentes</div>
@@ -1038,6 +1032,7 @@
       <div class="ia-action-pill">🔄 Elimina tareas repetitivas</div>
     </div>
 
+    <!-- CTA -->
     <div class="ia-cta-wrap" id="ia-cta">
       <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
     </div>
@@ -1594,41 +1589,150 @@
     });
   })();
 
-  // ── IA SECTION ANIMATION ────────────────────
+  // ── IA SECTION — TERMINAL CURSOR ANIMATION ──
   (function(){
     const iaSection = document.querySelector('.ia-section');
     if(!iaSection) return;
-    const badges = iaSection.querySelectorAll('.ia-badge');
+    const stage = document.getElementById('ia-stage');
+    const terminal = document.getElementById('ia-terminal');
+    const cmd = document.getElementById('ia-cmd');
+    const cursorEl = document.getElementById('ia-cursor');
+    const glow = document.getElementById('ia-glow');
+    const dot = document.getElementById('ia-dot');
+    const badges = stage.querySelectorAll('.ia-badge');
     const pills = iaSection.querySelectorAll('.ia-action-pill');
     const ctaWrap = iaSection.querySelector('.ia-cta-wrap');
+
+    const CHARS = '!@#$%^&*()_+-=[]{}|;:<>?/~`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const COMMAND = '> activar_agentes';
+
+    // Text scramble effect
+    function scrambleText(el, target, duration, cb){
+      const len = target.length;
+      const steps = Math.ceil(duration / 30);
+      let step = 0;
+      const iv = setInterval(()=>{
+        let out = '';
+        for(let i = 0; i < len; i++){
+          if(i < (step / steps) * len){
+            out += target[i];
+          } else {
+            out += CHARS[Math.floor(Math.random()*CHARS.length)];
+          }
+        }
+        el.textContent = out;
+        step++;
+        if(step > steps){
+          clearInterval(iv);
+          el.textContent = target;
+          if(cb) cb();
+        }
+      }, 30);
+    }
+
+    // Type command character by character
+    function typeCommand(text, cb){
+      cmd.style.opacity = '1';
+      let i = 0;
+      const iv = setInterval(()=>{
+        cmd.textContent = text.slice(0, i+1);
+        i++;
+        if(i >= text.length){
+          clearInterval(iv);
+          if(cb) cb();
+        }
+      }, 60);
+    }
+
+    // Create radial lines from center to badges
+    function createLines(){
+      const stageRect = stage.getBoundingClientRect();
+      const cx = stageRect.width / 2;
+      const cy = stageRect.height / 2;
+
+      badges.forEach((badge, i) => {
+        const bRect = badge.getBoundingClientRect();
+        const bx = bRect.left - stageRect.left + bRect.width / 2;
+        const by = bRect.top - stageRect.top + bRect.height / 2;
+        const dx = bx - cx;
+        const dy = by - cy;
+        const len = Math.sqrt(dx*dx + dy*dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+        const line = document.createElement('div');
+        line.className = 'ia-line';
+        line.style.width = len + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+        line.id = 'ia-line-' + i;
+        stage.appendChild(line);
+      });
+    }
+
+    // Main animation sequence
+    function runSequence(){
+      // 0s — cursor is already blinking
+
+      // 0.5s — type command
+      setTimeout(()=>{
+        typeCommand(COMMAND, ()=>{
+
+          // After typing done — brief pause then dissolve
+          setTimeout(()=>{
+            // Hide terminal text
+            cmd.style.transition = 'opacity 0.4s';
+            cmd.style.opacity = '0';
+            cursorEl.style.transition = 'opacity 0.3s';
+            cursorEl.style.opacity = '0';
+
+            // Show center dot + glow
+            setTimeout(()=>{
+              dot.classList.add('dot-in');
+              glow.classList.add('glow-in');
+
+              // Create and show lines
+              createLines();
+              setTimeout(()=>{
+                document.querySelectorAll('.ia-line').forEach((line, i)=>{
+                  setTimeout(()=> line.classList.add('line-in'), i * 80);
+                });
+              }, 200);
+
+              // Badges appear with scramble
+              badges.forEach((badge, i)=>{
+                const textEl = badge.querySelector('.ia-badge-text');
+                const target = badge.dataset.text;
+                setTimeout(()=>{
+                  badge.classList.add('badge-in');
+                  // Start with random chars
+                  textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+                  // Scramble decode
+                  setTimeout(()=> scrambleText(textEl, target, 600, ()=>{
+                    badge.classList.add('badge-float');
+                    badge.style.animationDelay = (i * 0.4) + 's';
+                  }), 100);
+                }, 600 + i * 250);
+              });
+
+              // Action pills
+              pills.forEach((p, i) => {
+                setTimeout(()=> p.classList.add('pill-in'), 2200 + i * 120);
+              });
+
+              // CTA
+              setTimeout(()=>{
+                if(ctaWrap) ctaWrap.classList.add('cta-in');
+              }, 2800);
+
+            }, 300);
+          }, 400);
+        });
+      }, 500);
+    }
 
     const iaObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if(e.isIntersecting){
-          // 0.5s — activate reveal
-          setTimeout(() => {
-            iaSection.classList.add('ia-active');
-          }, 500);
-
-          // 1.5s — badges stagger
-          badges.forEach((b, i) => {
-            setTimeout(() => {
-              b.classList.add('badge-in');
-            }, 1500 + i * 200);
-          });
-
-          // 2.5s — action pills
-          pills.forEach((p, i) => {
-            setTimeout(() => {
-              p.classList.add('pill-in');
-            }, 2500 + i * 120);
-          });
-
-          // 3s — CTA
-          setTimeout(() => {
-            if(ctaWrap) ctaWrap.classList.add('cta-in');
-          }, 3000);
-
+          runSequence();
           iaObs.unobserve(e.target);
         }
       });
