@@ -204,7 +204,7 @@
     .pp5 { top: 60%; left: -55px; animation-delay: 0.35s; }
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
 
-    /* ── IA SECTION (terminal cursor) ─────────── */
+    /* ── IA SECTION (circle to network) ──────── */
     .ia-section { position: relative; overflow: hidden; padding: 8rem 3rem; }
     .ia-headline {
       font-size: clamp(2.8rem, 6vw, 4.5rem);
@@ -223,87 +223,33 @@
       font-weight: 300; max-width: 620px; margin: 0 auto 4rem; line-height: 1.7;
     }
 
-    /* Terminal stage */
+    /* Stage */
     .ia-stage {
-      position: relative; width: 100%; max-width: 700px;
-      height: 420px; margin: 0 auto 3rem;
+      position: relative; width: 100%; max-width: 800px;
+      height: 460px; margin: 0 auto 3rem;
+    }
+    .ia-stage svg.ia-svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
     }
 
-    /* Cursor + command */
-    .ia-terminal {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      font-family: var(--mono); font-size: 18px; color: #1e7018;
-      white-space: nowrap; z-index: 5;
-    }
-    .ia-cursor-char {
-      display: inline-block; width: 2px; height: 1.1em;
-      background: #1e7018; vertical-align: text-bottom;
-      animation: ia-blink 0.7s step-end infinite;
-    }
-    @keyframes ia-blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
-    .ia-command { opacity: 0; }
-    .ia-prompt { color: rgba(30,112,24,0.5); }
-
-    /* Radial lines from center */
-    .ia-line {
-      position: absolute; top: 50%; left: 50%;
-      height: 1px; transform-origin: 0 0;
-      background: linear-gradient(90deg, rgba(30,112,24,0.3), rgba(30,112,24,0.05));
-      opacity: 0; z-index: 1;
-    }
-    .ia-line.line-in {
-      opacity: 1;
-      transition: opacity 0.4s ease;
-    }
-
-    /* Glow pulse at center */
-    .ia-center-glow {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 120px; height: 120px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,112,24,0.12) 0%, transparent 70%);
-      opacity: 0; z-index: 0;
-      transition: opacity 0.6s ease;
-    }
-    .ia-center-glow.glow-in { opacity: 1; }
-    .ia-center-dot {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #1e7018; opacity: 0; z-index: 2;
-      transition: opacity 0.3s ease;
-      box-shadow: 0 0 20px rgba(30,112,24,0.3);
-    }
-    .ia-center-dot.dot-in { opacity: 1; }
-
-    /* Badges positioned around */
+    /* Badges — no box, just text + line */
     .ia-badge {
       position: absolute; z-index: 3;
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(30,112,24,0.05); border: 1px solid rgba(30,112,24,0.15);
-      border-radius: 8px; padding: 10px 18px;
-      font-size: 12px; font-family: var(--mono); letter-spacing: 0.12em;
-      text-transform: uppercase; color: #1a1a18;
-      opacity: 0; white-space: nowrap;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
+      color: rgba(30,112,24,0.7); white-space: nowrap;
+      opacity: 0; transition: opacity 0.3s ease;
     }
-    .ia-badge svg { flex-shrink: 0; }
     .ia-badge.badge-in { opacity: 1; }
-    .ia-badge.badge-float { animation: badge-float 5s ease-in-out infinite; }
+    .ia-badge.badge-float { animation: badge-float 6s ease-in-out infinite; }
     @keyframes badge-float {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-5px); }
     }
-    /* Badge positions */
-    .ia-b0 { top: 8%; left: 2%; }
-    .ia-b1 { top: 5%; right: 2%; }
-    .ia-b2 { bottom: 18%; left: 0%; }
-    .ia-b3 { bottom: 15%; right: 0%; }
-
-    /* Connector lines from badges to center */
-    .ia-connector {
-      position: absolute; z-index: 1; pointer-events: none;
-      opacity: 0; transition: opacity 0.5s ease;
-    }
-    .ia-connector.conn-in { opacity: 1; }
+    /* Badge positions — around the network */
+    .ia-b0 { top: 12%; left: 4%; }
+    .ia-b1 { top: 8%; right: 4%; }
+    .ia-b2 { bottom: 16%; left: 6%; }
+    .ia-b3 { bottom: 12%; right: 4%; }
 
     /* Action pills */
     .ia-actions {
@@ -440,12 +386,8 @@
       .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
       .prod-pill { display: none; }
       .ia-section { padding: 5rem 1.5rem; }
-      .ia-stage { height: 350px; }
-      .ia-badge { font-size: 11px; padding: 8px 12px; }
-      .ia-b0 { top: 5%; left: 0; }
-      .ia-b1 { top: 2%; right: 0; }
-      .ia-b2 { bottom: 12%; left: 0; }
-      .ia-b3 { bottom: 8%; right: 0; }
+      .ia-stage { height: 380px; }
+      .ia-badge { font-size: 11px; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -478,10 +420,8 @@
       .prod-card-title { font-size: 20px; }
       .ia-headline { font-size: 2.6rem; }
       .ia-sub { font-size: 21px; }
-      .ia-stage { height: 320px; }
-      .ia-terminal { font-size: 15px; }
-      .ia-badge { font-size: 10px; padding: 6px 10px; letter-spacing: 0.08em; position: relative; top: auto; left: auto; right: auto; bottom: auto; }
-      .ia-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; height: auto; gap: 1rem; padding: 2rem 0; }
+      .ia-stage { height: 340px; }
+      .ia-badge { font-size: 10px; letter-spacing: 0.08em; }
       .ia-action-pill { font-size: 15px; }
       .ia-cta-btn { font-size: 15px; padding: 18px 32px; }
       .mobile-br { display: block; }
@@ -992,36 +932,47 @@
     <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
     <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
 
-    <!-- Terminal stage -->
+    <!-- Network stage -->
     <div class="ia-stage" id="ia-stage">
-      <!-- Center glow -->
-      <div class="ia-center-glow" id="ia-glow"></div>
-      <div class="ia-center-dot" id="ia-dot"></div>
+      <svg class="ia-svg" id="ia-svg" viewBox="0 0 800 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Initial ring -->
+        <circle id="ia-ring" cx="400" cy="230" r="50" stroke="#1e7018" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <!-- Center dot (appears after) -->
+        <circle id="ia-center" cx="400" cy="230" r="5" fill="#1e7018" opacity="0"/>
+        <!-- Glow -->
+        <circle id="ia-glow" cx="400" cy="230" r="40" fill="url(#ia-glow-grad)" opacity="0"/>
+        <defs>
+          <radialGradient id="ia-glow-grad"><stop offset="0%" stop-color="rgba(30,112,24,0.15)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        </defs>
+        <!-- Nodes (hidden initially) -->
+        <circle class="ia-node" data-tx="-220" data-ty="-110" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
+        <circle class="ia-node" data-tx="230" data-ty="-100" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
+        <circle class="ia-node" data-tx="-200" data-ty="120" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
+        <circle class="ia-node" data-tx="240" data-ty="110" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
+        <circle class="ia-node" data-tx="0" data-ty="-150" cx="400" cy="230" r="3" fill="#1e7018" opacity="0"/>
+        <!-- Connection lines (hidden) -->
+        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
+        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
+        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
+        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
+        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
+        <!-- Cross-connections between nodes -->
+        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
+        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
+        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
+        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
+        <!-- Badge connector lines (angular) -->
+        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+      </svg>
 
-      <!-- Terminal cursor -->
-      <div class="ia-terminal" id="ia-terminal">
-        <span class="ia-command" id="ia-cmd"></span><span class="ia-cursor-char" id="ia-cursor">|</span>
-      </div>
-
-      <!-- Lines will be injected by JS -->
-
-      <!-- Badges -->
-      <div class="ia-badge ia-b0" data-text="TRABAJO 24/7" data-delay="0">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span class="ia-badge-text"></span>
-      </div>
-      <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA" data-delay="1">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        <span class="ia-badge-text"></span>
-      </div>
-      <div class="ia-badge ia-b2" data-text="EQUIPO ×3" data-delay="2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        <span class="ia-badge-text"></span>
-      </div>
-      <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS" data-delay="3">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e7018" stroke-width="1.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span class="ia-badge-text"></span>
-      </div>
+      <!-- Badges — no box, just text -->
+      <div class="ia-badge ia-b0" data-text="TRABAJO 24/7" data-node="0"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA" data-node="1"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b2" data-text="EQUIPO ×3" data-node="2"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS" data-node="3"><span class="ia-badge-text"></span></div>
     </div>
 
     <!-- Action pills -->
@@ -1589,144 +1540,177 @@
     });
   })();
 
-  // ── IA SECTION — TERMINAL CURSOR ANIMATION ──
+  // ── IA SECTION — CIRCLE TO NETWORK ───────────
   (function(){
     const iaSection = document.querySelector('.ia-section');
     if(!iaSection) return;
-    const stage = document.getElementById('ia-stage');
-    const terminal = document.getElementById('ia-terminal');
-    const cmd = document.getElementById('ia-cmd');
-    const cursorEl = document.getElementById('ia-cursor');
-    const glow = document.getElementById('ia-glow');
-    const dot = document.getElementById('ia-dot');
-    const badges = stage.querySelectorAll('.ia-badge');
+
+    const ring = document.getElementById('ia-ring');
+    const center = document.getElementById('ia-center');
+    const glowEl = document.getElementById('ia-glow');
+    const nodes = document.querySelectorAll('.ia-node');
+    const edges = document.querySelectorAll('.ia-edge');
+    const crosses = document.querySelectorAll('.ia-cross');
+    const conns = document.querySelectorAll('.ia-conn');
+    const badges = iaSection.querySelectorAll('.ia-badge');
     const pills = iaSection.querySelectorAll('.ia-action-pill');
     const ctaWrap = iaSection.querySelector('.ia-cta-wrap');
 
-    const CHARS = '!@#$%^&*()_+-=[]{}|;:<>?/~`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const COMMAND = '> activar_agentes';
+    const CX = 400, CY = 230;
+    const CHARS = '!@#$%^&*_+-=[]{}|:<>?/~ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-    // Text scramble effect
-    function scrambleText(el, target, duration, cb){
+    // Scramble text decode
+    function scramble(el, target, dur, cb){
       const len = target.length;
-      const steps = Math.ceil(duration / 30);
+      const steps = Math.ceil(dur / 30);
       let step = 0;
       const iv = setInterval(()=>{
         let out = '';
         for(let i = 0; i < len; i++){
-          if(i < (step / steps) * len){
-            out += target[i];
-          } else {
-            out += CHARS[Math.floor(Math.random()*CHARS.length)];
-          }
+          out += i < (step/steps)*len ? target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
         }
         el.textContent = out;
         step++;
-        if(step > steps){
-          clearInterval(iv);
-          el.textContent = target;
-          if(cb) cb();
-        }
+        if(step > steps){ clearInterval(iv); el.textContent = target; if(cb) cb(); }
       }, 30);
     }
 
-    // Type command character by character
-    function typeCommand(text, cb){
-      cmd.style.opacity = '1';
-      let i = 0;
-      const iv = setInterval(()=>{
-        cmd.textContent = text.slice(0, i+1);
-        i++;
-        if(i >= text.length){
-          clearInterval(iv);
-          if(cb) cb();
-        }
-      }, 60);
+    // Animate SVG attribute
+    function animAttr(el, attr, from, to, dur, ease){
+      const start = performance.now();
+      (function tick(now){
+        const t = Math.min((now - start)/dur, 1);
+        const e = ease ? (1 - Math.pow(1-t, 3)) : t; // cubic ease-out
+        const v = from + (to - from) * e;
+        el.setAttribute(attr, v);
+        if(t < 1) requestAnimationFrame(tick);
+      })(performance.now());
     }
 
-    // Create radial lines from center to badges
-    function createLines(){
-      const stageRect = stage.getBoundingClientRect();
-      const cx = stageRect.width / 2;
-      const cy = stageRect.height / 2;
-
-      badges.forEach((badge, i) => {
-        const bRect = badge.getBoundingClientRect();
-        const bx = bRect.left - stageRect.left + bRect.width / 2;
-        const by = bRect.top - stageRect.top + bRect.height / 2;
-        const dx = bx - cx;
-        const dy = by - cy;
-        const len = Math.sqrt(dx*dx + dy*dy);
-        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-
-        const line = document.createElement('div');
-        line.className = 'ia-line';
-        line.style.width = len + 'px';
-        line.style.transform = `rotate(${angle}deg)`;
-        line.id = 'ia-line-' + i;
-        stage.appendChild(line);
-      });
-    }
-
-    // Main animation sequence
     function runSequence(){
-      // 0s — cursor is already blinking
+      // Node final positions
+      const nodeTargets = [];
+      nodes.forEach(n => {
+        nodeTargets.push({ tx: +n.dataset.tx, ty: +n.dataset.ty });
+      });
 
-      // 0.5s — type command
+      // ── PHASE 1: Ring pulse ──
       setTimeout(()=>{
-        typeCommand(COMMAND, ()=>{
+        // Pulse: scale up then down
+        animAttr(ring, 'r', 50, 70, 250, true);
+        setTimeout(()=>{
+          animAttr(ring, 'r', 70, 50, 200, true);
+        }, 250);
+      }, 300);
 
-          // After typing done — brief pause then dissolve
+      // ── PHASE 2: Ring shrinks, nodes fly out ──
+      setTimeout(()=>{
+        // Shrink ring
+        animAttr(ring, 'r', 50, 0, 600, true);
+        animAttr(ring, 'opacity', 0.6, 0, 500, false);
+
+        // Show center dot + glow
+        setTimeout(()=>{
+          animAttr(center, 'opacity', 0, 1, 400, false);
+          animAttr(glowEl, 'opacity', 0, 0.8, 600, false);
+        }, 200);
+
+        // Animate nodes outward
+        nodes.forEach((node, i) => {
+          const target = nodeTargets[i];
+          const finalX = CX + target.tx;
+          const finalY = CY + target.ty;
+
           setTimeout(()=>{
-            // Hide terminal text
-            cmd.style.transition = 'opacity 0.4s';
-            cmd.style.opacity = '0';
-            cursorEl.style.transition = 'opacity 0.3s';
-            cursorEl.style.opacity = '0';
+            node.setAttribute('opacity', '0.8');
 
-            // Show center dot + glow
-            setTimeout(()=>{
-              dot.classList.add('dot-in');
-              glow.classList.add('glow-in');
+            const startTime = performance.now();
+            const dur = 700;
+            (function tick(now){
+              const t = Math.min((now - startTime)/dur, 1);
+              const e = 1 - Math.pow(1-t, 3);
+              const x = CX + target.tx * e;
+              const y = CY + target.ty * e;
+              node.setAttribute('cx', x);
+              node.setAttribute('cy', y);
 
-              // Create and show lines
-              createLines();
-              setTimeout(()=>{
-                document.querySelectorAll('.ia-line').forEach((line, i)=>{
-                  setTimeout(()=> line.classList.add('line-in'), i * 80);
-                });
-              }, 200);
-
-              // Badges appear with scramble
-              badges.forEach((badge, i)=>{
-                const textEl = badge.querySelector('.ia-badge-text');
-                const target = badge.dataset.text;
-                setTimeout(()=>{
-                  badge.classList.add('badge-in');
-                  // Start with random chars
-                  textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-                  // Scramble decode
-                  setTimeout(()=> scrambleText(textEl, target, 600, ()=>{
-                    badge.classList.add('badge-float');
-                    badge.style.animationDelay = (i * 0.4) + 's';
-                  }), 100);
-                }, 600 + i * 250);
-              });
-
-              // Action pills
-              pills.forEach((p, i) => {
-                setTimeout(()=> p.classList.add('pill-in'), 2200 + i * 120);
-              });
-
-              // CTA
-              setTimeout(()=>{
-                if(ctaWrap) ctaWrap.classList.add('cta-in');
-              }, 2800);
-
-            }, 300);
-          }, 400);
+              // Animate edge from center to node
+              if(edges[i]){
+                edges[i].setAttribute('x2', x);
+                edges[i].setAttribute('y2', y);
+                edges[i].setAttribute('opacity', '0.2');
+              }
+              if(t < 1) requestAnimationFrame(tick);
+            })(performance.now());
+          }, i * 100);
         });
-      }, 500);
+
+        // Cross connections (after nodes settle)
+        setTimeout(()=>{
+          const crossPairs = [[0,4],[1,4],[0,2],[1,3]];
+          crossPairs.forEach((pair, i) => {
+            if(!crosses[i]) return;
+            const n1 = nodeTargets[pair[0]];
+            const n2 = nodeTargets[pair[1]];
+            crosses[i].setAttribute('x1', CX + n1.tx);
+            crosses[i].setAttribute('y1', CY + n1.ty);
+            crosses[i].setAttribute('x2', CX + n2.tx);
+            crosses[i].setAttribute('y2', CY + n2.ty);
+            setTimeout(()=> crosses[i].setAttribute('opacity', '0.1'), i * 80);
+          });
+        }, 900);
+
+      }, 800);
+
+      // ── PHASE 3: Badge connectors + text decode ──
+      setTimeout(()=>{
+        const badgePositions = [
+          {bx: 32, by: 55},   // b0: top-left
+          {bx: 768, by: 37},  // b1: top-right
+          {bx: 48, by: 390},  // b2: bottom-left
+          {bx: 768, by: 380}, // b3: bottom-right
+        ];
+
+        badges.forEach((badge, i) => {
+          const target = nodeTargets[i];
+          const nx = CX + target.tx;
+          const ny = CY + target.ty;
+          const bp = badgePositions[i];
+          // Angular connector: badge → elbow → node
+          const elbowX = (i % 2 === 0) ? nx - 30 : nx + 30;
+          const elbowY = bp.by > CY ? ny + 20 : ny - 20;
+
+          if(conns[i]){
+            conns[i].setAttribute('points', `${bp.bx},${bp.by} ${elbowX},${elbowY} ${nx},${ny}`);
+          }
+
+          setTimeout(()=>{
+            // Show connector
+            if(conns[i]) conns[i].setAttribute('opacity', '0.25');
+
+            // Show badge with scramble
+            badge.classList.add('badge-in');
+            const textEl = badge.querySelector('.ia-badge-text');
+            const txt = badge.dataset.text;
+            textEl.textContent = txt.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+
+            setTimeout(()=> scramble(textEl, txt, 500, ()=>{
+              badge.classList.add('badge-float');
+              badge.style.animationDelay = (i * 0.5) + 's';
+            }), 150);
+          }, i * 300);
+        });
+      }, 2000);
+
+      // ── PHASE 4: Pills + CTA ──
+      setTimeout(()=>{
+        pills.forEach((p, i) => {
+          setTimeout(()=> p.classList.add('pill-in'), i * 120);
+        });
+        setTimeout(()=>{
+          if(ctaWrap) ctaWrap.classList.add('cta-in');
+        }, 600);
+      }, 3500);
     }
 
     const iaObs = new IntersectionObserver(entries => {
@@ -1736,7 +1720,7 @@
           iaObs.unobserve(e.target);
         }
       });
-    }, {threshold: 0.3});
+    }, {threshold: 0.25});
     iaObs.observe(iaSection);
   })();
 </script>
