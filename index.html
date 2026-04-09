@@ -205,7 +205,10 @@
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
 
     /* ── IA SECTION (ring to network) ────────── */
-    .ia-section { position: relative; overflow: hidden; padding: 8rem 3rem 6rem; }
+    .ia-section {
+      position: relative; overflow: hidden; padding: 8rem 3rem 6rem;
+      background: radial-gradient(ellipse at 50% 70%, rgba(30,112,24,0.06) 0%, rgba(30,112,24,0.02) 40%, transparent 70%);
+    }
     .ia-headline {
       font-size: clamp(2.8rem, 6vw, 4.5rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
@@ -226,9 +229,7 @@
       position: relative; width: 100%; max-width: 800px;
       height: 500px; margin: 0 auto 2rem;
     }
-    .ia-stage svg.ia-svg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-    }
+    .ia-stage svg.ia-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
     .ia-badge {
       position: absolute; z-index: 3;
       font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
@@ -237,29 +238,13 @@
     }
     .ia-badge.badge-in { opacity: 1; }
     .ia-badge.badge-float { animation: badge-float 6s ease-in-out infinite; }
-    @keyframes badge-float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    .ia-b0 { top: 4%; left: 5%; }
-    .ia-b1 { top: 1%; right: 3%; }
-    .ia-b2 { bottom: 8%; left: 7%; }
-    .ia-b3 { bottom: 5%; right: 3%; }
-    .ia-actions {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;
-      max-width: 700px; margin: 0 auto 3rem;
-    }
-    .ia-action-pill {
-      background: rgba(30,112,24,0.05); border: 1px solid rgba(30,112,24,0.12);
-      border-radius: 999px; padding: 8px 18px;
-      font-size: 14px; color: #4e4e4a;
-      opacity: 0; transform: translateY(12px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .ia-action-pill.pill-in { opacity: 1; transform: translateY(0); }
+    @keyframes badge-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+    .ia-b0 { top: 14%; left: 3%; }
+    .ia-b1 { top: 10%; right: 1%; }
+    .ia-b2 { bottom: 10%; left: 5%; }
+    .ia-b3 { bottom: 6%; right: 1%; }
     .ia-cta-wrap {
-      text-align: center;
-      opacity: 0; transform: translateY(12px);
+      text-align: center; opacity: 0; transform: translateY(12px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .ia-cta-wrap.cta-in { opacity: 1; transform: translateY(0); }
@@ -273,9 +258,9 @@
     }
     .ia-cta-btn:hover {
       background: rgba(30,112,24,0.12);
-      box-shadow: 0 0 40px rgba(30,112,24,0.1);
-      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(30,112,24,0.1); transform: translateY(-2px);
     }
+
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .nivel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
@@ -413,7 +398,6 @@
       .ia-sub { font-size: 21px; }
       .ia-stage { height: 380px; }
       .ia-badge { font-size: 10px; letter-spacing: 0.08em; }
-      .ia-action-pill { font-size: 15px; }
       .ia-cta-btn { font-size: 15px; padding: 18px 32px; }
       .mobile-br { display: block; }
       .nivel-card { padding: calc(1.75rem + 20px) 1.75rem; }
@@ -921,36 +905,21 @@
   <div class="container" style="position:relative;z-index:1;">
     <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
     <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
-
     <div class="ia-stage" id="ia-stage">
       <svg class="ia-svg" id="ia-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="ia-glow-grad"><stop offset="0%" stop-color="rgba(30,112,24,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-        </defs>
-        <!-- Glow behind ring -->
-        <circle id="ia-glow" cx="400" cy="280" r="60" fill="url(#ia-glow-grad)" opacity="0"/>
-        <!-- Main ring -->
-        <circle id="ia-ring" cx="400" cy="60" r="28" stroke="#1e7018" stroke-width="1.5" fill="none" opacity="0.6"/>
-        <!-- 4 angular connectors (polylines ending vertical) -->
+        <defs><radialGradient id="ia-glow-grad"><stop offset="0%" stop-color="rgba(30,112,24,0.1)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+        <circle id="ia-glow" cx="400" cy="280" r="120" fill="url(#ia-glow-grad)" opacity="0"/>
+        <circle id="ia-ring" cx="400" cy="40" r="28" stroke="#1e7018" stroke-width="1.5" fill="none" opacity="0.5"/>
         <polyline id="ia-conn0" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
         <polyline id="ia-conn1" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
         <polyline id="ia-conn2" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
         <polyline id="ia-conn3" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
       </svg>
-
       <div class="ia-badge ia-b0" data-text="TRABAJO 24/7"><span class="ia-badge-text"></span></div>
       <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA"><span class="ia-badge-text"></span></div>
       <div class="ia-badge ia-b2" data-text="EQUIPO ×3"><span class="ia-badge-text"></span></div>
       <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS"><span class="ia-badge-text"></span></div>
     </div>
-
-    <div class="ia-actions" id="ia-actions">
-      <div class="ia-action-pill">⚡ Automatiza seguimientos</div>
-      <div class="ia-action-pill">🤖 Despliega agentes</div>
-      <div class="ia-action-pill">📊 Genera reportes</div>
-      <div class="ia-action-pill">🔄 Elimina tareas repetitivas</div>
-    </div>
-
     <div class="ia-cta-wrap" id="ia-cta">
       <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
     </div>
@@ -1511,147 +1480,106 @@
   (function(){
     const iaSection = document.querySelector('.ia-section');
     if(!iaSection) return;
-
     const ring = document.getElementById('ia-ring');
     const glowEl = document.getElementById('ia-glow');
     const badges = iaSection.querySelectorAll('.ia-badge');
-    const pills = iaSection.querySelectorAll('.ia-action-pill');
     const ctaWrap = iaSection.querySelector('.ia-cta-wrap');
-
-    const CX = 400, START_Y = 60, END_Y = 280;
+    const CX = 400, START_Y = 40, END_Y = 280, END_R = 80;
     const CHARS = '!@#$%^&*_+-=[]{}|:<>?/~ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let triggered = false;
-    let scrollBound = true;
+    let triggered = false, scrollBound = true;
 
-    // Scramble text decode — SLOW
     function scramble(el, target, dur, cb){
-      const len = target.length;
-      const steps = Math.ceil(dur / 35);
+      const len = target.length, steps = Math.ceil(dur / 35);
       let step = 0;
       const iv = setInterval(()=>{
         let out = '';
-        for(let i = 0; i < len; i++){
-          out += i < (step/steps)*len ? target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
-        }
-        el.textContent = out;
-        step++;
+        for(let i = 0; i < len; i++) out += i < (step/steps)*len ? target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
+        el.textContent = out; step++;
         if(step > steps){ clearInterval(iv); el.textContent = target; if(cb) cb(); }
       }, 35);
     }
 
-    // Scroll-driven ring descent
     function onScroll(){
       if(!scrollBound) return;
       const rect = iaSection.getBoundingClientRect();
-      const sectionH = rect.height;
       const viewH = window.innerHeight;
-
-      // Progress: 0 when section top hits viewport bottom, 1 when top hits viewport top
-      const raw = 1 - (rect.top / viewH);
-      const progress = Math.max(0, Math.min(raw * 0.6, 1)); // compress to first 60% of scroll
-
-      const cy = START_Y + (END_Y - START_Y) * progress;
-      ring.setAttribute('cy', cy);
-
-      // When ring reaches target
+      const progress = Math.max(0, Math.min((1 - rect.top / viewH) * 1.2, 1));
+      ring.setAttribute('cy', START_Y + (END_Y - START_Y) * progress);
       if(progress >= 0.95 && !triggered){
-        triggered = true;
-        scrollBound = false;
+        triggered = true; scrollBound = false;
         ring.setAttribute('cy', END_Y);
         triggerExpansion();
       }
     }
 
     function triggerExpansion(){
-      // Pulse ring bigger
-      const dur = 500;
-      const startR = 28, endR = 42;
-      const startTime = performance.now();
+      const dur = 600, startR = 28, startS = 1.5, s = performance.now();
       (function anim(now){
-        const t = Math.min((now - startTime)/dur, 1);
-        const e = 1 - Math.pow(1-t, 3);
-        ring.setAttribute('r', startR + (endR - startR) * e);
+        const t = Math.min((now - s)/dur, 1), e = 1 - Math.pow(1-t, 3);
+        ring.setAttribute('r', startR + (END_R - startR) * e);
+        ring.setAttribute('stroke-width', startS + (5 - startS) * e);
+        ring.setAttribute('opacity', 0.5 + 0.3 * e);
         if(t < 1) requestAnimationFrame(anim);
       })(performance.now());
 
-      // Show glow
-      setTimeout(()=>{
-        glowEl.setAttribute('opacity', '0.8');
-        glowEl.style.transition = 'opacity 0.6s';
-      }, 200);
+      setTimeout(()=> glowEl.setAttribute('opacity', '0.7'), 300);
 
-      // Connector targets: ring center → elbow → vertical end near badge
-      // Format: [elbowX, elbowY, endX, endY]
-      const connTargets = [
-        [140, 140, 140, 50],    // top-left: TRABAJO 24/7
-        [660, 130, 660, 40],    // top-right: MEMORIA INFINITA
-        [150, 400, 150, 450],   // bottom-left: EQUIPO ×3
-        [670, 390, 670, 440],   // bottom-right: TAREAS AUTOMATIZADAS
+      // Connectors: start OUTSIDE ring edge, diagonal to elbow, then HORIZONTAL
+      const ANG = Math.PI / 4; // 45 degrees
+      const R_OUT = END_R + 20;
+      const conns = [
+        // top-left: start NW outside ring → elbow → horizontal LEFT
+        { sx: CX - R_OUT * Math.cos(ANG), sy: END_Y - R_OUT * Math.sin(ANG), ex: 190, ey: 110, hx: 25, hy: 110 },
+        // top-right: start NE → elbow → horizontal RIGHT
+        { sx: CX + R_OUT * Math.cos(ANG), sy: END_Y - R_OUT * Math.sin(ANG), ex: 610, ey: 95, hx: 780, hy: 95 },
+        // bottom-left: start SW → elbow → horizontal LEFT
+        { sx: CX - R_OUT * Math.cos(ANG), sy: END_Y + R_OUT * Math.sin(ANG), ex: 180, ey: 430, hx: 35, hy: 430 },
+        // bottom-right: start SE → elbow → horizontal RIGHT
+        { sx: CX + R_OUT * Math.cos(ANG), sy: END_Y + R_OUT * Math.sin(ANG), ex: 620, ey: 420, hx: 780, hy: 420 },
       ];
 
-      // Animate connectors
-      connTargets.forEach((target, i) => {
+      conns.forEach((c, i) => {
         const conn = document.getElementById('ia-conn' + i);
         if(!conn) return;
-
         setTimeout(()=>{
-          // Phase 1: draw from ring to elbow
-          const d1 = 400;
-          const s1 = performance.now();
+          const d1 = 450, s1 = performance.now();
           (function draw1(now){
-            const t = Math.min((now - s1)/d1, 1);
-            const e = 1 - Math.pow(1-t, 3);
-            const ex = CX + (target[0] - CX) * e;
-            const ey = END_Y + (target[1] - END_Y) * e;
-            conn.setAttribute('points', CX+','+END_Y+' '+ex+','+ey+' '+ex+','+ey);
+            const t = Math.min((now - s1)/d1, 1), e = 1 - Math.pow(1-t, 3);
+            const mx = c.sx + (c.ex - c.sx) * e, my = c.sy + (c.ey - c.sy) * e;
+            conn.setAttribute('points', c.sx+','+c.sy+' '+mx+','+my+' '+mx+','+my);
             conn.setAttribute('opacity', '0.3');
             if(t < 1) requestAnimationFrame(draw1);
             else {
-              // Phase 2: draw vertical to end
-              const d2 = 300;
-              const s2 = performance.now();
+              const d2 = 350, s2 = performance.now();
               (function draw2(now2){
-                const t2 = Math.min((now2 - s2)/d2, 1);
-                const e2 = 1 - Math.pow(1-t2, 3);
-                const fy = target[1] + (target[3] - target[1]) * e2;
-                conn.setAttribute('points', CX+','+END_Y+' '+target[0]+','+target[1]+' '+target[2]+','+fy);
+                const t2 = Math.min((now2 - s2)/d2, 1), e2 = 1 - Math.pow(1-t2, 3);
+                const fx = c.ex + (c.hx - c.ex) * e2;
+                conn.setAttribute('points', c.sx+','+c.sy+' '+c.ex+','+c.ey+' '+fx+','+c.hy);
                 if(t2 < 1) requestAnimationFrame(draw2);
               })(performance.now());
             }
           })(performance.now());
-        }, 300 + i * 200);
+        }, 400 + i * 220);
       });
 
-      // Badges with slow scramble
       badges.forEach((badge, i) => {
         const textEl = badge.querySelector('.ia-badge-text');
         const target = badge.dataset.text;
-
         setTimeout(()=>{
           badge.classList.add('badge-in');
-          // Start with random chars
           textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-          // Slow decode
           setTimeout(()=> scramble(textEl, target, 1200, ()=>{
             badge.classList.add('badge-float');
             badge.style.animationDelay = (i * 0.5) + 's';
           }), 200);
-        }, 900 + i * 350);
+        }, 1000 + i * 350);
       });
 
-      // Action pills
-      pills.forEach((p, i) => {
-        setTimeout(()=> p.classList.add('pill-in'), 3000 + i * 150);
-      });
-
-      // CTA
-      setTimeout(()=>{
-        if(ctaWrap) ctaWrap.classList.add('cta-in');
-      }, 3800);
+      setTimeout(()=>{ if(ctaWrap) ctaWrap.classList.add('cta-in'); }, 3500);
     }
 
     window.addEventListener('scroll', onScroll, {passive: true});
-    onScroll(); // initial check
+    onScroll();
   })();
 </script>
 </body>
