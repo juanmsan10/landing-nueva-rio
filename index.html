@@ -204,8 +204,8 @@
     .pp5 { top: 60%; left: -55px; animation-delay: 0.35s; }
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
 
-    /* ── IA SECTION (circle to network) ──────── */
-    .ia-section { position: relative; overflow: hidden; padding: 8rem 3rem; }
+    /* ── IA SECTION (ring to network) ────────── */
+    .ia-section { position: relative; overflow: hidden; padding: 8rem 3rem 6rem; }
     .ia-headline {
       font-size: clamp(2.8rem, 6vw, 4.5rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
@@ -220,23 +220,19 @@
     }
     .ia-sub {
       font-size: 20px; color: #4e4e4a; text-align: center;
-      font-weight: 300; max-width: 620px; margin: 0 auto 4rem; line-height: 1.7;
+      font-weight: 300; max-width: 620px; margin: 0 auto 0; line-height: 1.7;
     }
-
-    /* Stage */
     .ia-stage {
       position: relative; width: 100%; max-width: 800px;
-      height: 460px; margin: 0 auto 3rem;
+      height: 500px; margin: 0 auto 2rem;
     }
     .ia-stage svg.ia-svg {
       position: absolute; inset: 0; width: 100%; height: 100%;
     }
-
-    /* Badges — no box, just text + line */
     .ia-badge {
       position: absolute; z-index: 3;
       font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
-      color: rgba(30,112,24,0.7); white-space: nowrap;
+      color: rgba(30,112,24,0.75); white-space: nowrap;
       opacity: 0; transition: opacity 0.3s ease;
     }
     .ia-badge.badge-in { opacity: 1; }
@@ -245,13 +241,10 @@
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
     }
-    /* Badge positions — around the network */
-    .ia-b0 { top: 12%; left: 4%; }
-    .ia-b1 { top: 8%; right: 4%; }
-    .ia-b2 { bottom: 16%; left: 6%; }
-    .ia-b3 { bottom: 12%; right: 4%; }
-
-    /* Action pills */
+    .ia-b0 { top: 4%; left: 5%; }
+    .ia-b1 { top: 1%; right: 3%; }
+    .ia-b2 { bottom: 8%; left: 7%; }
+    .ia-b3 { bottom: 5%; right: 3%; }
     .ia-actions {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;
       max-width: 700px; margin: 0 auto 3rem;
@@ -264,8 +257,6 @@
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .ia-action-pill.pill-in { opacity: 1; transform: translateY(0); }
-
-    /* CTA */
     .ia-cta-wrap {
       text-align: center;
       opacity: 0; transform: translateY(12px);
@@ -386,7 +377,7 @@
       .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
       .prod-pill { display: none; }
       .ia-section { padding: 5rem 1.5rem; }
-      .ia-stage { height: 380px; }
+      .ia-stage { height: 420px; }
       .ia-badge { font-size: 11px; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
@@ -420,7 +411,7 @@
       .prod-card-title { font-size: 20px; }
       .ia-headline { font-size: 2.6rem; }
       .ia-sub { font-size: 21px; }
-      .ia-stage { height: 340px; }
+      .ia-stage { height: 380px; }
       .ia-badge { font-size: 10px; letter-spacing: 0.08em; }
       .ia-action-pill { font-size: 15px; }
       .ia-cta-btn { font-size: 15px; padding: 18px 32px; }
@@ -928,54 +919,31 @@
 <!-- ░░ HUMANOS CON IA — light ░░ -->
 <section class="light-s ia-section" id="ia">
   <div class="container" style="position:relative;z-index:1;">
-
     <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
     <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
 
-    <!-- Network stage -->
     <div class="ia-stage" id="ia-stage">
-      <svg class="ia-svg" id="ia-svg" viewBox="0 0 800 460" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Initial ring -->
-        <circle id="ia-ring" cx="400" cy="230" r="50" stroke="#1e7018" stroke-width="1.5" fill="none" opacity="0.6"/>
-        <!-- Center dot (appears after) -->
-        <circle id="ia-center" cx="400" cy="230" r="5" fill="#1e7018" opacity="0"/>
-        <!-- Glow -->
-        <circle id="ia-glow" cx="400" cy="230" r="40" fill="url(#ia-glow-grad)" opacity="0"/>
+      <svg class="ia-svg" id="ia-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="ia-glow-grad"><stop offset="0%" stop-color="rgba(30,112,24,0.15)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+          <radialGradient id="ia-glow-grad"><stop offset="0%" stop-color="rgba(30,112,24,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
         </defs>
-        <!-- Nodes (hidden initially) -->
-        <circle class="ia-node" data-tx="-220" data-ty="-110" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
-        <circle class="ia-node" data-tx="230" data-ty="-100" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
-        <circle class="ia-node" data-tx="-200" data-ty="120" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
-        <circle class="ia-node" data-tx="240" data-ty="110" cx="400" cy="230" r="4" fill="#1e7018" opacity="0"/>
-        <circle class="ia-node" data-tx="0" data-ty="-150" cx="400" cy="230" r="3" fill="#1e7018" opacity="0"/>
-        <!-- Connection lines (hidden) -->
-        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
-        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
-        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
-        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
-        <line class="ia-edge" x1="400" y1="230" x2="400" y2="230" stroke="#1e7018" stroke-width="0.8" opacity="0"/>
-        <!-- Cross-connections between nodes -->
-        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
-        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
-        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
-        <line class="ia-cross" x1="0" y1="0" x2="0" y2="0" stroke="#1e7018" stroke-width="0.5" opacity="0"/>
-        <!-- Badge connector lines (angular) -->
-        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-        <polyline class="ia-conn" points="0,0 0,0 0,0" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <!-- Glow behind ring -->
+        <circle id="ia-glow" cx="400" cy="280" r="60" fill="url(#ia-glow-grad)" opacity="0"/>
+        <!-- Main ring -->
+        <circle id="ia-ring" cx="400" cy="60" r="28" stroke="#1e7018" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <!-- 4 angular connectors (polylines ending vertical) -->
+        <polyline id="ia-conn0" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <polyline id="ia-conn1" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <polyline id="ia-conn2" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
+        <polyline id="ia-conn3" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
       </svg>
 
-      <!-- Badges — no box, just text -->
-      <div class="ia-badge ia-b0" data-text="TRABAJO 24/7" data-node="0"><span class="ia-badge-text"></span></div>
-      <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA" data-node="1"><span class="ia-badge-text"></span></div>
-      <div class="ia-badge ia-b2" data-text="EQUIPO ×3" data-node="2"><span class="ia-badge-text"></span></div>
-      <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS" data-node="3"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b0" data-text="TRABAJO 24/7"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b2" data-text="EQUIPO ×3"><span class="ia-badge-text"></span></div>
+      <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS"><span class="ia-badge-text"></span></div>
     </div>
 
-    <!-- Action pills -->
     <div class="ia-actions" id="ia-actions">
       <div class="ia-action-pill">⚡ Automatiza seguimientos</div>
       <div class="ia-action-pill">🤖 Despliega agentes</div>
@@ -983,7 +951,6 @@
       <div class="ia-action-pill">🔄 Elimina tareas repetitivas</div>
     </div>
 
-    <!-- CTA -->
     <div class="ia-cta-wrap" id="ia-cta">
       <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
     </div>
@@ -1540,29 +1507,26 @@
     });
   })();
 
-  // ── IA SECTION — CIRCLE TO NETWORK ───────────
+  // ── IA SECTION — RING SCROLL + EXPAND ───────
   (function(){
     const iaSection = document.querySelector('.ia-section');
     if(!iaSection) return;
 
     const ring = document.getElementById('ia-ring');
-    const center = document.getElementById('ia-center');
     const glowEl = document.getElementById('ia-glow');
-    const nodes = document.querySelectorAll('.ia-node');
-    const edges = document.querySelectorAll('.ia-edge');
-    const crosses = document.querySelectorAll('.ia-cross');
-    const conns = document.querySelectorAll('.ia-conn');
     const badges = iaSection.querySelectorAll('.ia-badge');
     const pills = iaSection.querySelectorAll('.ia-action-pill');
     const ctaWrap = iaSection.querySelector('.ia-cta-wrap');
 
-    const CX = 400, CY = 230;
+    const CX = 400, START_Y = 60, END_Y = 280;
     const CHARS = '!@#$%^&*_+-=[]{}|:<>?/~ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let triggered = false;
+    let scrollBound = true;
 
-    // Scramble text decode
+    // Scramble text decode — SLOW
     function scramble(el, target, dur, cb){
       const len = target.length;
-      const steps = Math.ceil(dur / 30);
+      const steps = Math.ceil(dur / 35);
       let step = 0;
       const iv = setInterval(()=>{
         let out = '';
@@ -1572,156 +1536,122 @@
         el.textContent = out;
         step++;
         if(step > steps){ clearInterval(iv); el.textContent = target; if(cb) cb(); }
-      }, 30);
+      }, 35);
     }
 
-    // Animate SVG attribute
-    function animAttr(el, attr, from, to, dur, ease){
-      const start = performance.now();
-      (function tick(now){
-        const t = Math.min((now - start)/dur, 1);
-        const e = ease ? (1 - Math.pow(1-t, 3)) : t; // cubic ease-out
-        const v = from + (to - from) * e;
-        el.setAttribute(attr, v);
-        if(t < 1) requestAnimationFrame(tick);
+    // Scroll-driven ring descent
+    function onScroll(){
+      if(!scrollBound) return;
+      const rect = iaSection.getBoundingClientRect();
+      const sectionH = rect.height;
+      const viewH = window.innerHeight;
+
+      // Progress: 0 when section top hits viewport bottom, 1 when top hits viewport top
+      const raw = 1 - (rect.top / viewH);
+      const progress = Math.max(0, Math.min(raw * 0.6, 1)); // compress to first 60% of scroll
+
+      const cy = START_Y + (END_Y - START_Y) * progress;
+      ring.setAttribute('cy', cy);
+
+      // When ring reaches target
+      if(progress >= 0.95 && !triggered){
+        triggered = true;
+        scrollBound = false;
+        ring.setAttribute('cy', END_Y);
+        triggerExpansion();
+      }
+    }
+
+    function triggerExpansion(){
+      // Pulse ring bigger
+      const dur = 500;
+      const startR = 28, endR = 42;
+      const startTime = performance.now();
+      (function anim(now){
+        const t = Math.min((now - startTime)/dur, 1);
+        const e = 1 - Math.pow(1-t, 3);
+        ring.setAttribute('r', startR + (endR - startR) * e);
+        if(t < 1) requestAnimationFrame(anim);
       })(performance.now());
-    }
 
-    function runSequence(){
-      // Node final positions
-      const nodeTargets = [];
-      nodes.forEach(n => {
-        nodeTargets.push({ tx: +n.dataset.tx, ty: +n.dataset.ty });
+      // Show glow
+      setTimeout(()=>{
+        glowEl.setAttribute('opacity', '0.8');
+        glowEl.style.transition = 'opacity 0.6s';
+      }, 200);
+
+      // Connector targets: ring center → elbow → vertical end near badge
+      // Format: [elbowX, elbowY, endX, endY]
+      const connTargets = [
+        [140, 140, 140, 50],    // top-left: TRABAJO 24/7
+        [660, 130, 660, 40],    // top-right: MEMORIA INFINITA
+        [150, 400, 150, 450],   // bottom-left: EQUIPO ×3
+        [670, 390, 670, 440],   // bottom-right: TAREAS AUTOMATIZADAS
+      ];
+
+      // Animate connectors
+      connTargets.forEach((target, i) => {
+        const conn = document.getElementById('ia-conn' + i);
+        if(!conn) return;
+
+        setTimeout(()=>{
+          // Phase 1: draw from ring to elbow
+          const d1 = 400;
+          const s1 = performance.now();
+          (function draw1(now){
+            const t = Math.min((now - s1)/d1, 1);
+            const e = 1 - Math.pow(1-t, 3);
+            const ex = CX + (target[0] - CX) * e;
+            const ey = END_Y + (target[1] - END_Y) * e;
+            conn.setAttribute('points', CX+','+END_Y+' '+ex+','+ey+' '+ex+','+ey);
+            conn.setAttribute('opacity', '0.3');
+            if(t < 1) requestAnimationFrame(draw1);
+            else {
+              // Phase 2: draw vertical to end
+              const d2 = 300;
+              const s2 = performance.now();
+              (function draw2(now2){
+                const t2 = Math.min((now2 - s2)/d2, 1);
+                const e2 = 1 - Math.pow(1-t2, 3);
+                const fy = target[1] + (target[3] - target[1]) * e2;
+                conn.setAttribute('points', CX+','+END_Y+' '+target[0]+','+target[1]+' '+target[2]+','+fy);
+                if(t2 < 1) requestAnimationFrame(draw2);
+              })(performance.now());
+            }
+          })(performance.now());
+        }, 300 + i * 200);
       });
 
-      // ── PHASE 1: Ring pulse ──
-      setTimeout(()=>{
-        // Pulse: scale up then down
-        animAttr(ring, 'r', 50, 70, 250, true);
+      // Badges with slow scramble
+      badges.forEach((badge, i) => {
+        const textEl = badge.querySelector('.ia-badge-text');
+        const target = badge.dataset.text;
+
         setTimeout(()=>{
-          animAttr(ring, 'r', 70, 50, 200, true);
-        }, 250);
-      }, 300);
+          badge.classList.add('badge-in');
+          // Start with random chars
+          textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+          // Slow decode
+          setTimeout(()=> scramble(textEl, target, 1200, ()=>{
+            badge.classList.add('badge-float');
+            badge.style.animationDelay = (i * 0.5) + 's';
+          }), 200);
+        }, 900 + i * 350);
+      });
 
-      // ── PHASE 2: Ring shrinks, nodes fly out ──
+      // Action pills
+      pills.forEach((p, i) => {
+        setTimeout(()=> p.classList.add('pill-in'), 3000 + i * 150);
+      });
+
+      // CTA
       setTimeout(()=>{
-        // Shrink ring
-        animAttr(ring, 'r', 50, 0, 600, true);
-        animAttr(ring, 'opacity', 0.6, 0, 500, false);
-
-        // Show center dot + glow
-        setTimeout(()=>{
-          animAttr(center, 'opacity', 0, 1, 400, false);
-          animAttr(glowEl, 'opacity', 0, 0.8, 600, false);
-        }, 200);
-
-        // Animate nodes outward
-        nodes.forEach((node, i) => {
-          const target = nodeTargets[i];
-          const finalX = CX + target.tx;
-          const finalY = CY + target.ty;
-
-          setTimeout(()=>{
-            node.setAttribute('opacity', '0.8');
-
-            const startTime = performance.now();
-            const dur = 700;
-            (function tick(now){
-              const t = Math.min((now - startTime)/dur, 1);
-              const e = 1 - Math.pow(1-t, 3);
-              const x = CX + target.tx * e;
-              const y = CY + target.ty * e;
-              node.setAttribute('cx', x);
-              node.setAttribute('cy', y);
-
-              // Animate edge from center to node
-              if(edges[i]){
-                edges[i].setAttribute('x2', x);
-                edges[i].setAttribute('y2', y);
-                edges[i].setAttribute('opacity', '0.2');
-              }
-              if(t < 1) requestAnimationFrame(tick);
-            })(performance.now());
-          }, i * 100);
-        });
-
-        // Cross connections (after nodes settle)
-        setTimeout(()=>{
-          const crossPairs = [[0,4],[1,4],[0,2],[1,3]];
-          crossPairs.forEach((pair, i) => {
-            if(!crosses[i]) return;
-            const n1 = nodeTargets[pair[0]];
-            const n2 = nodeTargets[pair[1]];
-            crosses[i].setAttribute('x1', CX + n1.tx);
-            crosses[i].setAttribute('y1', CY + n1.ty);
-            crosses[i].setAttribute('x2', CX + n2.tx);
-            crosses[i].setAttribute('y2', CY + n2.ty);
-            setTimeout(()=> crosses[i].setAttribute('opacity', '0.1'), i * 80);
-          });
-        }, 900);
-
-      }, 800);
-
-      // ── PHASE 3: Badge connectors + text decode ──
-      setTimeout(()=>{
-        const badgePositions = [
-          {bx: 32, by: 55},   // b0: top-left
-          {bx: 768, by: 37},  // b1: top-right
-          {bx: 48, by: 390},  // b2: bottom-left
-          {bx: 768, by: 380}, // b3: bottom-right
-        ];
-
-        badges.forEach((badge, i) => {
-          const target = nodeTargets[i];
-          const nx = CX + target.tx;
-          const ny = CY + target.ty;
-          const bp = badgePositions[i];
-          // Angular connector: badge → elbow → node
-          const elbowX = (i % 2 === 0) ? nx - 30 : nx + 30;
-          const elbowY = bp.by > CY ? ny + 20 : ny - 20;
-
-          if(conns[i]){
-            conns[i].setAttribute('points', `${bp.bx},${bp.by} ${elbowX},${elbowY} ${nx},${ny}`);
-          }
-
-          setTimeout(()=>{
-            // Show connector
-            if(conns[i]) conns[i].setAttribute('opacity', '0.25');
-
-            // Show badge with scramble
-            badge.classList.add('badge-in');
-            const textEl = badge.querySelector('.ia-badge-text');
-            const txt = badge.dataset.text;
-            textEl.textContent = txt.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-
-            setTimeout(()=> scramble(textEl, txt, 500, ()=>{
-              badge.classList.add('badge-float');
-              badge.style.animationDelay = (i * 0.5) + 's';
-            }), 150);
-          }, i * 300);
-        });
-      }, 2000);
-
-      // ── PHASE 4: Pills + CTA ──
-      setTimeout(()=>{
-        pills.forEach((p, i) => {
-          setTimeout(()=> p.classList.add('pill-in'), i * 120);
-        });
-        setTimeout(()=>{
-          if(ctaWrap) ctaWrap.classList.add('cta-in');
-        }, 600);
-      }, 3500);
+        if(ctaWrap) ctaWrap.classList.add('cta-in');
+      }, 3800);
     }
 
-    const iaObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          runSequence();
-          iaObs.unobserve(e.target);
-        }
-      });
-    }, {threshold: 0.25});
-    iaObs.observe(iaSection);
+    window.addEventListener('scroll', onScroll, {passive: true});
+    onScroll(); // initial check
   })();
 </script>
 </body>
