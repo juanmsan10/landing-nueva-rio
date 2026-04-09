@@ -205,46 +205,84 @@
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
 
     /* ── IA SECTION (ring to network) ────────── */
+    /* IA SECTION — STICKY SCROLL */
+    .ia-scroll-outer {
+      position: relative;
+      height: 300vh;
+    }
     .ia-section {
-      position: relative; overflow: hidden; padding: 8rem 3rem 6rem;
-      background: radial-gradient(ellipse at 50% 70%, rgba(30,112,24,0.06) 0%, rgba(30,112,24,0.02) 40%, transparent 70%);
+      position: sticky; top: 0;
+      height: 100vh; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #f8f7f4;
+    }
+    .ia-bg-text {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: clamp(5rem, 12vw, 10rem); font-weight: 700;
+      letter-spacing: -0.04em; line-height: 0.95;
+      color: rgba(30,112,24,0.07);
+      white-space: nowrap; pointer-events: none; z-index: 0;
+      filter: blur(4px); opacity: 0;
+      transition: opacity 0.8s ease, filter 1.2s ease;
+      text-align: center;
+    }
+    .ia-bg-text.bg-reveal { opacity: 1; filter: blur(2px); }
+    .ia-img-wrap {
+      position: relative; z-index: 2;
+      width: 600px; max-width: 85vw;
+      will-change: transform, filter;
+      transition: filter 0.4s ease;
+    }
+    .ia-img-wrap img {
+      width: 100%; height: auto; display: block;
+      object-fit: contain;
     }
     .ia-headline {
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      position: relative; z-index: 3;
+      font-size: clamp(2.2rem, 5vw, 4rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
-      text-align: center; margin-bottom: 1.5rem;
-      background: linear-gradient(180deg, rgba(26,26,24,0.95) 0%, rgba(26,26,24,0.4) 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-align: center; margin-bottom: 2rem;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      color: #1a1a18;
     }
+    .ia-headline.head-in { opacity: 1; transform: translateY(0); }
     .ia-headline em {
-      font-style: normal;
-      background: linear-gradient(180deg, #1e7018 0%, rgba(30,112,24,0.5) 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      font-style: normal; color: #1e7018;
     }
     .ia-sub {
-      font-size: 20px; color: #4e4e4a; text-align: center;
-      font-weight: 300; max-width: 620px; margin: 0 auto 0; line-height: 1.7;
+      position: relative; z-index: 3;
+      font-size: 18px; color: #4e4e4a; text-align: center;
+      font-weight: 300; max-width: 560px; margin: 0 auto; line-height: 1.7;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s 0.15s ease, transform 0.6s 0.15s ease;
     }
-    .ia-stage {
-      position: relative; width: 100%; max-width: 800px;
-      height: 500px; margin: 0 auto 2rem;
+    .ia-sub.head-in { opacity: 1; transform: translateY(0); }
+    .ia-labels {
+      position: absolute; inset: 0; z-index: 4; pointer-events: none;
     }
-    .ia-stage svg.ia-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .ia-badge {
-      position: absolute; z-index: 3;
+    .ia-label {
+      position: absolute;
       font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
-      color: rgba(30,112,24,0.75); white-space: nowrap;
+      color: rgba(30,112,24,0.8); white-space: nowrap;
       opacity: 0; transition: opacity 0.3s ease;
     }
-    .ia-badge.badge-in { opacity: 1; }
-    .ia-badge.badge-float { animation: badge-float 6s ease-in-out infinite; }
-    @keyframes badge-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
-    .ia-b0 { top: 14%; left: 3%; }
-    .ia-b1 { top: 10%; right: 1%; }
-    .ia-b2 { bottom: 10%; left: 5%; }
-    .ia-b3 { bottom: 6%; right: 1%; }
+    .ia-label.lbl-in { opacity: 1; }
+    .ia-label.lbl-float { animation: ia-lbl-float 6s ease-in-out infinite; }
+    @keyframes ia-lbl-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+    .ia-label-line {
+      position: absolute; z-index: 3; pointer-events: none;
+      stroke: rgba(30,112,24,0.3); stroke-width: 1; fill: none;
+    }
+    .ia-l0 { top: 22%; left: 5%; }
+    .ia-l1 { top: 18%; right: 5%; }
+    .ia-l2 { bottom: 22%; left: 7%; }
+    .ia-l3 { bottom: 18%; right: 5%; }
     .ia-cta-wrap {
-      text-align: center; opacity: 0; transform: translateY(12px);
+      position: relative; z-index: 5;
+      text-align: center; margin-top: 2rem;
+      opacity: 0; transform: translateY(12px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .ia-cta-wrap.cta-in { opacity: 1; transform: translateY(0); }
@@ -361,9 +399,9 @@
       .pq-grid { grid-template-columns: 1fr; }
       .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
       .prod-pill { display: none; }
-      .ia-section { padding: 5rem 1.5rem; }
-      .ia-stage { height: 420px; }
-      .ia-badge { font-size: 11px; }
+      .ia-scroll-outer { height: 200vh; }
+      .ia-img-wrap { width: 90vw; }
+      .ia-label { font-size: 10px; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -394,11 +432,10 @@
       .prod-headline { font-size: 2rem; }
       .prod-sub { font-size: 20px; margin-bottom: 2.5rem; }
       .prod-card-title { font-size: 20px; }
-      .ia-headline { font-size: 2.6rem; }
-      .ia-sub { font-size: 21px; }
-      .ia-stage { height: 380px; }
-      .ia-badge { font-size: 10px; letter-spacing: 0.08em; }
-      .ia-cta-btn { font-size: 15px; padding: 18px 32px; }
+      .ia-headline { font-size: 2.2rem; }
+      .ia-sub { font-size: 17px; }
+      .ia-label { font-size: 9px; letter-spacing: 0.08em; }
+      .ia-cta-btn { font-size: 13px; padding: 14px 28px; }
       .mobile-br { display: block; }
       .nivel-card { padding: calc(1.75rem + 20px) 1.75rem; }
       .nivel-num { min-height: 0; padding: 0.42rem 0.72rem; font-size: 15px; }
@@ -899,31 +936,26 @@
   </div>
 </section>
 
-<!-- ░░ HUMANOS CON IA — light ░░ -->
+<!-- ░░ HUMANOS CON IA — STICKY SCROLL ░░ -->
+<div class="ia-scroll-outer">
 <section class="light-s ia-section" id="ia">
-  <div class="container" style="position:relative;z-index:1;">
-    <h2 class="ia-headline reveal">Humanos con <em>IA.</em></h2>
-    <p class="ia-sub reveal reveal-delay-1">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
-    <div class="ia-stage" id="ia-stage">
-      <svg class="ia-svg" id="ia-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs><radialGradient id="ia-glow-grad"><stop offset="0%" stop-color="rgba(30,112,24,0.1)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
-        <circle id="ia-glow" cx="400" cy="280" r="120" fill="url(#ia-glow-grad)" opacity="0"/>
-        <circle id="ia-ring" cx="400" cy="40" r="28" stroke="#1e7018" stroke-width="1.5" fill="none" opacity="0.5"/>
-        <polyline id="ia-conn0" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-        <polyline id="ia-conn1" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-        <polyline id="ia-conn2" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-        <polyline id="ia-conn3" points="400,280 400,280 400,280" stroke="#1e7018" stroke-width="0.7" fill="none" opacity="0"/>
-      </svg>
-      <div class="ia-badge ia-b0" data-text="TRABAJO 24/7"><span class="ia-badge-text"></span></div>
-      <div class="ia-badge ia-b1" data-text="MEMORIA INFINITA"><span class="ia-badge-text"></span></div>
-      <div class="ia-badge ia-b2" data-text="EQUIPO ×3"><span class="ia-badge-text"></span></div>
-      <div class="ia-badge ia-b3" data-text="TAREAS AUTOMATIZADAS"><span class="ia-badge-text"></span></div>
-    </div>
-    <div class="ia-cta-wrap" id="ia-cta">
-      <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
-    </div>
+  <div class="ia-bg-text" id="ia-bg-text">HUMANOS<br>CON IA</div>
+  <h2 class="ia-headline" id="ia-head">Humanos con <em>IA</em></h2>
+  <p class="ia-sub" id="ia-sub-text">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
+  <div class="ia-img-wrap" id="ia-img-wrap">
+    <img src="11.png" alt="Operador aumentado con IA">
+  </div>
+  <div class="ia-labels" id="ia-labels">
+    <div class="ia-label ia-l0" data-text="TRABAJO 24/7"><span class="ia-label-text"></span></div>
+    <div class="ia-label ia-l1" data-text="MEMORIA INFINITA"><span class="ia-label-text"></span></div>
+    <div class="ia-label ia-l2" data-text="EQUIPO ×3"><span class="ia-label-text"></span></div>
+    <div class="ia-label ia-l3" data-text="SIN REPROCESOS"><span class="ia-label-text"></span></div>
+  </div>
+  <div class="ia-cta-wrap" id="ia-cta">
+    <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
   </div>
 </section>
+</div>
 
 <!-- ░░ CÓMO EMPEZAR — light ░░ -->
 <section class="light-s" id="diagnostico">
@@ -1475,17 +1507,22 @@
     });
   })();
 
-  // ── IA SECTION — RING SCROLL + EXPAND ───────
+  // ── IA SECTION — STICKY SCROLL ANIMATION ───────
   (function(){
-    const iaSection = document.querySelector('.ia-section');
-    if(!iaSection) return;
-    const ring = document.getElementById('ia-ring');
-    const glowEl = document.getElementById('ia-glow');
-    const badges = iaSection.querySelectorAll('.ia-badge');
-    const ctaWrap = iaSection.querySelector('.ia-cta-wrap');
-    const CX = 400, START_Y = 40, END_Y = 280, END_R = 80;
-    const CHARS = '!@#$%^&*_+-=[]{}|:<>?/~ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let triggered = false, scrollBound = true;
+    const outer = document.querySelector('.ia-scroll-outer');
+    const section = document.querySelector('.ia-section');
+    if(!outer || !section) return;
+
+    const imgWrap = document.getElementById('ia-img-wrap');
+    const bgText = document.getElementById('ia-bg-text');
+    const headline = document.getElementById('ia-head');
+    const subText = document.getElementById('ia-sub-text');
+    const labels = section.querySelectorAll('.ia-label');
+    const ctaWrap = document.getElementById('ia-cta');
+
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+    let labelsTriggered = false;
+    let ctaTriggered = false;
 
     function scramble(el, target, dur, cb){
       const len = target.length, steps = Math.ceil(dur / 35);
@@ -1499,82 +1536,61 @@
     }
 
     function onScroll(){
-      if(!scrollBound) return;
-      const rect = iaSection.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      const progress = Math.max(0, Math.min((1 - rect.top / viewH) * 1.2, 1));
-      ring.setAttribute('cy', START_Y + (END_Y - START_Y) * progress);
-      if(progress >= 0.95 && !triggered){
-        triggered = true; scrollBound = false;
-        ring.setAttribute('cy', END_Y);
-        triggerExpansion();
+      const rect = outer.getBoundingClientRect();
+      const totalScroll = outer.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      const p = Math.max(0, Math.min(scrolled / totalScroll, 1));
+
+      // Phase 1 (0–0.4): Image starts zoomed in (scale 2.2) and scales to 1
+      // Phase 2 (0.4–0.65): Image settles, blur clears, bg text appears
+      // Phase 3 (0.65–1): Labels decode, headline/sub/CTA appear
+
+      // Image scale: 2.2 → 1
+      const scaleP = Math.min(p / 0.4, 1);
+      const easeScale = 1 - Math.pow(1 - scaleP, 3);
+      const scale = 2.2 - 1.2 * easeScale;
+      imgWrap.style.transform = 'scale(' + scale + ')';
+
+      // Image blur: starts at 3px, clears by phase 2
+      const blurP = Math.min(p / 0.5, 1);
+      const blurVal = 3 * (1 - blurP);
+      imgWrap.style.filter = blurVal > 0.1 ? 'blur(' + blurVal + 'px)' : 'none';
+
+      // Background text: appears in phase 2
+      if(p > 0.35) { bgText.classList.add('bg-reveal'); }
+      else { bgText.classList.remove('bg-reveal'); }
+
+      // Headline + sub: appear in phase 2.5
+      if(p > 0.5) {
+        headline.classList.add('head-in');
+        subText.classList.add('head-in');
+      } else {
+        headline.classList.remove('head-in');
+        subText.classList.remove('head-in');
       }
-    }
 
-    function triggerExpansion(){
-      const dur = 600, startR = 28, startS = 1.5, s = performance.now();
-      (function anim(now){
-        const t = Math.min((now - s)/dur, 1), e = 1 - Math.pow(1-t, 3);
-        ring.setAttribute('r', startR + (END_R - startR) * e);
-        ring.setAttribute('stroke-width', startS + (5 - startS) * e);
-        ring.setAttribute('opacity', 0.5 + 0.3 * e);
-        if(t < 1) requestAnimationFrame(anim);
-      })(performance.now());
+      // Labels: decode once at phase 3
+      if(p > 0.6 && !labelsTriggered){
+        labelsTriggered = true;
+        labels.forEach((lbl, i) => {
+          const textEl = lbl.querySelector('.ia-label-text');
+          const target = lbl.dataset.text;
+          setTimeout(()=>{
+            lbl.classList.add('lbl-in');
+            textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+            setTimeout(()=> scramble(textEl, target, 900, ()=>{
+              lbl.classList.add('lbl-float');
+              lbl.style.animationDelay = (i * 0.4) + 's';
+            }), 150);
+          }, i * 280);
+        });
+      }
 
-      setTimeout(()=> glowEl.setAttribute('opacity', '0.7'), 300);
-
-      // Connectors: start OUTSIDE ring edge, diagonal to elbow, then HORIZONTAL
-      const ANG = Math.PI / 4; // 45 degrees
-      const R_OUT = END_R + 20;
-      const conns = [
-        // top-left: start NW outside ring → elbow → horizontal LEFT
-        { sx: CX - R_OUT * Math.cos(ANG), sy: END_Y - R_OUT * Math.sin(ANG), ex: 190, ey: 110, hx: 25, hy: 110 },
-        // top-right: start NE → elbow → horizontal RIGHT
-        { sx: CX + R_OUT * Math.cos(ANG), sy: END_Y - R_OUT * Math.sin(ANG), ex: 610, ey: 95, hx: 780, hy: 95 },
-        // bottom-left: start SW → elbow → horizontal LEFT
-        { sx: CX - R_OUT * Math.cos(ANG), sy: END_Y + R_OUT * Math.sin(ANG), ex: 180, ey: 430, hx: 35, hy: 430 },
-        // bottom-right: start SE → elbow → horizontal RIGHT
-        { sx: CX + R_OUT * Math.cos(ANG), sy: END_Y + R_OUT * Math.sin(ANG), ex: 620, ey: 420, hx: 780, hy: 420 },
-      ];
-
-      conns.forEach((c, i) => {
-        const conn = document.getElementById('ia-conn' + i);
-        if(!conn) return;
-        setTimeout(()=>{
-          const d1 = 450, s1 = performance.now();
-          (function draw1(now){
-            const t = Math.min((now - s1)/d1, 1), e = 1 - Math.pow(1-t, 3);
-            const mx = c.sx + (c.ex - c.sx) * e, my = c.sy + (c.ey - c.sy) * e;
-            conn.setAttribute('points', c.sx+','+c.sy+' '+mx+','+my+' '+mx+','+my);
-            conn.setAttribute('opacity', '0.3');
-            if(t < 1) requestAnimationFrame(draw1);
-            else {
-              const d2 = 350, s2 = performance.now();
-              (function draw2(now2){
-                const t2 = Math.min((now2 - s2)/d2, 1), e2 = 1 - Math.pow(1-t2, 3);
-                const fx = c.ex + (c.hx - c.ex) * e2;
-                conn.setAttribute('points', c.sx+','+c.sy+' '+c.ex+','+c.ey+' '+fx+','+c.hy);
-                if(t2 < 1) requestAnimationFrame(draw2);
-              })(performance.now());
-            }
-          })(performance.now());
-        }, 400 + i * 220);
-      });
-
-      badges.forEach((badge, i) => {
-        const textEl = badge.querySelector('.ia-badge-text');
-        const target = badge.dataset.text;
-        setTimeout(()=>{
-          badge.classList.add('badge-in');
-          textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-          setTimeout(()=> scramble(textEl, target, 1200, ()=>{
-            badge.classList.add('badge-float');
-            badge.style.animationDelay = (i * 0.5) + 's';
-          }), 200);
-        }, 1000 + i * 350);
-      });
-
-      setTimeout(()=>{ if(ctaWrap) ctaWrap.classList.add('cta-in'); }, 3500);
+      // CTA
+      if(p > 0.75 && !ctaTriggered){
+        ctaTriggered = true;
+        if(ctaWrap) ctaWrap.classList.add('cta-in');
+      }
     }
 
     window.addEventListener('scroll', onScroll, {passive: true});
