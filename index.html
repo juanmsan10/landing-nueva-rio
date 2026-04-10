@@ -214,7 +214,7 @@
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 90%; max-width: 1400px; height: 75%;
+      width: 92%; max-width: 1200px; height: 75%;
       border-radius: 24px;
       background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
@@ -1588,32 +1588,38 @@
       canvas.style.height = vRect.height + 'px';
 
       // LEFT: "TRABAJO 24/7"
-      // Path: text left edge (5px below text) → horizontal right to text right edge → diagonal down-right to image
+      // Horizontal line 5px below text: starts at text LEFT edge, extends RIGHT well past text toward image
+      // Then short diagonal from end of horizontal down to image
       const l0 = lbl0.getBoundingClientRect();
       const l0_left = l0.left - vRect.left;
-      const l0_right = l0.right - vRect.left;
       const l0_y = l0.bottom - vRect.top + 5;
-      const l0_imgX = imgRect.left - vRect.left + imgRect.width * 0.33;
+      // Horizontal extends to ~42% of visual width (near image left edge)
+      const l0_hEnd = vRect.width * 0.42;
+      // Diagonal end: image upper-left
+      const l0_imgX = imgRect.left - vRect.left + imgRect.width * 0.35;
       const l0_imgY = imgRect.top - vRect.top + imgRect.height * 0.5;
 
       const points0 = [
         {x: l0_left, y: l0_y},
-        {x: l0_right, y: l0_y},
+        {x: l0_hEnd, y: l0_y},
         {x: l0_imgX, y: l0_imgY}
       ];
 
       // RIGHT: "MEMORIA INFINITA"
-      // Path: text right edge (5px below text) → horizontal left to text left edge → diagonal down-left to image
+      // Horizontal line 5px below text: starts at text RIGHT edge, extends LEFT well past text toward image
+      // Then short diagonal from end of horizontal down to image
       const l1 = lbl1.getBoundingClientRect();
-      const r1_left = l1.left - vRect.left;
       const r1_right = l1.right - vRect.left;
       const r1_y = l1.bottom - vRect.top + 5;
-      const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.67;
+      // Horizontal extends to ~58% of visual width (near image right edge)
+      const r1_hEnd = vRect.width * 0.58;
+      // Diagonal end: image lower-right
+      const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.65;
 
       const points1 = [
         {x: r1_right, y: r1_y},
-        {x: r1_left, y: r1_y},
+        {x: r1_hEnd, y: r1_y},
         {x: r1_imgX, y: r1_imgY}
       ];
 
