@@ -280,13 +280,13 @@
       font-size: clamp(calc(1.8rem - 6px), calc(3.5vw - 6px), calc(3rem - 6px));
       color: rgba(0,0,0,0.35);
       filter: blur(2.5px);
-      bottom: calc(22% + 25px); left: 14%;
+      bottom: calc(22% + 25px); left: calc(14% - 20px);
     }
     .ia-blur-right2 {
       font-size: clamp(calc(1.4rem - 3px), calc(2.5vw - 3px), calc(2.2rem - 3px));
       color: rgba(0,0,0,0.45);
       filter: blur(2.5px);
-      top: 12%; right: calc(10% - 10px);
+      top: 12%; right: calc(10% + 50px);
       white-space: pre-line;
     }
 
@@ -1535,6 +1535,7 @@
 
     function hologramReveal(){
       const start = performance.now(), totalDur = 1200;
+      let labelsTriggered = false;
       (function frame(now){
         const elapsed = now - start;
         const t = Math.min(elapsed / totalDur, 1);
@@ -1549,10 +1550,14 @@
           imgWrap.style.opacity = 0.75 + 0.25 * e;
           imgWrap.style.filter = e > 0.95 ? 'none' : 'blur('+(0.5*(1-e))+'px) saturate('+(0.8+0.2*e)+')';
         }
+        // Trigger labels at 500ms (0.7s earlier than end)
+        if(elapsed >= 500 && !labelsTriggered){
+          labelsTriggered = true;
+          triggerLabels();
+        }
         if(t < 1) requestAnimationFrame(frame);
         else {
           imgWrap.style.opacity = '1'; imgWrap.style.filter = 'none';
-          triggerLabels();
         }
       })(performance.now());
     }
@@ -1609,7 +1614,14 @@
     }
 
     function triggerLabels(){
-      drawConnectors();
+      // Wait for layout to settle before measuring positions
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          drawConnectors();
+          // Safety redraw after layout fully settles
+          setTimeout(drawConnectors, 150);
+        });
+      });
     }
 
     function drawConnectors(){
@@ -1651,7 +1663,7 @@
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.7;
       // Steep diagonal: 65° from horizontal, length = 35% of image height
-      const r1_diagLen = imgRect.height * 0.35;
+      const r1_diagLen = Math.max(0, imgRect.height * 0.35 - 50);
       const r1_angle = 65 * Math.PI / 180;
       const r1_diagX = r1_hEnd - r1_diagLen * Math.cos(r1_angle);
       const r1_diagY = r1_y + r1_diagLen * Math.sin(r1_angle);
@@ -1719,7 +1731,14 @@
       const boxRect = gbox.getBoundingClientRect();
       if(boxRect.bottom <= window.innerHeight){
         triggered = true;
-        hologramReveal();
+        const img = imgWrap.querySelector('img');
+        if(img && img.complete) {
+          hologramReveal();
+        } else if(img) {
+          img.addEventListener('load', hologramReveal, {once: true});
+        } else {
+          hologramReveal();
+        }
       }
     }
 
