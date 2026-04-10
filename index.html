@@ -205,29 +205,22 @@
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
 
     /* ── IA SECTION (ring to network) ────────── */
-    /* IA SECTION — STICKY SCROLL */
-    .ia-scroll-outer {
-      position: relative;
-      height: 250vh;
-    }
+    /* IA SECTION */
     .ia-section {
-      position: sticky; top: 0;
-      height: 100vh; overflow: hidden;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 3rem 0;
       background: #f8f7f4;
+      display: flex; flex-direction: column; align-items: center;
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 92%; max-width: 1200px; height: 55%;
-      border-radius: 24px 24px 0 0;
-      background: linear-gradient(180deg, rgba(30,112,24,0.06) 0%, rgba(30,112,24,0.15) 100%);
-      opacity: 0; transition: opacity 0.8s ease;
+      width: 92%; max-width: 1200px; height: 65%;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
     }
-    .ia-gradient-box.gbox-in { opacity: 1; }
     .ia-bg-text {
-      position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       font-size: clamp(4rem, 10vw, 8rem); font-weight: 700;
       letter-spacing: -0.04em; line-height: 0.95;
       color: rgba(30,112,24,0.06);
@@ -242,11 +235,8 @@
       font-size: clamp(2.6rem, 5.5vw, 4.6rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
       text-align: center; margin-bottom: 1.5rem;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
       color: #1a1a18;
     }
-    .ia-headline.head-in { opacity: 1; transform: translateY(0); }
     .ia-headline em {
       font-style: normal; color: #1e7018;
     }
@@ -254,48 +244,41 @@
       position: relative; z-index: 3;
       font-size: 18px; color: #4e4e4a; text-align: center;
       font-weight: 300; max-width: 560px; margin: 0 auto; line-height: 1.7;
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.6s 0.15s ease, transform 0.6s 0.15s ease;
     }
-    .ia-sub.head-in { opacity: 1; transform: translateY(0); }
+    .ia-visual-area {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 1100px;
+      margin-top: 0;
+    }
     .ia-img-wrap {
       position: relative; z-index: 2;
-      width: 600px; max-width: 85vw;
+      width: 700px; max-width: 60vw;
+      margin: 0 auto;
+      display: flex; align-items: flex-end;
       will-change: opacity, filter;
     }
     .ia-img-wrap img {
       width: 100%; height: auto; display: block;
       object-fit: contain;
     }
-    /* Connector + label pairs */
-    .ia-label-group {
+    /* Labels + SVG connectors */
+    .ia-label-el {
       position: absolute; z-index: 4; pointer-events: none;
-      display: flex; align-items: center; gap: 0;
-    }
-    .ia-label-group.left { flex-direction: row; }
-    .ia-label-group.right { flex-direction: row-reverse; }
-    .ia-label-text-el {
       font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
       color: rgba(30,112,24,0.75); white-space: nowrap;
-      opacity: 0; transition: opacity 0.3s ease;
+      opacity: 0;
     }
-    .ia-label-text-el.lbl-in { opacity: 1; }
-    .ia-connector {
-      height: 1px; background: rgba(30,112,24,0.3);
-      width: 0; transition: none;
+    .ia-label-el.lbl-in { opacity: 1; }
+    .ia-connectors-svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      z-index: 3; pointer-events: none;
     }
-    .ia-connector-vert {
-      width: 1px; background: rgba(30,112,24,0.3);
-      height: 0; transition: none;
+    .ia-conn-path {
+      stroke: rgba(30,112,24,0.35); stroke-width: 1; fill: none;
     }
-    .ia-connector-wrap {
-      display: flex; flex-direction: column;
-    }
-    .ia-connector-wrap.align-end { align-items: flex-end; }
-    .ia-connector-wrap.align-start { align-items: flex-start; }
-    /* Positions — matching ClickUp layout */
-    .ia-lg0 { top: 30%; left: 4%; }
-    .ia-lg1 { top: 55%; right: 4%; }
+    /* Label positions */
+    .ia-lbl-left { top: 28%; left: 6%; }
+    .ia-lbl-right { top: 58%; right: 6%; }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -397,11 +380,11 @@
       .pq-grid { grid-template-columns: 1fr; }
       .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
       .prod-pill { display: none; }
-      .ia-scroll-outer { height: 200vh; }
-      .ia-img-wrap { width: 90vw; }
-      .ia-label-text-el { font-size: 10px; }
-      .ia-lg0 { top: 25%; left: 2%; }
-      .ia-lg1 { top: 55%; right: 2%; }
+      .ia-section { padding: 4rem 1.5rem 0; }
+      .ia-img-wrap { width: 90vw; max-width: 90vw; }
+      .ia-label-el { font-size: 10px; }
+      .ia-lbl-left { top: 22%; left: 2%; }
+      .ia-lbl-right { top: 55%; right: 2%; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -434,7 +417,7 @@
       .prod-card-title { font-size: 20px; }
       .ia-headline { font-size: 2.2rem; }
       .ia-sub { font-size: 17px; }
-      .ia-label-text-el { font-size: 9px; letter-spacing: 0.08em; }
+      .ia-label-el { font-size: 9px; letter-spacing: 0.08em; }
       .mobile-br { display: block; }
       .nivel-card { padding: calc(1.75rem + 20px) 1.75rem; }
       .nivel-num { min-height: 0; padding: 0.42rem 0.72rem; font-size: 15px; }
@@ -935,34 +918,23 @@
   </div>
 </section>
 
-<!-- ░░ HUMANOS CON IA — STICKY SCROLL ░░ -->
-<div class="ia-scroll-outer">
+<!-- ░░ HUMANOS CON IA ░░ -->
 <section class="light-s ia-section" id="ia">
-  <div class="ia-gradient-box" id="ia-gbox"></div>
-  <div class="ia-bg-text" id="ia-bg-text">UNA NUEVA ERA</div>
-  <h2 class="ia-headline" id="ia-head">Humanos con <em>IA</em>, una nueva era</h2>
-  <p class="ia-sub" id="ia-sub-text">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
-  <div class="ia-img-wrap" id="ia-img-wrap">
-    <img src="11.png" alt="Operador aumentado con IA">
-  </div>
-  <!-- Label left: TRABAJO 24/7 — higher position -->
-  <div class="ia-label-group left ia-lg0" id="ia-lg0">
-    <span class="ia-label-text-el" id="ia-lt0" data-text="TRABAJO 24/7"></span>
-    <div class="ia-connector-wrap align-end">
-      <div class="ia-connector" id="ia-ch0" style="width:0;"></div>
-      <div class="ia-connector-vert" id="ia-cv0" style="height:0;"></div>
+  <h2 class="ia-headline">Humanos con <em>IA</em>, <em>una nueva era</em></h2>
+  <p class="ia-sub">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
+  <div class="ia-visual-area" id="ia-visual">
+    <div class="ia-gradient-box"></div>
+    <div class="ia-bg-text" id="ia-bg-text">UNA NUEVA ERA</div>
+    <div class="ia-img-wrap" id="ia-img-wrap">
+      <img src="11.png" alt="Operador aumentado con IA">
     </div>
-  </div>
-  <!-- Label right: MEMORIA INFINITA — lower position -->
-  <div class="ia-label-group right ia-lg1" id="ia-lg1">
-    <span class="ia-label-text-el" id="ia-lt1" data-text="MEMORIA INFINITA"></span>
-    <div class="ia-connector-wrap align-start">
-      <div class="ia-connector" id="ia-ch1" style="width:0;"></div>
-      <div class="ia-connector-vert" id="ia-cv1" style="height:0;"></div>
-    </div>
+    <!-- SVG connectors drawn via JS -->
+    <svg class="ia-connectors-svg" id="ia-conn-svg" preserveAspectRatio="none"></svg>
+    <!-- Labels -->
+    <span class="ia-label-el ia-lbl-left" id="ia-lbl0" data-text="TRABAJO 24/7"></span>
+    <span class="ia-label-el ia-lbl-right" id="ia-lbl1" data-text="MEMORIA INFINITA"></span>
   </div>
 </section>
-</div>
 
 <!-- ░░ CÓMO EMPEZAR — light ░░ -->
 <section class="light-s" id="diagnostico">
@@ -1514,126 +1486,153 @@
     });
   })();
 
-  // ── IA SECTION — STICKY SCROLL + HOLOGRAM ───────
+  // ── IA SECTION — HOLOGRAM + CONNECTORS ───────
   (function(){
-    const outer = document.querySelector('.ia-scroll-outer');
     const section = document.querySelector('.ia-section');
-    if(!outer || !section) return;
+    if(!section) return;
 
+    const visual = document.getElementById('ia-visual');
     const imgWrap = document.getElementById('ia-img-wrap');
     const bgText = document.getElementById('ia-bg-text');
-    const headline = document.getElementById('ia-head');
-    const subText = document.getElementById('ia-sub-text');
-    const gbox = document.getElementById('ia-gbox');
+    const connSvg = document.getElementById('ia-conn-svg');
+    const lbl0 = document.getElementById('ia-lbl0');
+    const lbl1 = document.getElementById('ia-lbl1');
 
-    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-    let labelsTriggered = false;
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&';
+    let triggered = false;
 
-    // Connector config
-    const connectors = [
-      { textEl: document.getElementById('ia-lt0'), hLine: document.getElementById('ia-ch0'), vLine: document.getElementById('ia-cv0'), hTarget: 80, vTarget: 60 },
-      { textEl: document.getElementById('ia-lt1'), hLine: document.getElementById('ia-ch1'), vLine: document.getElementById('ia-cv1'), hTarget: 80, vTarget: 60 },
-    ];
+    // Init: image hidden
+    imgWrap.style.opacity = '0';
 
     function scramble(el, target, dur, cb){
-      const len = target.length, steps = Math.ceil(dur / 35);
+      const len = target.length, steps = Math.ceil(dur / 30);
       let step = 0;
       const iv = setInterval(()=>{
         let out = '';
-        for(let i = 0; i < len; i++) out += i < (step/steps)*len ? target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
+        for(let i = 0; i < len; i++){
+          if(i < (step/steps)*len) out += target[i];
+          else out += CHARS[Math.floor(Math.random()*CHARS.length)];
+        }
         el.textContent = out; step++;
         if(step > steps){ clearInterval(iv); el.textContent = target; if(cb) cb(); }
-      }, 35);
+      }, 30);
     }
 
-    function animateConnector(c, delay){
+    function hologramReveal(){
+      // Flicker phase (0–600ms) then stabilize (600–1200ms)
+      const start = performance.now();
+      const totalDur = 1200;
+      (function frame(now){
+        const elapsed = now - start;
+        const t = Math.min(elapsed / totalDur, 1);
+        if(t < 0.5){
+          // Flicker: random opacity jumps, blur, desaturated, green tint
+          const sub = t / 0.5;
+          const flicker = 0.15 + sub * 0.6 + Math.sin(elapsed * 0.05) * 0.1 * (1 - sub);
+          imgWrap.style.opacity = Math.max(0, Math.min(flicker, 1));
+          imgWrap.style.filter = 'blur('+(3*(1-sub))+'px) brightness('+(1.2-0.2*sub)+') saturate('+(0.4+0.4*sub)+')';
+        } else {
+          const sub = (t - 0.5) / 0.5;
+          const e = 1 - Math.pow(1-sub, 3);
+          imgWrap.style.opacity = 0.75 + 0.25 * e;
+          imgWrap.style.filter = e > 0.95 ? 'none' : 'blur('+(0.5*(1-e))+'px) saturate('+(0.8+0.2*e)+')';
+        }
+        if(t < 1) requestAnimationFrame(frame);
+        else {
+          imgWrap.style.opacity = '1';
+          imgWrap.style.filter = 'none';
+          // After hologram done, trigger labels + connectors
+          setTimeout(triggerLabels, 300);
+        }
+      })(performance.now());
+    }
+
+    function drawPath(pathEl, dur, cb){
+      const len = pathEl.getTotalLength();
+      pathEl.style.strokeDasharray = len;
+      pathEl.style.strokeDashoffset = len;
+      const start = performance.now();
+      (function frame(now){
+        const t = Math.min((now - start)/dur, 1);
+        const e = 1 - Math.pow(1-t, 2);
+        pathEl.style.strokeDashoffset = len * (1 - e);
+        if(t < 1) requestAnimationFrame(frame);
+        else if(cb) cb();
+      })(performance.now());
+    }
+
+    function triggerLabels(){
+      // Get positions relative to visual area
+      const vRect = visual.getBoundingClientRect();
+      const imgRect = imgWrap.getBoundingClientRect();
+
+      // Set SVG viewBox to match visual area
+      const w = vRect.width, h = vRect.height;
+      connSvg.setAttribute('viewBox', '0 0 '+w+' '+h);
+      connSvg.style.width = w+'px';
+      connSvg.style.height = h+'px';
+
+      // LEFT label: "TRABAJO 24/7"
+      const lbl0Rect = lbl0.getBoundingClientRect();
+      // Point 1: left edge of text, slightly below text
+      const l0x1 = lbl0Rect.left - vRect.left;
+      const l0y1 = lbl0Rect.bottom - vRect.top + 4;
+      // Horizontal line goes right to text right edge
+      const l0x2 = lbl0Rect.right - vRect.left;
+      const l0y2 = l0y1;
+      // Angled line goes down-right toward image center-left
+      const l0x3 = imgRect.left - vRect.left + imgRect.width * 0.35;
+      const l0y3 = imgRect.top - vRect.top + imgRect.height * 0.55;
+
+      const path0 = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path0.setAttribute('d', 'M'+l0x1+','+l0y1+' L'+l0x2+','+l0y2+' L'+l0x3+','+l0y3);
+      path0.setAttribute('class', 'ia-conn-path');
+      connSvg.appendChild(path0);
+
+      // RIGHT label: "MEMORIA INFINITA"
+      const lbl1Rect = lbl1.getBoundingClientRect();
+      // Point 3: right edge of text, slightly below
+      const r1x1 = lbl1Rect.right - vRect.left;
+      const r1y1 = lbl1Rect.bottom - vRect.top + 4;
+      // Horizontal line goes left to text left edge
+      const r1x2 = lbl1Rect.left - vRect.left;
+      const r1y2 = r1y1;
+      // Angled line goes down-left toward image center-right
+      const r1x3 = imgRect.left - vRect.left + imgRect.width * 0.65;
+      const r1y3 = imgRect.top - vRect.top + imgRect.height * 0.7;
+
+      const path1 = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path1.setAttribute('d', 'M'+r1x1+','+r1y1+' L'+r1x2+','+r1y2+' L'+r1x3+','+r1y3);
+      path1.setAttribute('class', 'ia-conn-path');
+      connSvg.appendChild(path1);
+
+      // Animate label 0 + connector 0
+      lbl0.classList.add('lbl-in');
+      lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+      scramble(lbl0, lbl0.dataset.text, 1800);
+      drawPath(path0, 1400);
+
+      // Animate label 1 + connector 1 (delayed)
       setTimeout(()=>{
-        // Animate horizontal line
-        const hDur = 500, hStart = performance.now();
-        (function drawH(now){
-          const t = Math.min((now - hStart)/hDur, 1);
-          const e = 1 - Math.pow(1-t, 3);
-          c.hLine.style.width = (c.hTarget * e) + 'px';
-          if(t < 1) requestAnimationFrame(drawH);
-          else {
-            // Then vertical line
-            const vDur = 400, vStart = performance.now();
-            (function drawV(now2){
-              const t2 = Math.min((now2 - vStart)/vDur, 1);
-              const e2 = 1 - Math.pow(1-t2, 3);
-              c.vLine.style.height = (c.vTarget * e2) + 'px';
-              if(t2 < 1) requestAnimationFrame(drawV);
-            })(performance.now());
-          }
-        })(performance.now());
-      }, delay);
+        lbl1.classList.add('lbl-in');
+        lbl1.textContent = lbl1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+        scramble(lbl1, lbl1.dataset.text, 1800);
+        drawPath(path1, 1400);
+      }, 500);
+
+      // BG text
+      bgText.classList.add('bg-reveal');
     }
 
+    // Trigger when visual area scrolls into view
     function onScroll(){
-      const rect = outer.getBoundingClientRect();
-      const totalScroll = outer.offsetHeight - window.innerHeight;
-      const scrolled = -rect.top;
-      const p = Math.max(0, Math.min(scrolled / totalScroll, 1));
-
-      // Hologram effect: image appears with scanlines/opacity
-      // Phase 1 (0–0.3): hologram flicker — opacity oscillates, green tint, blur
-      // Phase 2 (0.3–0.5): stabilize to full image
-      // Phase 3 (0.5+): labels + connectors
-
-      if(p < 0.3){
-        const sub = p / 0.3;
-        // Flicker effect
-        const flicker = 0.3 + sub * 0.5 + Math.sin(p * 80) * 0.08;
-        imgWrap.style.opacity = flicker;
-        imgWrap.style.filter = 'blur(' + (4 * (1-sub)) + 'px) brightness(1.15) saturate(0.6)';
-      } else if(p < 0.5){
-        const sub = (p - 0.3) / 0.2;
-        const e = 1 - Math.pow(1-sub, 2);
-        imgWrap.style.opacity = 0.8 + 0.2 * e;
-        const bl = 1 * (1 - e);
-        imgWrap.style.filter = bl > 0.05 ? 'blur('+bl+'px) brightness('+(1.15-0.15*e)+') saturate('+(0.6+0.4*e)+')' : 'none';
-      } else {
-        imgWrap.style.opacity = 1;
-        imgWrap.style.filter = 'none';
-      }
-
-      // Background text
-      if(p > 0.25) bgText.classList.add('bg-reveal');
-      else bgText.classList.remove('bg-reveal');
-
-      // Gradient box
-      if(p > 0.3) gbox.classList.add('gbox-in');
-      else gbox.classList.remove('gbox-in');
-
-      // Headline + sub
-      if(p > 0.15){
-        headline.classList.add('head-in');
-        subText.classList.add('head-in');
-      } else {
-        headline.classList.remove('head-in');
-        subText.classList.remove('head-in');
-      }
-
-      // Labels + connectors at phase 3
-      if(p > 0.5 && !labelsTriggered){
-        labelsTriggered = true;
-        connectors.forEach((c, i) => {
-          const target = c.textEl.dataset.text;
-          setTimeout(()=>{
-            // Start scramble
-            c.textEl.style.opacity = 1;
-            c.textEl.classList.add('lbl-in');
-            c.textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-            scramble(c.textEl, target, 900);
-            // Animate connector simultaneously
-            animateConnector(c, 0);
-          }, i * 400);
-        });
+      if(triggered) return;
+      const rect = visual.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 100){
+        triggered = true;
+        hologramReveal();
       }
     }
-
-    // Init: image starts invisible
-    imgWrap.style.opacity = 0;
 
     window.addEventListener('scroll', onScroll, {passive: true});
     onScroll();
