@@ -94,7 +94,7 @@
     #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 13px; color: #1e7018; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
     .hero-eyebrow span { width: 24px; height: 1px; background: #1e7018; }
-    .hero-h1 { font-size: clamp(2.6rem, 5.5vw, 5rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; max-width: 860px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+    .hero-h1 { font-size: clamp(2.4rem, 5.2vw, 4.7rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; max-width: 860px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
     .hero-h1-static { display: block; color: #1a1a18; }
     .hero-typed-wrap { display: block; min-height: 1.15em; }
     .hero-typed { color: #1e7018; border-right: 3px solid #1e7018; padding-right: 4px; animation: blink 0.8s infinite; }
@@ -214,7 +214,7 @@
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 92%; max-width: 1200px; height: 75%;
+      width: calc(100% - 60px); max-width: none; height: 75%;
       border-radius: 24px;
       background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
@@ -284,11 +284,11 @@
     /* ── MÉTODO (dark) ────────────────────────── */
     .fases { display: flex; gap: 0; position: relative; margin-top: 1rem; }
     .fases-line { position: absolute; top: 33px; height: 1px; background: linear-gradient(90deg, rgba(126,244,116,0.7), rgba(126,244,116,0.5), rgba(126,244,116,0.7)); pointer-events: none; z-index: 0; transform-origin: left center; transform: scaleX(0); }
-    .fases-line-1 { left: 33px; width: calc(33.33%); }
-    .fases-line-2 { left: calc(33.33% + 33px); width: calc(33.33%); }
+    .fases-line-1 { left: calc(16.66%); width: calc(33.33%); }
+    .fases-line-2 { left: calc(50%); width: calc(33.33%); }
     .fases-line.line-draw { transform: scaleX(1); transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-    .fase { flex: 1; padding: 0 3rem 0 0; position: relative; }
-    .fase:last-child { padding-right: 0; }
+    .fase { flex: 1; padding: 0 2rem; position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .fase:last-child { padding-right: 2rem; }
     .fase-dot { width: 66px; height: 66px; background: #161616; border: 1px solid rgba(255,255,255,0.16); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.75rem; position: relative; z-index: 2; transition: border-color 0.5s, box-shadow 0.5s; }
     .fase:hover .fase-dot { border-color: var(--g); }
     .fase.scroll-active .fase-dot { border-color: var(--g); }
@@ -659,7 +659,7 @@
     <span class="hero-h1-static">Convertimos caos operativo en</span>
     <span class="hero-typed-wrap"><span class="hero-typed" id="typed"></span></span>
   </h1>
-  <p class="hero-sub">Ordenamos procesos críticos, los hacemos predecibles y dejamos a tu equipo operando con claridad. Cuando el proceso está listo, metemos automatización e IA donde realmente empujan resultados.</p>
+  <p class="hero-sub">Ordenamos procesos críticos, los hacemos predecibles y dejamos a tu equipo operando con claridad. Cuando el proceso está listo, incorporamos IA donde realmente empuja resultados.</p>
   <div class="hero-actions">
     <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="btn-primary">AGENDAR LLAMADA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
     <a href="#metodo" class="btn-ghost-light">Cómo trabajamos</a>
@@ -869,14 +869,10 @@
     </div>
 
   </div>
-</section>
-
-<!-- ░░ MÉTODO — dark ░░ -->
-<section class="dark-s" id="metodo">
-  <div class="sec-grid"></div>
+<!-- método continues in same section -->
   <div class="sec-glow br"></div>
   <div class="particles" id="particles-metodo"></div>
-  <div class="container">
+  <div class="container" style="padding-top:4rem;">
     <div class="section-label reveal">El método</div>
     <h2 class="section-h2 reveal reveal-delay-1"><em>3 fases. 4-6 semanas.</em><br>Un proceso que funciona.</h2>
     <p class="section-sub reveal reveal-delay-2">No reformamos toda tu empresa. Resolvemos un proceso crítico con la profundidad necesaria para que el cambio sea real y sostenible.</p>
@@ -1588,14 +1584,13 @@
       canvas.style.height = vRect.height + 'px';
 
       // LEFT: "TRABAJO 24/7"
-      // Horizontal line 5px below text: starts at text LEFT edge, extends RIGHT well past text toward image
-      // Then short diagonal from end of horizontal down to image
+      // Horizontal line 5px below text: starts at text LEFT edge, extends ~80px past text RIGHT edge
+      // Then diagonal from end of horizontal down to image
       const l0 = lbl0.getBoundingClientRect();
       const l0_left = l0.left - vRect.left;
+      const l0_right = l0.right - vRect.left;
       const l0_y = l0.bottom - vRect.top + 5;
-      // Horizontal extends to ~42% of visual width (near image left edge)
-      const l0_hEnd = vRect.width * 0.42;
-      // Diagonal end: image upper-left
+      const l0_hEnd = l0_right + 80;
       const l0_imgX = imgRect.left - vRect.left + imgRect.width * 0.35;
       const l0_imgY = imgRect.top - vRect.top + imgRect.height * 0.5;
 
@@ -1606,14 +1601,13 @@
       ];
 
       // RIGHT: "MEMORIA INFINITA"
-      // Horizontal line 5px below text: starts at text RIGHT edge, extends LEFT well past text toward image
-      // Then short diagonal from end of horizontal down to image
+      // Horizontal line 5px below text: starts at text RIGHT edge, extends ~80px past text LEFT edge
+      // Then diagonal from end of horizontal down to image
       const l1 = lbl1.getBoundingClientRect();
+      const r1_left = l1.left - vRect.left;
       const r1_right = l1.right - vRect.left;
       const r1_y = l1.bottom - vRect.top + 5;
-      // Horizontal extends to ~58% of visual width (near image right edge)
-      const r1_hEnd = vRect.width * 0.58;
-      // Diagonal end: image lower-right
+      const r1_hEnd = r1_left - 80;
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.65;
 
