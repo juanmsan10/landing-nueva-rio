@@ -99,7 +99,7 @@
     .hero-typed-wrap { display: block; min-height: 1.15em; }
     .hero-typed { color: #1e7018; border-right: 3px solid #1e7018; padding-right: 4px; animation: blink 0.8s infinite; }
     @keyframes blink { 0%,100%{border-color:#1e7018;} 50%{border-color:transparent;} }
-    .hero-sub { font-size: 1.15rem; color: #4e4e4a; line-height: 1.8; max-width: 580px; margin-bottom: 3rem; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+    .hero-sub { font-size: 1.15rem; color: #4e4e4a; line-height: 1.8; max-width: 700px; margin-bottom: 3rem; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
     .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.25rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
     .btn-primary { height: 56px; padding: 0 36px; background: #1a1a18; color: #f8f7f4; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--sans); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.2s; }
     .btn-primary:hover { background: #2e2e2e; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.18); }
@@ -277,16 +277,17 @@
     }
     .ia-blur-el.lbl-in { opacity: 1; }
     .ia-blur-left2 {
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
-      color: rgba(30,112,24,0.35);
+      font-size: clamp(calc(1.8rem - 3px), calc(3.5vw - 3px), calc(3rem - 3px));
+      color: rgba(0,0,0,0.35);
       filter: blur(2.5px);
-      bottom: 22%; left: 14%;
+      bottom: calc(22% + 25px); left: 14%;
     }
     .ia-blur-right2 {
-      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-      color: rgba(232,64,64,0.45);
+      font-size: clamp(calc(1.4rem - 3px), calc(2.5vw - 3px), calc(2.2rem - 3px));
+      color: rgba(0,0,0,0.45);
       filter: blur(2.5px);
-      top: 12%; right: 10%;
+      top: 12%; right: calc(10% - 40px);
+      white-space: pre-line;
     }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
@@ -615,7 +616,7 @@
     }
     .chaos-headline em { font-style: normal; color: #1e7018; font-weight: 500; }
     .chaos-sub {
-      font-size: 1.3rem;
+      font-size: calc(1.3rem - 2px);
       color: #4e4e4a;
       margin-bottom: 4rem;
       font-weight: 300;
@@ -724,7 +725,7 @@
 <!-- ░░ CHAOS — light ░░ -->
 <section class="chaos-section" id="problema">
   <h2 class="chaos-headline reveal">El <em>40% del tiempo</em> de tu equipo<br>se va en resolver lo que <em>ya debería funcionar.</em></h2>
-  <p class="chaos-sub reveal reveal-delay-1">Operar sin procesos claros no es un inconveniente. Es un costo invisible que se acumula cada semana.</p>
+  <p class="chaos-sub reveal reveal-delay-1">Operar sin procesos efectivos es un costo invisible que se acumula cada semana.</p>
 
   <div class="chaos-visual reveal reveal-delay-2" id="chaos-visual">
     <img src="nudos.png" alt="" class="chaos-illustration">
@@ -934,7 +935,7 @@
 <!-- ░░ HUMANOS CON IA ░░ -->
 <section class="light-s ia-section" id="ia">
   <div class="ia-gradient-box"></div>
-  <h2 class="ia-headline">Humanos con IA, una <em>nueva era</em></h2>
+  <h2 class="ia-headline">Humanos con IA, <em>una nueva era</em></h2>
   <p class="ia-sub">Automatizamos tareas repetitivas y entrenamos a tu gente con herramientas personalizadas que optimizan el trabajo. <strong>Así es como tu equipo se multiplica... ¡sin contratar una sola persona más!</strong></p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-img-wrap" id="ia-img-wrap">
@@ -1649,11 +1650,16 @@
       const r1_hEnd = r1_left - 80;
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.7;
+      // Extend diagonal 2x longer and steeper downward
+      const r1_dx = r1_imgX - r1_hEnd;
+      const r1_dy = r1_imgY - r1_y;
+      const r1_diagX = r1_hEnd + r1_dx * 2;
+      const r1_diagY = r1_y + r1_dy * 2.5;
 
       const p1 = [
         {x: r1_right, y: r1_y},
         {x: r1_hEnd, y: r1_y},
-        {x: r1_imgX, y: r1_imgY}
+        {x: r1_diagX, y: r1_diagY}
       ];
 
       if(!connectorsDrawn){
@@ -1670,8 +1676,22 @@
         scramble(blur0, blur0.dataset.text, 2200);
 
         blur1.classList.add('lbl-in');
-        blur1.textContent = blur1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-        scramble(blur1, blur1.dataset.text, 2200);
+        const blur1Target = "DELEGA Y\nAUTOMATIZA";
+        blur1.textContent = blur1Target.replace(/[^\n]/g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+        // Scramble preserving newlines
+        (function(){
+          const len = blur1Target.length, steps = Math.ceil(2200 / 30);
+          let step = 0;
+          const iv = setInterval(()=>{
+            let out = '';
+            for(let i = 0; i < len; i++){
+              if(blur1Target[i] === '\n'){ out += '\n'; continue; }
+              out += i < (step/steps)*len ? blur1Target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
+            }
+            blur1.textContent = out; step++;
+            if(step > steps){ clearInterval(iv); blur1.textContent = blur1Target; }
+          }, 30);
+        })();
 
         // Animate label 1 + connector (delayed)
         setTimeout(()=>{
