@@ -208,7 +208,7 @@
     /* IA SECTION — STICKY SCROLL */
     .ia-scroll-outer {
       position: relative;
-      height: 300vh;
+      height: 250vh;
     }
     .ia-section {
       position: sticky; top: 0;
@@ -217,32 +217,31 @@
       align-items: center; justify-content: center;
       background: #f8f7f4;
     }
+    .ia-gradient-box {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 92%; max-width: 1200px; height: 55%;
+      border-radius: 24px 24px 0 0;
+      background: linear-gradient(180deg, rgba(30,112,24,0.06) 0%, rgba(30,112,24,0.15) 100%);
+      opacity: 0; transition: opacity 0.8s ease;
+      z-index: 0;
+    }
+    .ia-gradient-box.gbox-in { opacity: 1; }
     .ia-bg-text {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      font-size: clamp(5rem, 12vw, 10rem); font-weight: 700;
+      position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%);
+      font-size: clamp(4rem, 10vw, 8rem); font-weight: 700;
       letter-spacing: -0.04em; line-height: 0.95;
-      color: rgba(30,112,24,0.07);
+      color: rgba(30,112,24,0.06);
       white-space: nowrap; pointer-events: none; z-index: 0;
-      filter: blur(4px); opacity: 0;
-      transition: opacity 0.8s ease, filter 1.2s ease;
+      filter: blur(3px); opacity: 0;
+      transition: opacity 0.8s ease;
       text-align: center;
     }
-    .ia-bg-text.bg-reveal { opacity: 1; filter: blur(2px); }
-    .ia-img-wrap {
-      position: relative; z-index: 2;
-      width: 600px; max-width: 85vw;
-      will-change: transform, filter;
-      transition: filter 0.4s ease;
-    }
-    .ia-img-wrap img {
-      width: 100%; height: auto; display: block;
-      object-fit: contain;
-    }
+    .ia-bg-text.bg-reveal { opacity: 1; }
     .ia-headline {
       position: relative; z-index: 3;
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -0.04em;
-      text-align: center; margin-bottom: 2rem;
+      text-align: center; margin-bottom: 1.5rem;
       opacity: 0; transform: translateY(24px);
       transition: opacity 0.6s ease, transform 0.6s ease;
       color: #1a1a18;
@@ -259,45 +258,44 @@
       transition: opacity 0.6s 0.15s ease, transform 0.6s 0.15s ease;
     }
     .ia-sub.head-in { opacity: 1; transform: translateY(0); }
-    .ia-labels {
-      position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    .ia-img-wrap {
+      position: relative; z-index: 2;
+      width: 600px; max-width: 85vw;
+      will-change: opacity, filter;
     }
-    .ia-label {
-      position: absolute;
-      font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
-      color: rgba(30,112,24,0.8); white-space: nowrap;
+    .ia-img-wrap img {
+      width: 100%; height: auto; display: block;
+      object-fit: contain;
+    }
+    /* Connector + label pairs */
+    .ia-label-group {
+      position: absolute; z-index: 4; pointer-events: none;
+      display: flex; align-items: center; gap: 0;
+    }
+    .ia-label-group.left { flex-direction: row; }
+    .ia-label-group.right { flex-direction: row-reverse; }
+    .ia-label-text-el {
+      font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
+      color: rgba(30,112,24,0.75); white-space: nowrap;
       opacity: 0; transition: opacity 0.3s ease;
     }
-    .ia-label.lbl-in { opacity: 1; }
-    .ia-label.lbl-float { animation: ia-lbl-float 6s ease-in-out infinite; }
-    @keyframes ia-lbl-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
-    .ia-label-line {
-      position: absolute; z-index: 3; pointer-events: none;
-      stroke: rgba(30,112,24,0.3); stroke-width: 1; fill: none;
+    .ia-label-text-el.lbl-in { opacity: 1; }
+    .ia-connector {
+      height: 1px; background: rgba(30,112,24,0.3);
+      width: 0; transition: none;
     }
-    .ia-l0 { top: 22%; left: 5%; }
-    .ia-l1 { top: 18%; right: 5%; }
-    .ia-l2 { bottom: 22%; left: 7%; }
-    .ia-l3 { bottom: 18%; right: 5%; }
-    .ia-cta-wrap {
-      position: relative; z-index: 5;
-      text-align: center; margin-top: 2rem;
-      opacity: 0; transform: translateY(12px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+    .ia-connector-vert {
+      width: 1px; background: rgba(30,112,24,0.3);
+      height: 0; transition: none;
     }
-    .ia-cta-wrap.cta-in { opacity: 1; transform: translateY(0); }
-    .ia-cta-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 16px 36px; border-radius: 999px;
-      background: rgba(30,112,24,0.06); border: 1px solid rgba(30,112,24,0.35);
-      color: #1e7018; font-size: 14px; font-weight: 700; font-family: var(--sans);
-      letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase;
-      transition: all 0.3s;
+    .ia-connector-wrap {
+      display: flex; flex-direction: column;
     }
-    .ia-cta-btn:hover {
-      background: rgba(30,112,24,0.12);
-      box-shadow: 0 0 40px rgba(30,112,24,0.1); transform: translateY(-2px);
-    }
+    .ia-connector-wrap.align-end { align-items: flex-end; }
+    .ia-connector-wrap.align-start { align-items: flex-start; }
+    /* Positions — matching ClickUp layout */
+    .ia-lg0 { top: 30%; left: 4%; }
+    .ia-lg1 { top: 55%; right: 4%; }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -401,7 +399,9 @@
       .prod-pill { display: none; }
       .ia-scroll-outer { height: 200vh; }
       .ia-img-wrap { width: 90vw; }
-      .ia-label { font-size: 10px; }
+      .ia-label-text-el { font-size: 10px; }
+      .ia-lg0 { top: 25%; left: 2%; }
+      .ia-lg1 { top: 55%; right: 2%; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -434,8 +434,7 @@
       .prod-card-title { font-size: 20px; }
       .ia-headline { font-size: 2.2rem; }
       .ia-sub { font-size: 17px; }
-      .ia-label { font-size: 9px; letter-spacing: 0.08em; }
-      .ia-cta-btn { font-size: 13px; padding: 14px 28px; }
+      .ia-label-text-el { font-size: 9px; letter-spacing: 0.08em; }
       .mobile-br { display: block; }
       .nivel-card { padding: calc(1.75rem + 20px) 1.75rem; }
       .nivel-num { min-height: 0; padding: 0.42rem 0.72rem; font-size: 15px; }
@@ -939,20 +938,28 @@
 <!-- ░░ HUMANOS CON IA — STICKY SCROLL ░░ -->
 <div class="ia-scroll-outer">
 <section class="light-s ia-section" id="ia">
-  <div class="ia-bg-text" id="ia-bg-text">HUMANOS<br>CON IA</div>
-  <h2 class="ia-headline" id="ia-head">Humanos con <em>IA</em></h2>
+  <div class="ia-gradient-box" id="ia-gbox"></div>
+  <div class="ia-bg-text" id="ia-bg-text">UNA NUEVA ERA</div>
+  <h2 class="ia-headline" id="ia-head">Humanos con <em>IA</em>, una nueva era</h2>
   <p class="ia-sub" id="ia-sub-text">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
   <div class="ia-img-wrap" id="ia-img-wrap">
     <img src="11.png" alt="Operador aumentado con IA">
   </div>
-  <div class="ia-labels" id="ia-labels">
-    <div class="ia-label ia-l0" data-text="TRABAJO 24/7"><span class="ia-label-text"></span></div>
-    <div class="ia-label ia-l1" data-text="MEMORIA INFINITA"><span class="ia-label-text"></span></div>
-    <div class="ia-label ia-l2" data-text="EQUIPO ×3"><span class="ia-label-text"></span></div>
-    <div class="ia-label ia-l3" data-text="SIN REPROCESOS"><span class="ia-label-text"></span></div>
+  <!-- Label left: TRABAJO 24/7 — higher position -->
+  <div class="ia-label-group left ia-lg0" id="ia-lg0">
+    <span class="ia-label-text-el" id="ia-lt0" data-text="TRABAJO 24/7"></span>
+    <div class="ia-connector-wrap align-end">
+      <div class="ia-connector" id="ia-ch0" style="width:0;"></div>
+      <div class="ia-connector-vert" id="ia-cv0" style="height:0;"></div>
+    </div>
   </div>
-  <div class="ia-cta-wrap" id="ia-cta">
-    <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="ia-cta-btn">ESCALAR CON IA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
+  <!-- Label right: MEMORIA INFINITA — lower position -->
+  <div class="ia-label-group right ia-lg1" id="ia-lg1">
+    <span class="ia-label-text-el" id="ia-lt1" data-text="MEMORIA INFINITA"></span>
+    <div class="ia-connector-wrap align-start">
+      <div class="ia-connector" id="ia-ch1" style="width:0;"></div>
+      <div class="ia-connector-vert" id="ia-cv1" style="height:0;"></div>
+    </div>
   </div>
 </section>
 </div>
@@ -1507,7 +1514,7 @@
     });
   })();
 
-  // ── IA SECTION — STICKY SCROLL ANIMATION ───────
+  // ── IA SECTION — STICKY SCROLL + HOLOGRAM ───────
   (function(){
     const outer = document.querySelector('.ia-scroll-outer');
     const section = document.querySelector('.ia-section');
@@ -1517,12 +1524,16 @@
     const bgText = document.getElementById('ia-bg-text');
     const headline = document.getElementById('ia-head');
     const subText = document.getElementById('ia-sub-text');
-    const labels = section.querySelectorAll('.ia-label');
-    const ctaWrap = document.getElementById('ia-cta');
+    const gbox = document.getElementById('ia-gbox');
 
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
     let labelsTriggered = false;
-    let ctaTriggered = false;
+
+    // Connector config
+    const connectors = [
+      { textEl: document.getElementById('ia-lt0'), hLine: document.getElementById('ia-ch0'), vLine: document.getElementById('ia-cv0'), hTarget: 80, vTarget: 60 },
+      { textEl: document.getElementById('ia-lt1'), hLine: document.getElementById('ia-ch1'), vLine: document.getElementById('ia-cv1'), hTarget: 80, vTarget: 60 },
+    ];
 
     function scramble(el, target, dur, cb){
       const len = target.length, steps = Math.ceil(dur / 35);
@@ -1535,33 +1546,67 @@
       }, 35);
     }
 
+    function animateConnector(c, delay){
+      setTimeout(()=>{
+        // Animate horizontal line
+        const hDur = 500, hStart = performance.now();
+        (function drawH(now){
+          const t = Math.min((now - hStart)/hDur, 1);
+          const e = 1 - Math.pow(1-t, 3);
+          c.hLine.style.width = (c.hTarget * e) + 'px';
+          if(t < 1) requestAnimationFrame(drawH);
+          else {
+            // Then vertical line
+            const vDur = 400, vStart = performance.now();
+            (function drawV(now2){
+              const t2 = Math.min((now2 - vStart)/vDur, 1);
+              const e2 = 1 - Math.pow(1-t2, 3);
+              c.vLine.style.height = (c.vTarget * e2) + 'px';
+              if(t2 < 1) requestAnimationFrame(drawV);
+            })(performance.now());
+          }
+        })(performance.now());
+      }, delay);
+    }
+
     function onScroll(){
       const rect = outer.getBoundingClientRect();
       const totalScroll = outer.offsetHeight - window.innerHeight;
       const scrolled = -rect.top;
       const p = Math.max(0, Math.min(scrolled / totalScroll, 1));
 
-      // Phase 1 (0–0.4): Image starts zoomed in (scale 2.2) and scales to 1
-      // Phase 2 (0.4–0.65): Image settles, blur clears, bg text appears
-      // Phase 3 (0.65–1): Labels decode, headline/sub/CTA appear
+      // Hologram effect: image appears with scanlines/opacity
+      // Phase 1 (0–0.3): hologram flicker — opacity oscillates, green tint, blur
+      // Phase 2 (0.3–0.5): stabilize to full image
+      // Phase 3 (0.5+): labels + connectors
 
-      // Image scale: 2.2 → 1
-      const scaleP = Math.min(p / 0.4, 1);
-      const easeScale = 1 - Math.pow(1 - scaleP, 3);
-      const scale = 2.2 - 1.2 * easeScale;
-      imgWrap.style.transform = 'scale(' + scale + ')';
+      if(p < 0.3){
+        const sub = p / 0.3;
+        // Flicker effect
+        const flicker = 0.3 + sub * 0.5 + Math.sin(p * 80) * 0.08;
+        imgWrap.style.opacity = flicker;
+        imgWrap.style.filter = 'blur(' + (4 * (1-sub)) + 'px) brightness(1.15) saturate(0.6)';
+      } else if(p < 0.5){
+        const sub = (p - 0.3) / 0.2;
+        const e = 1 - Math.pow(1-sub, 2);
+        imgWrap.style.opacity = 0.8 + 0.2 * e;
+        const bl = 1 * (1 - e);
+        imgWrap.style.filter = bl > 0.05 ? 'blur('+bl+'px) brightness('+(1.15-0.15*e)+') saturate('+(0.6+0.4*e)+')' : 'none';
+      } else {
+        imgWrap.style.opacity = 1;
+        imgWrap.style.filter = 'none';
+      }
 
-      // Image blur: starts at 3px, clears by phase 2
-      const blurP = Math.min(p / 0.5, 1);
-      const blurVal = 3 * (1 - blurP);
-      imgWrap.style.filter = blurVal > 0.1 ? 'blur(' + blurVal + 'px)' : 'none';
+      // Background text
+      if(p > 0.25) bgText.classList.add('bg-reveal');
+      else bgText.classList.remove('bg-reveal');
 
-      // Background text: appears in phase 2
-      if(p > 0.35) { bgText.classList.add('bg-reveal'); }
-      else { bgText.classList.remove('bg-reveal'); }
+      // Gradient box
+      if(p > 0.3) gbox.classList.add('gbox-in');
+      else gbox.classList.remove('gbox-in');
 
-      // Headline + sub: appear in phase 2.5
-      if(p > 0.5) {
+      // Headline + sub
+      if(p > 0.15){
         headline.classList.add('head-in');
         subText.classList.add('head-in');
       } else {
@@ -1569,29 +1614,26 @@
         subText.classList.remove('head-in');
       }
 
-      // Labels: decode once at phase 3
-      if(p > 0.6 && !labelsTriggered){
+      // Labels + connectors at phase 3
+      if(p > 0.5 && !labelsTriggered){
         labelsTriggered = true;
-        labels.forEach((lbl, i) => {
-          const textEl = lbl.querySelector('.ia-label-text');
-          const target = lbl.dataset.text;
+        connectors.forEach((c, i) => {
+          const target = c.textEl.dataset.text;
           setTimeout(()=>{
-            lbl.classList.add('lbl-in');
-            textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-            setTimeout(()=> scramble(textEl, target, 900, ()=>{
-              lbl.classList.add('lbl-float');
-              lbl.style.animationDelay = (i * 0.4) + 's';
-            }), 150);
-          }, i * 280);
+            // Start scramble
+            c.textEl.style.opacity = 1;
+            c.textEl.classList.add('lbl-in');
+            c.textEl.textContent = target.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+            scramble(c.textEl, target, 900);
+            // Animate connector simultaneously
+            animateConnector(c, 0);
+          }, i * 400);
         });
       }
-
-      // CTA
-      if(p > 0.75 && !ctaTriggered){
-        ctaTriggered = true;
-        if(ctaWrap) ctaWrap.classList.add('cta-in');
-      }
     }
+
+    // Init: image starts invisible
+    imgWrap.style.opacity = 0;
 
     window.addEventListener('scroll', onScroll, {passive: true});
     onScroll();
