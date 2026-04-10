@@ -266,7 +266,7 @@
     }
     /* Label positions — tight to image */
     .ia-lbl-left { top: calc(22% - 40px); left: 12%; }
-    .ia-lbl-right { top: calc(58% + 30px); right: 12%; }
+    .ia-lbl-right { top: calc(58% + 60px); right: 12%; }
 
     /* Blur background texts */
     .ia-blur-el {
@@ -277,7 +277,7 @@
     }
     .ia-blur-el.lbl-in { opacity: 1; }
     .ia-blur-left2 {
-      font-size: clamp(calc(1.8rem - 3px), calc(3.5vw - 3px), calc(3rem - 3px));
+      font-size: clamp(calc(1.8rem - 6px), calc(3.5vw - 6px), calc(3rem - 6px));
       color: rgba(0,0,0,0.35);
       filter: blur(2.5px);
       bottom: calc(22% + 25px); left: 14%;
@@ -286,7 +286,7 @@
       font-size: clamp(calc(1.4rem - 3px), calc(2.5vw - 3px), calc(2.2rem - 3px));
       color: rgba(0,0,0,0.45);
       filter: blur(2.5px);
-      top: 12%; right: calc(10% - 40px);
+      top: 12%; right: calc(10% - 10px);
       white-space: pre-line;
     }
 
@@ -1650,11 +1650,11 @@
       const r1_hEnd = r1_left - 80;
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.7;
-      // Extend diagonal 2x longer and steeper downward
-      const r1_dx = r1_imgX - r1_hEnd;
-      const r1_dy = r1_imgY - r1_y;
-      const r1_diagX = r1_hEnd + r1_dx * 2;
-      const r1_diagY = r1_y + r1_dy * 2.5;
+      // Steep diagonal: 65° from horizontal, length = 35% of image height
+      const r1_diagLen = imgRect.height * 0.35;
+      const r1_angle = 65 * Math.PI / 180;
+      const r1_diagX = r1_hEnd - r1_diagLen * Math.cos(r1_angle);
+      const r1_diagY = r1_y + r1_diagLen * Math.sin(r1_angle);
 
       const p1 = [
         {x: r1_right, y: r1_y},
