@@ -214,7 +214,7 @@
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: calc(100% - 30px); max-width: none; height: 75%;
+      width: calc(100% - 80px); max-width: none; height: 75%;
       border-radius: 24px;
       background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
@@ -265,8 +265,29 @@
       z-index: 3; pointer-events: none;
     }
     /* Label positions — tight to image */
-    .ia-lbl-left { top: 22%; left: 12%; }
-    .ia-lbl-right { top: 58%; right: 12%; }
+    .ia-lbl-left { top: calc(22% - 40px); left: 12%; }
+    .ia-lbl-right { top: calc(58% + 30px); right: 12%; }
+
+    /* Blur background texts */
+    .ia-blur-el {
+      position: absolute; z-index: 4; pointer-events: none;
+      font-family: var(--mono); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; white-space: nowrap;
+      opacity: 0;
+    }
+    .ia-blur-el.lbl-in { opacity: 1; }
+    .ia-blur-left2 {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      color: rgba(30,112,24,0.35);
+      filter: blur(2.5px);
+      bottom: 22%; left: 14%;
+    }
+    .ia-blur-right2 {
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      color: rgba(232,64,64,0.45);
+      filter: blur(2.5px);
+      top: 12%; right: 10%;
+    }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -384,6 +405,7 @@
       .ia-label-el { font-size: 10px; }
       .ia-lbl-left { top: 28%; left: 3%; }
       .ia-lbl-right { top: 52%; right: 3%; }
+      .ia-blur-el { display: none; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -911,10 +933,10 @@
 
 <!-- ░░ HUMANOS CON IA ░░ -->
 <section class="light-s ia-section" id="ia">
+  <div class="ia-gradient-box"></div>
   <h2 class="ia-headline">Humanos con IA, una <em>nueva era</em></h2>
   <p class="ia-sub">Automatizamos tareas repetitivas y entrenamos a tu gente con herramientas personalizadas que optimizan el trabajo. <strong>Así es como tu equipo se multiplica... ¡sin contratar una sola persona más!</strong></p>
   <div class="ia-visual-area" id="ia-visual">
-    <div class="ia-gradient-box"></div>
     <div class="ia-img-wrap" id="ia-img-wrap">
       <img src="11.png" alt="Operador aumentado con IA">
     </div>
@@ -923,6 +945,9 @@
     <!-- Labels -->
     <span class="ia-label-el ia-lbl-left" id="ia-lbl0" data-text="TRABAJO 24/7"></span>
     <span class="ia-label-el ia-lbl-right" id="ia-lbl1" data-text="MEMORIA INFINITA"></span>
+    <!-- Blur texts -->
+    <span class="ia-blur-el ia-blur-left2" id="ia-blur0" data-text="TU EQUIPO X3"></span>
+    <span class="ia-blur-el ia-blur-right2" id="ia-blur1" data-text="DELEGA Y AUTOMATIZA"></span>
   </div>
 </section>
 
@@ -963,8 +988,8 @@
 <!-- ░░ PARA QUIÉN — dark ░░ -->
 <section class="light-s" id="paraquien" style="padding-left:0;padding-right:0;padding-top:calc(7rem - 80px);padding-bottom:calc(7rem - 80px);">
   <div style="width:95%;max-width:none;margin:0 auto;background:#161616;border:0.5px solid rgba(255,255,255,0.08);border-radius:20px;padding:calc(4rem + 20px) 3rem calc(4rem + 50px);position:relative;z-index:1;">
-    <h2 class="section-h2 reveal" style="text-align:center;margin-left:auto;margin-right:auto;color:#f2f2ef;"><span style="color:#7ef474;">Esto no es</span> para<br>cualquier empresa.</h2>
-    <div class="pq-grid reveal reveal-delay-1" style="margin:2.5rem auto 0;justify-content:center;">
+    <h2 class="section-h2 reveal" style="text-align:center;margin-left:auto;margin-right:auto;color:#f2f2ef;margin-bottom:calc(2.5rem + 20px);"><span style="color:#7ef474;">Esto no es</span> para<br>cualquier empresa.</h2>
+    <div class="pq-grid reveal reveal-delay-1" style="margin:2.5rem auto 0;justify-content:center;gap:calc(1.5rem + 20px);">
       <div class="pq-card glow-card yes" style="background:#1e1e1e;border-color:rgba(255,255,255,0.08);border-top:2px solid #7ef474;">
         <div class="pq-heading" style="color:#7ef474;">Es para ti si...</div>
         <ul class="pq-list" style="color:#b0b0ac;">
@@ -1484,6 +1509,8 @@
     const ctx = canvas.getContext('2d');
     const lbl0 = document.getElementById('ia-lbl0');
     const lbl1 = document.getElementById('ia-lbl1');
+    const blur0 = document.getElementById('ia-blur0');
+    const blur1 = document.getElementById('ia-blur1');
     const gbox = section.querySelector('.ia-gradient-box');
 
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&';
@@ -1524,7 +1551,7 @@
         if(t < 1) requestAnimationFrame(frame);
         else {
           imgWrap.style.opacity = '1'; imgWrap.style.filter = 'none';
-          setTimeout(triggerLabels, 300);
+          triggerLabels();
         }
       })(performance.now());
     }
@@ -1604,11 +1631,14 @@
       const l0_hEnd = l0_right + 80;
       const l0_imgX = imgRect.left - vRect.left + imgRect.width * 0.35;
       const l0_imgY = imgRect.top - vRect.top + imgRect.height * 0.45;
+      // Shorten diagonal to 50%
+      const l0_diagX = l0_hEnd + (l0_imgX - l0_hEnd) * 0.5;
+      const l0_diagY = l0_y + (l0_imgY - l0_y) * 0.5;
 
       const p0 = [
         {x: l0_left, y: l0_y},
         {x: l0_hEnd, y: l0_y},
-        {x: l0_imgX, y: l0_imgY}
+        {x: l0_diagX, y: l0_diagY}
       ];
 
       // RIGHT: "MEMORIA INFINITA"
@@ -1633,6 +1663,15 @@
         lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
         scramble(lbl0, lbl0.dataset.text, 1800);
         animateLine(p0, 1400);
+
+        // Blur texts — decode simultaneously
+        blur0.classList.add('lbl-in');
+        blur0.textContent = blur0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+        scramble(blur0, blur0.dataset.text, 2200);
+
+        blur1.classList.add('lbl-in');
+        blur1.textContent = blur1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+        scramble(blur1, blur1.dataset.text, 2200);
 
         // Animate label 1 + connector (delayed)
         setTimeout(()=>{
