@@ -214,8 +214,8 @@
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: calc(100% - 30px); max-width: none; height: 75%;
-      border-radius: 24px;
+      width: 100%; max-width: none; height: 75%;
+      border-radius: 0;
       background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
     }
@@ -227,7 +227,7 @@
       color: #1a1a18;
     }
     .ia-headline em {
-      font-style: normal; color: #1e7018;
+      font-style: normal; color: #7ef474;
     }
     .ia-sub {
       position: relative; z-index: 3;
@@ -265,8 +265,24 @@
       z-index: 3; pointer-events: none;
     }
     /* Label positions — tight to image */
-    .ia-lbl-left { top: 22%; left: 12%; }
-    .ia-lbl-right { top: 58%; right: 12%; }
+    .ia-lbl-left { top: calc(22% - 40px); left: 12%; }
+    .ia-lbl-right { top: calc(58% + 40px); right: 12%; }
+
+    /* Blur background texts (ClickUp style) */
+    .ia-blur-text {
+      position: absolute; z-index: 1; pointer-events: none;
+      font-family: var(--mono); font-weight: 500; text-transform: uppercase;
+      letter-spacing: 0.08em; color: rgba(30,112,24,0.18);
+      filter: blur(3px); white-space: nowrap;
+    }
+    .ia-blur-left {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      top: 45%; left: -2%;
+    }
+    .ia-blur-right {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      top: 30%; right: -1%;
+    }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -318,7 +334,10 @@
     .diag-step-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--t); }
     .diag-step-desc { font-size: 15px; color: var(--t2); line-height: 1.75; }
 
-    /* ── PARA QUIÉN (dark) ────────────────────── */
+    /* ── PARA QUIÉN (dark box on light bg) ──── */
+    #paraquien .pq-list li { color: #b0b0ac; }
+    #paraquien .pq-card.yes .pq-list li::before { color: #7ef474; }
+    #paraquien .pq-card.no .pq-list li::before { color: #ff5f5c; }
     .pq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; }
     .pq-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 2.5rem; }
     .pq-card.yes { border-top: 2px solid var(--g); }
@@ -381,6 +400,7 @@
       .ia-label-el { font-size: 10px; }
       .ia-lbl-left { top: 28%; left: 3%; }
       .ia-lbl-right { top: 52%; right: 3%; }
+      .ia-blur-text { display: none; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -881,7 +901,7 @@
 <!-- método continues in same section -->
   <div class="sec-glow br"></div>
   <div class="particles" id="particles-metodo"></div>
-  <div class="container" style="padding-top:160px;">
+  <div class="container" id="metodo" style="padding-top:160px;">
     <div class="section-label reveal">El método</div>
     <h2 class="section-h2 reveal reveal-delay-1"><em>3 fases. 4-6 semanas.</em><br>Un proceso que funciona.</h2>
     <p class="section-sub reveal reveal-delay-2">No reformamos toda tu empresa. Resolvemos un proceso crítico con la profundidad necesaria para que el cambio sea real y sostenible.</p>
@@ -916,6 +936,8 @@
   <p class="ia-sub">Automatizamos tareas repetitivas y entrenamos a tu gente con herramientas personalizadas que optimizan el trabajo. <strong>Así es como tu equipo se multiplica... ¡sin contratar una sola persona más!</strong></p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-gradient-box"></div>
+    <div class="ia-blur-text ia-blur-left">TU EQUIPO X3</div>
+    <div class="ia-blur-text ia-blur-right">MENOS ERRORES</div>
     <div class="ia-img-wrap" id="ia-img-wrap">
       <img src="11.png" alt="Operador aumentado con IA">
     </div>
@@ -962,16 +984,13 @@
 </section>
 
 <!-- ░░ PARA QUIÉN — dark ░░ -->
-<section class="dark-s" id="paraquien" style="padding-left:0;padding-right:0;">
-  <div class="sec-grid"></div>
-  <div class="sec-glow tr"></div>
-  <div class="particles" id="particles-paraquien"></div>
-  <div style="width:95%;max-width:none;margin:0 auto;background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:4rem 3rem;position:relative;z-index:1;">
-    <h2 class="section-h2 reveal" style="text-align:center;margin-left:auto;margin-right:auto;"><em>No es</em> para<br>cualquier empresa.</h2>
+<section class="light-s" id="paraquien" style="padding-left:0;padding-right:0;">
+  <div style="width:95%;max-width:none;margin:0 auto;background:#161616;border:0.5px solid rgba(255,255,255,0.08);border-radius:20px;padding:calc(4rem + 20px) 3rem calc(4rem + 50px);position:relative;z-index:1;">
+    <h2 class="section-h2 reveal" style="text-align:center;margin-left:auto;margin-right:auto;color:#f2f2ef;"><span style="color:#7ef474;">Esto no es</span> para<br>cualquier empresa.</h2>
     <div class="pq-grid reveal reveal-delay-1" style="margin:2.5rem auto 0;justify-content:center;">
-      <div class="pq-card glow-card yes">
-        <div class="pq-heading">Es para ti si...</div>
-        <ul class="pq-list">
+      <div class="pq-card glow-card yes" style="background:#1e1e1e;border-color:rgba(255,255,255,0.08);border-top:2px solid #7ef474;">
+        <div class="pq-heading" style="color:#7ef474;">Es para ti si...</div>
+        <ul class="pq-list" style="color:#b0b0ac;">
           <li>Empresa con equipo de 10+ personas</li>
           <li>El dueño sigue demasiado metido en la operación del día a día</li>
           <li>Los procesos dependen de personas específicas, no de un sistema</li>
@@ -979,9 +998,9 @@
           <li>El negocio tiene demanda pero la operación no aguanta el ritmo</li>
         </ul>
       </div>
-      <div class="pq-card glow-card no">
-        <div class="pq-heading">NO es para ti si...</div>
-        <ul class="pq-list">
+      <div class="pq-card glow-card no" style="background:#1e1e1e;border-color:rgba(255,255,255,0.08);border-top:2px solid rgba(255,95,92,0.6);">
+        <div class="pq-heading" style="color:#ff5f5c;">NO es para ti si...</div>
+        <ul class="pq-list" style="color:#b0b0ac;">
           <li>Tu empresa tiene menos de 10 personas</li>
           <li>Buscas una asesoría rápida, un taller o tips sueltos</li>
           <li>Quieres que alguien lo arregle sin cambiar nada de tu lado</li>
