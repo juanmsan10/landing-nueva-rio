@@ -94,7 +94,7 @@
     #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 13px; color: #1e7018; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
     .hero-eyebrow span { width: 24px; height: 1px; background: #1e7018; }
-    .hero-h1 { font-size: clamp(2.4rem, 5.2vw, 4.7rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; max-width: 860px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+    .hero-h1 { font-size: clamp(2.2rem, 4.8vw, 4.2rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; max-width: 960px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
     .hero-h1-static { display: block; color: #1a1a18; }
     .hero-typed-wrap { display: block; min-height: 1.15em; }
     .hero-typed { color: #1e7018; border-right: 3px solid #1e7018; padding-right: 4px; animation: blink 0.8s infinite; }
@@ -185,7 +185,7 @@
     /* Pills */
     .prod-pill {
       position: absolute; z-index: 0;
-      background: rgba(126,244,116,0.06); border: 1px solid rgba(126,244,116,0.18);
+      background: #1e1e1e; border: 1px solid rgba(126,244,116,0.18);
       border-radius: 999px; padding: 6px 16px;
       font-size: 13px; color: rgba(255,255,255,0.7);
       font-family: var(--sans); white-space: nowrap;
@@ -199,7 +199,7 @@
     }
     .pp1 { top: 5%;  left: -60px; animation-delay: 0s; }
     .pp2 { top: 35%; right: -70px; animation-delay: 0.7s; }
-    .pp3 { bottom: 25%; left: -50px; animation-delay: 1.4s; }
+    .pp3 { bottom: 20%; left: -50px; animation-delay: 1.4s; }
     .pp4 { top: 10%; right: -55px; animation-delay: 2.1s; }
     .pp5 { top: 60%; left: -55px; animation-delay: 0.35s; }
     .pp6 { bottom: 5%; right: -65px; animation-delay: 1.75s; }
@@ -214,7 +214,7 @@
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: calc(100% - 60px); max-width: none; height: 75%;
+      width: calc(100% - 30px); max-width: none; height: 75%;
       border-radius: 24px;
       background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
@@ -234,6 +234,7 @@
       font-size: 18px; color: #4e4e4a; text-align: center;
       font-weight: 300; max-width: 560px; margin: 0 auto 30px; line-height: 1.7;
     }
+    .ia-sub strong { font-weight: 600; color: #1a1a18; }
     .ia-visual-area {
       position: relative; z-index: 1;
       width: 100%; max-width: 1100px;
@@ -264,8 +265,8 @@
       z-index: 3; pointer-events: none;
     }
     /* Label positions — tight to image */
-    .ia-lbl-left { top: 30%; left: 12%; }
-    .ia-lbl-right { top: 54%; right: 12%; }
+    .ia-lbl-left { top: 22%; left: 12%; }
+    .ia-lbl-right { top: 58%; right: 12%; }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -284,11 +285,11 @@
     /* ── MÉTODO (dark) ────────────────────────── */
     .fases { display: flex; gap: 0; position: relative; margin-top: 1rem; }
     .fases-line { position: absolute; top: 33px; height: 1px; background: linear-gradient(90deg, rgba(126,244,116,0.7), rgba(126,244,116,0.5), rgba(126,244,116,0.7)); pointer-events: none; z-index: 0; transform-origin: left center; transform: scaleX(0); }
-    .fases-line-1 { left: calc(16.66%); width: calc(33.33%); }
-    .fases-line-2 { left: calc(50%); width: calc(33.33%); }
+    .fases-line-1 { left: 33px; width: calc(33.33%); }
+    .fases-line-2 { left: calc(33.33% + 33px); width: calc(33.33%); }
     .fases-line.line-draw { transform: scaleX(1); transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-    .fase { flex: 1; padding: 0 2rem; position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; }
-    .fase:last-child { padding-right: 2rem; }
+    .fase { flex: 1; padding: 0 3rem 0 0; position: relative; }
+    .fase:last-child { padding-right: 0; }
     .fase-dot { width: 66px; height: 66px; background: #161616; border: 1px solid rgba(255,255,255,0.16); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.75rem; position: relative; z-index: 2; transition: border-color 0.5s, box-shadow 0.5s; }
     .fase:hover .fase-dot { border-color: var(--g); }
     .fase.scroll-active .fase-dot { border-color: var(--g); }
@@ -299,6 +300,14 @@
 
     /* ── DIAGNÓSTICO / CÓMO EMPEZAR (light) ──── */
     .diag-header { margin-bottom: 3rem; }
+    .section-label-light {
+      background: rgba(30,112,24,0.06);
+      border: 1px solid rgba(30,112,24,0.25);
+      border-radius: 8px;
+      padding: 6px 16px;
+      color: #1e7018;
+    }
+    .section-label-light::before { display: none !important; }
     .diag-header p { font-size: 1.05rem; color: var(--t2); font-weight: 300; margin-top: 0.75rem; }
     .diag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
     .diag-step-card { background: var(--card-bg); padding: 2rem; transition: background 0.25s; }
@@ -738,7 +747,7 @@
       <!-- Pills flotantes -->
       <div class="prod-pill pp1 reveal">Responsables claros</div>
       <div class="prod-pill pp2 reveal">Cero improvisación</div>
-      <div class="prod-pill pp3 reveal">SOPs definidos</div>
+      <div class="prod-pill pp3 reveal">Ejecución consistente</div>
       <div class="prod-pill pp4 reveal">Flujos documentados</div>
       <div class="prod-pill pp5 reveal">Decisiones trazables</div>
       <div class="prod-pill pp6 reveal">KPIs visibles</div>
@@ -872,7 +881,7 @@
 <!-- método continues in same section -->
   <div class="sec-glow br"></div>
   <div class="particles" id="particles-metodo"></div>
-  <div class="container" style="padding-top:4rem;">
+  <div class="container" style="padding-top:160px;">
     <div class="section-label reveal">El método</div>
     <h2 class="section-h2 reveal reveal-delay-1"><em>3 fases. 4-6 semanas.</em><br>Un proceso que funciona.</h2>
     <p class="section-sub reveal reveal-delay-2">No reformamos toda tu empresa. Resolvemos un proceso crítico con la profundidad necesaria para que el cambio sea real y sostenible.</p>
@@ -903,8 +912,8 @@
 
 <!-- ░░ HUMANOS CON IA ░░ -->
 <section class="light-s ia-section" id="ia">
-  <h2 class="ia-headline">Humanos con <em>IA</em>, una <em>nueva era</em></h2>
-  <p class="ia-sub">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
+  <h2 class="ia-headline">Humanos con IA, una <em>nueva era</em></h2>
+  <p class="ia-sub">Automatizamos tareas repetitivas y entrenamos a tu gente con herramientas personalizadas que optimizan el trabajo. <strong>Así es como tu equipo se multiplica... ¡sin contratar una sola persona más!</strong></p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-gradient-box"></div>
     <div class="ia-img-wrap" id="ia-img-wrap">
@@ -921,10 +930,10 @@
 <!-- ░░ CÓMO EMPEZAR — light ░░ -->
 <section class="light-s" id="diagnostico">
   <div class="container">
-    <div class="diag-header reveal">
-      <div class="section-label">Cómo empezar</div>
-      <h2 class="section-h2">3 pasos. <em>Sin compromiso hasta que haga sentido.</em></h2>
-      <p>Así es el camino desde que nos contactas hasta que arrancamos.</p>
+    <div class="diag-header reveal" style="text-align:center;">
+      <div class="section-label section-label-light" style="display:inline-flex;margin-left:auto;margin-right:auto;">Cómo empezar</div>
+      <h2 class="section-h2" style="text-align:center;margin-left:auto;margin-right:auto;">3 pasos. <em>Sin compromiso hasta que haga sentido.</em></h2>
+      <p style="text-align:center;">Así es el camino desde que nos contactas hasta que arrancamos.</p>
     </div>
     <div class="diag-grid reveal reveal-delay-1">
       <div class="diag-step-card glow-card">
@@ -946,21 +955,22 @@
         <div class="diag-step-desc">Te entregamos una propuesta con alcance exacto, entregables, cronograma e inversión. Todo por escrito. Nada empieza sin acuerdo claro.</div>
       </div>
     </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal reveal-delay-2">
+      <a href="https://cal.com/juan-rio-abierto/15min" target="_blank" class="btn-primary mag-btn" style="display:inline-flex;">AGENDAR LLAMADA <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
+    </div>
   </div>
 </section>
 
 <!-- ░░ PARA QUIÉN — dark ░░ -->
-<section class="dark-s" id="paraquien">
+<section class="dark-s" id="paraquien" style="padding-left:0;padding-right:0;">
   <div class="sec-grid"></div>
   <div class="sec-glow tr"></div>
   <div class="particles" id="particles-paraquien"></div>
-  <div class="container">
-    <div class="section-label reveal">Selección de clientes</div>
-    <h2 class="section-h2 reveal reveal-delay-1"><em>Esto no es</em> para<br>cualquier empresa.</h2>
-    <p class="section-sub reveal reveal-delay-2">Solo trabajamos con empresas que están listas para ordenar su operación. Si no hay fit, te lo decimos de una.</p>
-    <div class="pq-grid reveal reveal-delay-3">
+  <div style="width:95%;max-width:none;margin:0 auto;background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:4rem 3rem;position:relative;z-index:1;">
+    <h2 class="section-h2 reveal" style="text-align:center;margin-left:auto;margin-right:auto;"><em>No es</em> para<br>cualquier empresa.</h2>
+    <div class="pq-grid reveal reveal-delay-1" style="margin:2.5rem auto 0;justify-content:center;">
       <div class="pq-card glow-card yes">
-        <div class="pq-heading">Esto es para ti si...</div>
+        <div class="pq-heading">Es para ti si...</div>
         <ul class="pq-list">
           <li>Empresa con equipo de 10+ personas</li>
           <li>El dueño sigue demasiado metido en la operación del día a día</li>
@@ -970,7 +980,7 @@
         </ul>
       </div>
       <div class="pq-card glow-card no">
-        <div class="pq-heading">Esto NO es para ti si...</div>
+        <div class="pq-heading">NO es para ti si...</div>
         <ul class="pq-list">
           <li>Tu empresa tiene menos de 10 personas</li>
           <li>Buscas una asesoría rápida, un taller o tips sueltos</li>
@@ -987,8 +997,7 @@
 <section class="light-s cta-section" id="cta">
   <div class="cta-inner">
     <div>
-      <div class="section-label reveal">El primer paso</div>
-      <h2 class="section-h2 reveal reveal-delay-1">Empieza con una<br><em>llamada de reconocimiento.</em></h2>
+      <h2 class="section-h2 reveal">Empieza con una<br><em>llamada de reconocimiento.</em></h2>
       <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0;">15 minutos. Sin costo. Sin presentación de ventas. Escuchamos tu situación y te decimos si podemos ayudarte, o no.</p>
       <div class="cta-bullets reveal reveal-delay-3">
         <div class="cta-bullet"><div class="cta-bullet-dot"></div><span>Seleccionas el horario que mejor te quede</span></div>
@@ -1483,6 +1492,7 @@
 
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&';
     let triggered = false;
+    let connectorsDrawn = false;
 
     imgWrap.style.opacity = '0';
 
@@ -1575,6 +1585,10 @@
     }
 
     function triggerLabels(){
+      drawConnectors();
+    }
+
+    function drawConnectors(){
       const vRect = visual.getBoundingClientRect();
       const imgRect = imgWrap.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
@@ -1583,53 +1597,66 @@
       canvas.style.width = vRect.width + 'px';
       canvas.style.height = vRect.height + 'px';
 
+      // Reset active lines and redraw
+      activeLines.length = 0;
+
       // LEFT: "TRABAJO 24/7"
-      // Horizontal line 5px below text: starts at text LEFT edge, extends ~80px past text RIGHT edge
-      // Then diagonal from end of horizontal down to image
       const l0 = lbl0.getBoundingClientRect();
       const l0_left = l0.left - vRect.left;
       const l0_right = l0.right - vRect.left;
       const l0_y = l0.bottom - vRect.top + 5;
       const l0_hEnd = l0_right + 80;
       const l0_imgX = imgRect.left - vRect.left + imgRect.width * 0.35;
-      const l0_imgY = imgRect.top - vRect.top + imgRect.height * 0.5;
+      const l0_imgY = imgRect.top - vRect.top + imgRect.height * 0.45;
 
-      const points0 = [
+      const p0 = [
         {x: l0_left, y: l0_y},
         {x: l0_hEnd, y: l0_y},
         {x: l0_imgX, y: l0_imgY}
       ];
 
       // RIGHT: "MEMORIA INFINITA"
-      // Horizontal line 5px below text: starts at text RIGHT edge, extends ~80px past text LEFT edge
-      // Then diagonal from end of horizontal down to image
       const l1 = lbl1.getBoundingClientRect();
       const r1_left = l1.left - vRect.left;
       const r1_right = l1.right - vRect.left;
       const r1_y = l1.bottom - vRect.top + 5;
       const r1_hEnd = r1_left - 80;
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
-      const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.65;
+      const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.7;
 
-      const points1 = [
+      const p1 = [
         {x: r1_right, y: r1_y},
         {x: r1_hEnd, y: r1_y},
         {x: r1_imgX, y: r1_imgY}
       ];
 
-      // Animate label 0 + connector
-      lbl0.classList.add('lbl-in');
-      lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-      scramble(lbl0, lbl0.dataset.text, 1800);
-      animateLine(points0, 1400);
+      if(!connectorsDrawn){
+        connectorsDrawn = true;
+        // Animate label 0 + connector
+        lbl0.classList.add('lbl-in');
+        lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+        scramble(lbl0, lbl0.dataset.text, 1800);
+        animateLine(p0, 1400);
 
-      // Animate label 1 + connector (delayed)
-      setTimeout(()=>{
-        lbl1.classList.add('lbl-in');
-        lbl1.textContent = lbl1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
-        scramble(lbl1, lbl1.dataset.text, 1800);
-        animateLine(points1, 1400);
-      }, 500);
+        // Animate label 1 + connector (delayed)
+        setTimeout(()=>{
+          lbl1.classList.add('lbl-in');
+          lbl1.textContent = lbl1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+          scramble(lbl1, lbl1.dataset.text, 1800);
+          animateLine(p1, 1400);
+        }, 500);
+      } else {
+        // Instant redraw on resize
+        [p0, p1].forEach(pts => {
+          let totalLen = 0;
+          for(let i = 1; i < pts.length; i++){
+            const dx = pts[i].x - pts[i-1].x, dy = pts[i].y - pts[i-1].y;
+            totalLen += Math.sqrt(dx*dx + dy*dy);
+          }
+          activeLines.push({ points: pts, drawLen: totalLen, totalLen: totalLen });
+        });
+        renderCanvas();
+      }
     }
 
     function onScroll(){
@@ -1640,6 +1667,14 @@
         hologramReveal();
       }
     }
+
+    // Resize handler — recalculate and redraw connectors
+    let resizeTimer;
+    window.addEventListener('resize', ()=>{
+      if(!connectorsDrawn) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(drawConnectors, 100);
+    });
 
     window.addEventListener('scroll', onScroll, {passive: true});
     onScroll();
