@@ -208,13 +208,13 @@
     /* IA SECTION */
     .ia-section {
       position: relative; overflow: hidden;
-      padding: 6rem 3rem 0;
+      padding: 8.5rem 3rem 0;
       background: #f8f7f4;
       display: flex; flex-direction: column; align-items: center;
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 92%; max-width: 1200px; height: 75%;
+      width: 90%; max-width: 1400px; height: 75%;
       border-radius: 24px;
       background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
@@ -232,7 +232,7 @@
     .ia-sub {
       position: relative; z-index: 3;
       font-size: 18px; color: #4e4e4a; text-align: center;
-      font-weight: 300; max-width: 560px; margin: 0 auto; line-height: 1.7;
+      font-weight: 300; max-width: 560px; margin: 0 auto 30px; line-height: 1.7;
     }
     .ia-visual-area {
       position: relative; z-index: 1;
@@ -250,7 +250,7 @@
       width: 100%; height: auto; display: block;
       object-fit: contain;
     }
-    /* Labels + SVG connectors */
+    /* Labels */
     .ia-label-el {
       position: absolute; z-index: 4; pointer-events: none;
       font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
@@ -258,11 +258,10 @@
       opacity: 0;
     }
     .ia-label-el.lbl-in { opacity: 1; }
-    .ia-connectors-svg {
-      position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: visible;
-    }
-    .ia-conn-path {
-      stroke: rgba(30,112,24,0.35); stroke-width: 1; fill: none;
+    /* Connector canvas */
+    .ia-conn-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      z-index: 3; pointer-events: none;
     }
     /* Label positions — tight to image */
     .ia-lbl-left { top: 30%; left: 12%; }
@@ -908,7 +907,7 @@
 
 <!-- ░░ HUMANOS CON IA ░░ -->
 <section class="light-s ia-section" id="ia">
-  <h2 class="ia-headline">Humanos con <em>IA</em>, <em>una nueva era</em></h2>
+  <h2 class="ia-headline">Humanos con <em>IA</em>, una <em>nueva era</em></h2>
   <p class="ia-sub">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-gradient-box"></div>
@@ -916,7 +915,7 @@
       <img src="11.png" alt="Operador aumentado con IA">
     </div>
     <!-- SVG connectors drawn via JS -->
-    <svg class="ia-connectors-svg" id="ia-conn-svg" preserveAspectRatio="none"></svg>
+    <canvas class="ia-conn-canvas" id="ia-conn-canvas"></canvas>
     <!-- Labels -->
     <span class="ia-label-el ia-lbl-left" id="ia-lbl0" data-text="TRABAJO 24/7"></span>
     <span class="ia-label-el ia-lbl-right" id="ia-lbl1" data-text="MEMORIA INFINITA"></span>
@@ -1473,14 +1472,15 @@
     });
   })();
 
-  // ── IA SECTION — HOLOGRAM + CONNECTORS ───────
+  // ── IA SECTION — HOLOGRAM + CANVAS CONNECTORS ───────
   (function(){
     const section = document.querySelector('.ia-section');
     if(!section) return;
 
     const visual = document.getElementById('ia-visual');
     const imgWrap = document.getElementById('ia-img-wrap');
-    const connSvg = document.getElementById('ia-conn-svg');
+    const canvas = document.getElementById('ia-conn-canvas');
+    const ctx = canvas.getContext('2d');
     const lbl0 = document.getElementById('ia-lbl0');
     const lbl1 = document.getElementById('ia-lbl1');
     const gbox = section.querySelector('.ia-gradient-box');
@@ -1488,7 +1488,6 @@
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&';
     let triggered = false;
 
-    // Init: image hidden
     imgWrap.style.opacity = '0';
 
     function scramble(el, target, dur, cb){
@@ -1497,8 +1496,7 @@
       const iv = setInterval(()=>{
         let out = '';
         for(let i = 0; i < len; i++){
-          if(i < (step/steps)*len) out += target[i];
-          else out += CHARS[Math.floor(Math.random()*CHARS.length)];
+          out += i < (step/steps)*len ? target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
         }
         el.textContent = out; step++;
         if(step > steps){ clearInterval(iv); el.textContent = target; if(cb) cb(); }
@@ -1506,8 +1504,7 @@
     }
 
     function hologramReveal(){
-      const start = performance.now();
-      const totalDur = 1200;
+      const start = performance.now(), totalDur = 1200;
       (function frame(now){
         const elapsed = now - start;
         const t = Math.min(elapsed / totalDur, 1);
@@ -1524,85 +1521,117 @@
         }
         if(t < 1) requestAnimationFrame(frame);
         else {
-          imgWrap.style.opacity = '1';
-          imgWrap.style.filter = 'none';
+          imgWrap.style.opacity = '1'; imgWrap.style.filter = 'none';
           setTimeout(triggerLabels, 300);
         }
       })(performance.now());
     }
 
-    function drawPath(pathEl, dur, cb){
-      const len = pathEl.getTotalLength();
-      pathEl.style.strokeDasharray = len;
-      pathEl.style.strokeDashoffset = len;
+    // Store active line states for proper canvas redraw
+    const activeLines = [];
+
+    function renderCanvas(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      const dpr = window.devicePixelRatio || 1;
+      ctx.scale(dpr, dpr);
+      ctx.strokeStyle = 'rgba(30,112,24,0.35)';
+      ctx.lineWidth = 1;
+      activeLines.forEach(line => {
+        if(line.drawLen <= 0) return;
+        ctx.beginPath();
+        ctx.moveTo(line.points[0].x, line.points[0].y);
+        let remaining = line.drawLen;
+        for(let i = 1; i < line.points.length && remaining > 0; i++){
+          const dx = line.points[i].x - line.points[i-1].x;
+          const dy = line.points[i].y - line.points[i-1].y;
+          const segLen = Math.sqrt(dx*dx + dy*dy);
+          if(remaining >= segLen){
+            ctx.lineTo(line.points[i].x, line.points[i].y);
+            remaining -= segLen;
+          } else {
+            const ratio = remaining / segLen;
+            ctx.lineTo(line.points[i-1].x + dx * ratio, line.points[i-1].y + dy * ratio);
+            remaining = 0;
+          }
+        }
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+
+    function animateLine(points, dur){
+      let totalLen = 0;
+      for(let i = 1; i < points.length; i++){
+        const dx = points[i].x - points[i-1].x, dy = points[i].y - points[i-1].y;
+        totalLen += Math.sqrt(dx*dx + dy*dy);
+      }
+      const lineState = { points: points, drawLen: 0, totalLen: totalLen };
+      activeLines.push(lineState);
       const start = performance.now();
       (function frame(now){
         const t = Math.min((now - start)/dur, 1);
         const e = 1 - Math.pow(1-t, 2);
-        pathEl.style.strokeDashoffset = len * (1 - e);
+        lineState.drawLen = totalLen * e;
+        renderCanvas();
         if(t < 1) requestAnimationFrame(frame);
-        else if(cb) cb();
       })(performance.now());
     }
 
     function triggerLabels(){
       const vRect = visual.getBoundingClientRect();
       const imgRect = imgWrap.getBoundingClientRect();
-      const w = vRect.width, h = vRect.height;
-      connSvg.setAttribute('viewBox', '0 0 '+w+' '+h);
-      connSvg.style.width = w+'px';
-      connSvg.style.height = h+'px';
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = vRect.width * dpr;
+      canvas.height = vRect.height * dpr;
+      canvas.style.width = vRect.width + 'px';
+      canvas.style.height = vRect.height + 'px';
 
-      // LEFT label: "TRABAJO 24/7"
-      // Connector: horizontal line 5px below text (left-aligned to text left edge),
-      // then diagonal from text right edge down to image
-      const l0Rect = lbl0.getBoundingClientRect();
-      const l0_textLeft = l0Rect.left - vRect.left;
-      const l0_textRight = l0Rect.right - vRect.left;
-      const l0_lineY = l0Rect.bottom - vRect.top + 5;
-      // Diagonal end: toward image upper-left area
-      const l0_endX = imgRect.left - vRect.left + imgRect.width * 0.32;
-      const l0_endY = imgRect.top - vRect.top + imgRect.height * 0.45;
+      // LEFT: "TRABAJO 24/7"
+      // Path: text left edge (5px below text) → horizontal right to text right edge → diagonal down-right to image
+      const l0 = lbl0.getBoundingClientRect();
+      const l0_left = l0.left - vRect.left;
+      const l0_right = l0.right - vRect.left;
+      const l0_y = l0.bottom - vRect.top + 5;
+      const l0_imgX = imgRect.left - vRect.left + imgRect.width * 0.33;
+      const l0_imgY = imgRect.top - vRect.top + imgRect.height * 0.5;
 
-      const path0 = document.createElementNS('http://www.w3.org/2000/svg','path');
-      // Start at left edge of text, go horizontal to right edge, then diagonal to image
-      path0.setAttribute('d', 'M'+l0_textLeft+','+l0_lineY+' L'+l0_textRight+','+l0_lineY+' L'+l0_endX+','+l0_endY);
-      path0.setAttribute('class', 'ia-conn-path');
-      connSvg.appendChild(path0);
+      const points0 = [
+        {x: l0_left, y: l0_y},
+        {x: l0_right, y: l0_y},
+        {x: l0_imgX, y: l0_imgY}
+      ];
 
-      // RIGHT label: "MEMORIA INFINITA"
-      // Connector: horizontal line 5px below text (right-aligned to text right edge),
-      // then diagonal from text left edge down to image
-      const l1Rect = lbl1.getBoundingClientRect();
-      const r1_textLeft = l1Rect.left - vRect.left;
-      const r1_textRight = l1Rect.right - vRect.left;
-      const r1_lineY = l1Rect.bottom - vRect.top + 5;
-      // Diagonal end: toward image lower-right area
-      const r1_endX = imgRect.left - vRect.left + imgRect.width * 0.68;
-      const r1_endY = imgRect.top - vRect.top + imgRect.height * 0.6;
+      // RIGHT: "MEMORIA INFINITA"
+      // Path: text right edge (5px below text) → horizontal left to text left edge → diagonal down-left to image
+      const l1 = lbl1.getBoundingClientRect();
+      const r1_left = l1.left - vRect.left;
+      const r1_right = l1.right - vRect.left;
+      const r1_y = l1.bottom - vRect.top + 5;
+      const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.67;
+      const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.65;
 
-      const path1 = document.createElementNS('http://www.w3.org/2000/svg','path');
-      // Start at right edge, go horizontal left to left edge, then diagonal to image
-      path1.setAttribute('d', 'M'+r1_textRight+','+r1_lineY+' L'+r1_textLeft+','+r1_lineY+' L'+r1_endX+','+r1_endY);
-      path1.setAttribute('class', 'ia-conn-path');
-      connSvg.appendChild(path1);
+      const points1 = [
+        {x: r1_right, y: r1_y},
+        {x: r1_left, y: r1_y},
+        {x: r1_imgX, y: r1_imgY}
+      ];
 
       // Animate label 0 + connector
       lbl0.classList.add('lbl-in');
       lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
       scramble(lbl0, lbl0.dataset.text, 1800);
-      drawPath(path0, 1400);
+      animateLine(points0, 1400);
 
       // Animate label 1 + connector (delayed)
       setTimeout(()=>{
         lbl1.classList.add('lbl-in');
         lbl1.textContent = lbl1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
         scramble(lbl1, lbl1.dataset.text, 1800);
-        drawPath(path1, 1400);
+        animateLine(points1, 1400);
       }, 500);
     }
 
-    // Trigger when gradient box bottom edge enters viewport
     function onScroll(){
       if(triggered) return;
       const boxRect = gbox.getBoundingClientRect();
