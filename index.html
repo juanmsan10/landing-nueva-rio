@@ -214,22 +214,11 @@
     }
     .ia-gradient-box {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 92%; max-width: 1200px; height: 65%;
+      width: 92%; max-width: 1200px; height: 75%;
       border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(30,112,24,0.12) 100%);
+      background: linear-gradient(180deg, #f8f7f4 0%, rgba(30,112,24,0.12) 100%);
       z-index: 0;
     }
-    .ia-bg-text {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      font-size: clamp(4rem, 10vw, 8rem); font-weight: 700;
-      letter-spacing: -0.04em; line-height: 0.95;
-      color: rgba(30,112,24,0.06);
-      white-space: nowrap; pointer-events: none; z-index: 0;
-      filter: blur(3px); opacity: 0;
-      transition: opacity 0.8s ease;
-      text-align: center;
-    }
-    .ia-bg-text.bg-reveal { opacity: 1; }
     .ia-headline {
       position: relative; z-index: 3;
       font-size: clamp(2.6rem, 5.5vw, 4.6rem);
@@ -252,7 +241,7 @@
     }
     .ia-img-wrap {
       position: relative; z-index: 2;
-      width: 700px; max-width: 60vw;
+      width: 910px; max-width: 75vw;
       margin: 0 auto;
       display: flex; align-items: flex-end;
       will-change: opacity, filter;
@@ -270,15 +259,14 @@
     }
     .ia-label-el.lbl-in { opacity: 1; }
     .ia-connectors-svg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      z-index: 3; pointer-events: none;
+      position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: visible;
     }
     .ia-conn-path {
       stroke: rgba(30,112,24,0.35); stroke-width: 1; fill: none;
     }
-    /* Label positions */
-    .ia-lbl-left { top: 28%; left: 6%; }
-    .ia-lbl-right { top: 58%; right: 6%; }
+    /* Label positions — tight to image */
+    .ia-lbl-left { top: 30%; left: 12%; }
+    .ia-lbl-right { top: 54%; right: 12%; }
 
     .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 10px; }
     .nivel-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: calc(2rem + 20px) 2rem; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -381,10 +369,10 @@
       .prod-grid { grid-template-columns: 1fr; gap: 1rem; }
       .prod-pill { display: none; }
       .ia-section { padding: 4rem 1.5rem 0; }
-      .ia-img-wrap { width: 90vw; max-width: 90vw; }
+      .ia-img-wrap { width: 95vw; max-width: 95vw; }
       .ia-label-el { font-size: 10px; }
-      .ia-lbl-left { top: 22%; left: 2%; }
-      .ia-lbl-right { top: 55%; right: 2%; }
+      .ia-lbl-left { top: 28%; left: 3%; }
+      .ia-lbl-right { top: 52%; right: 3%; }
       .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -924,7 +912,6 @@
   <p class="ia-sub">Automatizamos lo repetitivo, desplegamos agentes de IA y le damos a tu equipo capacidad que antes requería contratar.</p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-gradient-box"></div>
-    <div class="ia-bg-text" id="ia-bg-text">UNA NUEVA ERA</div>
     <div class="ia-img-wrap" id="ia-img-wrap">
       <img src="11.png" alt="Operador aumentado con IA">
     </div>
@@ -1493,10 +1480,10 @@
 
     const visual = document.getElementById('ia-visual');
     const imgWrap = document.getElementById('ia-img-wrap');
-    const bgText = document.getElementById('ia-bg-text');
     const connSvg = document.getElementById('ia-conn-svg');
     const lbl0 = document.getElementById('ia-lbl0');
     const lbl1 = document.getElementById('ia-lbl1');
+    const gbox = section.querySelector('.ia-gradient-box');
 
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&';
     let triggered = false;
@@ -1519,14 +1506,12 @@
     }
 
     function hologramReveal(){
-      // Flicker phase (0–600ms) then stabilize (600–1200ms)
       const start = performance.now();
       const totalDur = 1200;
       (function frame(now){
         const elapsed = now - start;
         const t = Math.min(elapsed / totalDur, 1);
         if(t < 0.5){
-          // Flicker: random opacity jumps, blur, desaturated, green tint
           const sub = t / 0.5;
           const flicker = 0.15 + sub * 0.6 + Math.sin(elapsed * 0.05) * 0.1 * (1 - sub);
           imgWrap.style.opacity = Math.max(0, Math.min(flicker, 1));
@@ -1541,7 +1526,6 @@
         else {
           imgWrap.style.opacity = '1';
           imgWrap.style.filter = 'none';
-          // After hologram done, trigger labels + connectors
           setTimeout(triggerLabels, 300);
         }
       })(performance.now());
@@ -1562,73 +1546,67 @@
     }
 
     function triggerLabels(){
-      // Get positions relative to visual area
       const vRect = visual.getBoundingClientRect();
       const imgRect = imgWrap.getBoundingClientRect();
-
-      // Set SVG viewBox to match visual area
       const w = vRect.width, h = vRect.height;
       connSvg.setAttribute('viewBox', '0 0 '+w+' '+h);
       connSvg.style.width = w+'px';
       connSvg.style.height = h+'px';
 
       // LEFT label: "TRABAJO 24/7"
-      const lbl0Rect = lbl0.getBoundingClientRect();
-      // Point 1: left edge of text, slightly below text
-      const l0x1 = lbl0Rect.left - vRect.left;
-      const l0y1 = lbl0Rect.bottom - vRect.top + 4;
-      // Horizontal line goes right to text right edge
-      const l0x2 = lbl0Rect.right - vRect.left;
-      const l0y2 = l0y1;
-      // Angled line goes down-right toward image center-left
-      const l0x3 = imgRect.left - vRect.left + imgRect.width * 0.35;
-      const l0y3 = imgRect.top - vRect.top + imgRect.height * 0.55;
+      // Connector: horizontal line 5px below text (left-aligned to text left edge),
+      // then diagonal from text right edge down to image
+      const l0Rect = lbl0.getBoundingClientRect();
+      const l0_textLeft = l0Rect.left - vRect.left;
+      const l0_textRight = l0Rect.right - vRect.left;
+      const l0_lineY = l0Rect.bottom - vRect.top + 5;
+      // Diagonal end: toward image upper-left area
+      const l0_endX = imgRect.left - vRect.left + imgRect.width * 0.32;
+      const l0_endY = imgRect.top - vRect.top + imgRect.height * 0.45;
 
       const path0 = document.createElementNS('http://www.w3.org/2000/svg','path');
-      path0.setAttribute('d', 'M'+l0x1+','+l0y1+' L'+l0x2+','+l0y2+' L'+l0x3+','+l0y3);
+      // Start at left edge of text, go horizontal to right edge, then diagonal to image
+      path0.setAttribute('d', 'M'+l0_textLeft+','+l0_lineY+' L'+l0_textRight+','+l0_lineY+' L'+l0_endX+','+l0_endY);
       path0.setAttribute('class', 'ia-conn-path');
       connSvg.appendChild(path0);
 
       // RIGHT label: "MEMORIA INFINITA"
-      const lbl1Rect = lbl1.getBoundingClientRect();
-      // Point 3: right edge of text, slightly below
-      const r1x1 = lbl1Rect.right - vRect.left;
-      const r1y1 = lbl1Rect.bottom - vRect.top + 4;
-      // Horizontal line goes left to text left edge
-      const r1x2 = lbl1Rect.left - vRect.left;
-      const r1y2 = r1y1;
-      // Angled line goes down-left toward image center-right
-      const r1x3 = imgRect.left - vRect.left + imgRect.width * 0.65;
-      const r1y3 = imgRect.top - vRect.top + imgRect.height * 0.7;
+      // Connector: horizontal line 5px below text (right-aligned to text right edge),
+      // then diagonal from text left edge down to image
+      const l1Rect = lbl1.getBoundingClientRect();
+      const r1_textLeft = l1Rect.left - vRect.left;
+      const r1_textRight = l1Rect.right - vRect.left;
+      const r1_lineY = l1Rect.bottom - vRect.top + 5;
+      // Diagonal end: toward image lower-right area
+      const r1_endX = imgRect.left - vRect.left + imgRect.width * 0.68;
+      const r1_endY = imgRect.top - vRect.top + imgRect.height * 0.6;
 
       const path1 = document.createElementNS('http://www.w3.org/2000/svg','path');
-      path1.setAttribute('d', 'M'+r1x1+','+r1y1+' L'+r1x2+','+r1y2+' L'+r1x3+','+r1y3);
+      // Start at right edge, go horizontal left to left edge, then diagonal to image
+      path1.setAttribute('d', 'M'+r1_textRight+','+r1_lineY+' L'+r1_textLeft+','+r1_lineY+' L'+r1_endX+','+r1_endY);
       path1.setAttribute('class', 'ia-conn-path');
       connSvg.appendChild(path1);
 
-      // Animate label 0 + connector 0
+      // Animate label 0 + connector
       lbl0.classList.add('lbl-in');
       lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
       scramble(lbl0, lbl0.dataset.text, 1800);
       drawPath(path0, 1400);
 
-      // Animate label 1 + connector 1 (delayed)
+      // Animate label 1 + connector (delayed)
       setTimeout(()=>{
         lbl1.classList.add('lbl-in');
         lbl1.textContent = lbl1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
         scramble(lbl1, lbl1.dataset.text, 1800);
         drawPath(path1, 1400);
       }, 500);
-
-      // BG text
-      bgText.classList.add('bg-reveal');
     }
 
-    // Trigger when visual area scrolls into view
+    // Trigger when gradient box bottom edge enters viewport
     function onScroll(){
       if(triggered) return;
-      const rect = visual.getBoundingClientRect();
-      if(rect.top < window.innerHeight - 100){
+      const boxRect = gbox.getBoundingClientRect();
+      if(boxRect.bottom <= window.innerHeight){
         triggered = true;
         hologramReveal();
       }
