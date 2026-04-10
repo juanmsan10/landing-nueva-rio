@@ -283,10 +283,10 @@
       bottom: calc(22% + 25px); left: calc(14% - 20px);
     }
     .ia-blur-right2 {
-      font-size: clamp(calc(1.4rem - 3px), calc(2.5vw - 3px), calc(2.2rem - 3px));
+      font-size: clamp(calc(1.4rem - 5px), calc(2.5vw - 5px), calc(2.2rem - 5px));
       color: rgba(0,0,0,0.45);
       filter: blur(2.5px);
-      top: 12%; right: calc(10% + 50px);
+      top: 12%; right: calc(10% + 130px);
       white-space: pre-line;
     }
 
@@ -944,7 +944,7 @@
     <!-- SVG connectors drawn via JS -->
     <canvas class="ia-conn-canvas" id="ia-conn-canvas"></canvas>
     <!-- Labels -->
-    <span class="ia-label-el ia-lbl-left" id="ia-lbl0" data-text="TRABAJO 24/7"></span>
+    <span class="ia-label-el ia-lbl-left" id="ia-lbl0" data-text="TRABAJA 24/7"></span>
     <span class="ia-label-el ia-lbl-right" id="ia-lbl1" data-text="MEMORIA INFINITA"></span>
     <!-- Blur texts -->
     <span class="ia-blur-el ia-blur-left2" id="ia-blur0" data-text="TU EQUIPO X3"></span>
@@ -1633,10 +1633,14 @@
       canvas.style.width = vRect.width + 'px';
       canvas.style.height = vRect.height + 'px';
 
+      // Pre-populate label text so getBoundingClientRect returns correct widths
+      if(!lbl0.textContent) lbl0.textContent = lbl0.dataset.text;
+      if(!lbl1.textContent) lbl1.textContent = lbl1.dataset.text;
+
       // Reset active lines and redraw
       activeLines.length = 0;
 
-      // LEFT: "TRABAJO 24/7"
+      // LEFT: "TRABAJA 24/7"
       const l0 = lbl0.getBoundingClientRect();
       const l0_left = l0.left - vRect.left;
       const l0_right = l0.right - vRect.left;
@@ -1663,7 +1667,7 @@
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.7;
       // Steep diagonal: 65° from horizontal, length = 35% of image height
-      const r1_diagLen = Math.max(0, imgRect.height * 0.35 - 50);
+      const r1_diagLen = Math.max(0, imgRect.height * 0.35 - 100);
       const r1_angle = 65 * Math.PI / 180;
       const r1_diagX = r1_hEnd - r1_diagLen * Math.cos(r1_angle);
       const r1_diagY = r1_y + r1_diagLen * Math.sin(r1_angle);
