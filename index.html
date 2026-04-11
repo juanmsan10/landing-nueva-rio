@@ -402,7 +402,7 @@
       .hero { padding: 120px 1.25rem 90px; }
       .hero-eyebrow { font-size: 16px; margin-bottom: 1.5rem; }
       .hero-h1 { font-size: calc(2.8rem - 4px); margin-bottom: 2.5rem; }
-      .hero-sub { font-size: 1.35rem; line-height: 1.6; margin-bottom: 2rem; }
+      .hero-sub { font-size: calc(1.35rem - 1px); line-height: 1.6; margin-bottom: calc(2rem + 5px); }
       .btn-primary { height: 64px; font-size: 19px; padding: 0 32px; }
       .btn-ghost-light { height: 64px; font-size: 19px; padding: 0 26px; }
       .hero-stats { max-width: 100%; margin-top: 3rem; grid-template-columns: 1fr; }
@@ -438,6 +438,7 @@
       .nivel-title { font-size: 24px; }
       .nivel-sub { font-size: 20px; line-height: 1.6; }
       .fase-periodo { font-size: 16px; }
+      .fase { padding-top: 10px; }
       .fase-dot { width: 72px; height: 72px; }
       .fase-num { font-size: 20px; }
       .fase-title { font-size: 24px; }
@@ -447,8 +448,11 @@
       .ia-headline { font-size: calc(2.2rem + 10px); }
       .ia-sub { font-size: 20px; margin-bottom: 50px; }
       .ia-gradient-box { width: calc(100% - 30px); }
-      .ia-img-wrap { width: 145vw; max-width: 145vw; position: relative; left: 50%; transform: translateX(-50%); }
-      .ia-label-el { font-size: 9px; letter-spacing: 0.08em; }
+      .ia-img-wrap { width: 145vw; max-width: 145vw; position: relative; left: 50%; transform: translateX(-50%); margin: 0; }
+      .ia-label-el { font-size: 12px; letter-spacing: 0.08em; }
+      .ia-lbl-left { top: calc(28% - 20px); }
+      .ia-lbl-right { top: calc(52% + 30px); }
+      .ia-conn-canvas { display: none; }
       /* CÓMO EMPEZAR */
       #diagnostico { padding-top: calc(5rem + 40px); }
       .diag-header p { font-size: 1.35rem; }
@@ -639,10 +643,10 @@
       .chaos-pain-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
-      .chaos-headline { font-size: calc(2rem - 2px); margin-bottom: calc(1.25rem + 40px); }
+      .chaos-headline { font-size: calc(2rem - 2px); margin-bottom: calc(1.25rem + 25px); }
       .chaos-sub { font-size: 20px; }
-      .chaos-pain-title { font-size: 24px; }
-      .chaos-pain-desc { font-size: 21px; }
+      .chaos-pain-title { font-size: 21px; }
+      .chaos-pain-desc { font-size: 18px; }
       .desktop-br { display: none; }
     }
   </style>
@@ -704,7 +708,7 @@
 <!-- ░░ CHAOS — light ░░ -->
 <section class="chaos-section" id="problema">
   <h2 class="chaos-headline reveal">El <em>40% del tiempo</em> de tu equipo<br class="desktop-br"> se va en resolver lo que <em>ya debería funcionar.</em></h2>
-  <p class="chaos-sub reveal reveal-delay-1">Operar sin procesos efectivos es un costo invisible que se acumula cada semana.</p>
+  <p class="chaos-sub reveal reveal-delay-1">El costo de operar sin procesos efectivos se acumula día tras día.</p>
 
   <div class="chaos-visual reveal reveal-delay-2" id="chaos-visual">
     <img src="nudos.png" alt="" class="chaos-illustration">
