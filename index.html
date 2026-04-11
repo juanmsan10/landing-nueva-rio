@@ -286,7 +286,7 @@
       font-size: clamp(calc(1.4rem - 5px), calc(2.5vw - 5px), calc(2.2rem - 5px));
       color: rgba(0,0,0,0.45);
       filter: blur(2.5px);
-      top: 12%; right: calc(10% + 130px);
+      top: 12%; right: calc(10% + 110px);
       white-space: pre-line;
     }
 
@@ -1667,7 +1667,7 @@
       const r1_imgX = imgRect.left - vRect.left + imgRect.width * 0.65;
       const r1_imgY = imgRect.top - vRect.top + imgRect.height * 0.7;
       // Steep diagonal: 65° from horizontal, length = 35% of image height
-      const r1_diagLen = Math.max(0, imgRect.height * 0.35 - 100);
+      const r1_diagLen = Math.max(0, imgRect.height * 0.35 - 130);
       const r1_angle = 65 * Math.PI / 180;
       const r1_diagX = r1_hEnd - r1_diagLen * Math.cos(r1_angle);
       const r1_diagY = r1_y + r1_diagLen * Math.sin(r1_angle);
