@@ -401,7 +401,7 @@
       /* HERO */
       .hero { padding: 120px 1.25rem 90px; }
       .hero-eyebrow { font-size: 16px; margin-bottom: 1.5rem; }
-      .hero-h1 { font-size: 2.8rem; margin-bottom: 2.5rem; }
+      .hero-h1 { font-size: calc(2.8rem - 4px); margin-bottom: 2.5rem; }
       .hero-sub { font-size: 1.35rem; line-height: 1.6; margin-bottom: 2rem; }
       .btn-primary { height: 64px; font-size: 19px; padding: 0 32px; }
       .btn-ghost-light { height: 64px; font-size: 19px; padding: 0 26px; }
@@ -420,10 +420,10 @@
       .mobile-br { display: block; }
       .desktop-br { display: none; }
       /* PROBLEMA (chaos) */
-      .chaos-headline { margin-bottom: calc(1.25rem + 20px); }
-      .chaos-sub { font-size: calc(1.3rem + 1px); }
-      .chaos-pain-title { font-size: 21px; }
-      .chaos-pain-desc { font-size: 19px; }
+      .chaos-headline { margin-bottom: calc(1.25rem + 40px); }
+      .chaos-sub { font-size: 20px; }
+      .chaos-pain-title { font-size: 24px; }
+      .chaos-pain-desc { font-size: 21px; }
       .problema-intro p { font-size: 1.35rem; line-height: 1.6; }
       .problema-intro { margin-top: 4rem; }
       .pain-title { font-size: 22px; }
@@ -449,7 +449,9 @@
       /* HUMANOS CON IA */
       .ia-section { padding-top: calc(4rem + 20px); }
       .ia-headline { font-size: calc(2.2rem + 10px); }
-      .ia-sub { font-size: 20px; margin-bottom: 50px; }
+      .ia-sub { font-size: 20px; margin-bottom: 70px; }
+      .ia-gradient-box { width: calc(100% - 20px); }
+      .ia-img-wrap { width: 170vw; max-width: 170vw; position: relative; left: 50%; transform: translateX(-50%); }
       .ia-label-el { font-size: 9px; letter-spacing: 0.08em; }
       /* CÓMO EMPEZAR */
       #diagnostico { padding-top: calc(5rem + 40px); }
@@ -462,12 +464,13 @@
       #diagnostico .btn-primary { height: 64px; font-size: 19px; padding: 0 32px; }
       /* ESTO NO ES */
       #paraquien .section-h2 { font-size: calc(2.4rem - 3px); }
-      #paraquien > div { width: 98% !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+      #paraquien > div { width: 98% !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; padding-bottom: calc(4rem + 20px) !important; }
       .pq-card { padding: 1.75rem; }
       .pq-heading { font-size: 17px; }
       .pq-list li { font-size: 20px; line-height: 1.55; }
       /* CTA */
       .cta-section { padding: 3.5rem 1.25rem; }
+      #cta .section-sub { font-size: calc(1.4rem - 2px); }
       .cta-bullet span { font-size: 21px; line-height: 1.5; }
       .cta-card { padding: calc(2rem + 20px) 2rem !important; }
       .cta-card-title { font-size: 30px !important; margin-bottom: 1.25rem !important; }
@@ -639,7 +642,7 @@
       .chaos-section { padding: 5rem 1.5rem 4rem; }
       .chaos-pain-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 560px) { .chaos-headline { font-size: 2rem; } .desktop-br { display: none; } }
+    @media (max-width: 560px) { .chaos-headline { font-size: calc(2rem - 2px); } .desktop-br { display: none; } }
   </style>
 </head>
 <body>
@@ -698,7 +701,7 @@
 
 <!-- ░░ CHAOS — light ░░ -->
 <section class="chaos-section" id="problema">
-  <h2 class="chaos-headline reveal">El <em>40% del tiempo</em> de tu equipo<br class="desktop-br">se va en resolver lo que <em>ya debería funcionar.</em></h2>
+  <h2 class="chaos-headline reveal">El <em>40% del tiempo</em> de tu equipo<br class="desktop-br"> se va en resolver lo que <em>ya debería funcionar.</em></h2>
   <p class="chaos-sub reveal reveal-delay-1">Operar sin procesos efectivos es un costo invisible que se acumula cada semana.</p>
 
   <div class="chaos-visual reveal reveal-delay-2" id="chaos-visual">
@@ -929,7 +932,7 @@
 <section class="light-s ia-section" id="ia">
   <div class="ia-gradient-box"></div>
   <h2 class="ia-headline">Humanos con IA, <br class="mobile-br"><em>una nueva era</em></h2>
-  <p class="ia-sub">Tu equipo se multiplica, sin contratar una sola persona más.</p>
+  <p class="ia-sub">Tu equipo se multiplica, sin contratar <br class="mobile-br">una sola persona más.</p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-img-wrap" id="ia-img-wrap">
       <img src="11.png" alt="Operador aumentado con IA">
