@@ -450,7 +450,7 @@
       .ia-gradient-box { width: calc(100% - 30px); }
       .ia-img-wrap { width: 145vw; max-width: 145vw; position: relative; left: 50%; transform: translateX(-50%); margin: 0; }
       .ia-label-el { font-size: 15px; letter-spacing: 0.08em; white-space: normal; text-align: left; }
-      .ia-lbl-left { top: calc(28% - 40px); max-width: 85px; }
+      .ia-lbl-left { top: calc(28% - 40px); max-width: 85px; left: calc(3% + 5px); }
       .ia-lbl-right { top: calc(52% + 45px); max-width: 90px; }
       .ia-conn-canvas { display: none; }
       /* CÓMO EMPEZAR */
@@ -1047,7 +1047,7 @@
 <script>
 
   // ── TYPING ───────────────────────────────────
-  const phrases=['procesos claros.','equipos autónomos.','consistencia diaria.','métricas útiles.','sistema efectivo.'];
+  const phrases=['procesos claros','equipos autónomos','consistencia diaria','métricas útiles','sistema efectivo'];
   let pi=0,ci=0,del=false;
   const typed=document.getElementById('typed');
   function type(){
@@ -1259,6 +1259,7 @@
       const iv = setInterval(()=>{
         let out = '';
         for(let i = 0; i < len; i++){
+          if(target[i] === ' ' || target[i] === '\n'){ out += target[i]; continue; }
           out += i < (step/steps)*len ? target[i] : CHARS[Math.floor(Math.random()*CHARS.length)];
         }
         el.textContent = out; step++;
@@ -1415,7 +1416,7 @@
         connectorsDrawn = true;
         // Animate label 0 + connector
         lbl0.classList.add('lbl-in');
-        lbl0.textContent = lbl0.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+        lbl0.textContent = lbl0.dataset.text.replace(/[^ ]/g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
         scramble(lbl0, lbl0.dataset.text, 1800);
         animateLine(p0, 1400);
 
@@ -1445,7 +1446,7 @@
         // Animate label 1 + connector (delayed)
         setTimeout(()=>{
           lbl1.classList.add('lbl-in');
-          lbl1.textContent = lbl1.dataset.text.replace(/./g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
+          lbl1.textContent = lbl1.dataset.text.replace(/[^ ]/g, ()=> CHARS[Math.floor(Math.random()*CHARS.length)]);
           scramble(lbl1, lbl1.dataset.text, 1800);
           animateLine(p1, 1400);
         }, 500);
