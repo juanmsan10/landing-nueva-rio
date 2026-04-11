@@ -611,6 +611,7 @@
       margin: 0 auto;
     }
     .chaos-illustration { width: 100%; height: auto; display: block; }
+    .chaos-img-mobile { display: none; }
     .chaos-play-cursor {
       position: fixed; pointer-events: none; z-index: 9999; display: none;
       background: #1a1a18; color: #f8f7f4; border-radius: 40px;
@@ -647,6 +648,8 @@
       .chaos-sub { font-size: 20px; }
       .chaos-pain-title { font-size: 21px; }
       .chaos-pain-desc { font-size: 18px; }
+      .chaos-img-desktop { display: none; }
+      .chaos-img-mobile { display: block; }
       .desktop-br { display: none; }
     }
   </style>
@@ -711,7 +714,8 @@
   <p class="chaos-sub reveal reveal-delay-1">El costo de operar sin procesos efectivos se acumula día tras día.</p>
 
   <div class="chaos-visual reveal reveal-delay-2" id="chaos-visual">
-    <img src="nudos.png" alt="" class="chaos-illustration">
+    <img src="nudos.png" alt="" class="chaos-illustration chaos-img-desktop">
+    <img src="nudos_movil.png" alt="" class="chaos-illustration chaos-img-mobile">
   </div>
 
   <!-- Play Video cursor -->
