@@ -419,11 +419,7 @@
       .ticker-item { font-size: 17px; padding: 0 1.75rem; }
       .mobile-br { display: block; }
       .desktop-br { display: none; }
-      /* PROBLEMA (chaos) */
-      .chaos-headline { margin-bottom: calc(1.25rem + 40px); }
-      .chaos-sub { font-size: 20px; }
-      .chaos-pain-title { font-size: 24px; }
-      .chaos-pain-desc { font-size: 21px; }
+      /* PROBLEMA (chaos) — overrides in later 560px block */
       .problema-intro p { font-size: 1.35rem; line-height: 1.6; }
       .problema-intro { margin-top: 4rem; }
       .pain-title { font-size: 22px; }
@@ -449,9 +445,9 @@
       /* HUMANOS CON IA */
       .ia-section { padding-top: calc(4rem + 20px); }
       .ia-headline { font-size: calc(2.2rem + 10px); }
-      .ia-sub { font-size: 20px; margin-bottom: 70px; }
-      .ia-gradient-box { width: calc(100% - 20px); }
-      .ia-img-wrap { width: 170vw; max-width: 170vw; position: relative; left: 50%; transform: translateX(-50%); }
+      .ia-sub { font-size: 20px; margin-bottom: 50px; }
+      .ia-gradient-box { width: calc(100% - 30px); }
+      .ia-img-wrap { width: 145vw; max-width: 145vw; position: relative; left: 50%; transform: translateX(-50%); }
       .ia-label-el { font-size: 9px; letter-spacing: 0.08em; }
       /* CÓMO EMPEZAR */
       #diagnostico { padding-top: calc(5rem + 40px); }
@@ -642,7 +638,13 @@
       .chaos-section { padding: 5rem 1.5rem 4rem; }
       .chaos-pain-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 560px) { .chaos-headline { font-size: calc(2rem - 2px); } .desktop-br { display: none; } }
+    @media (max-width: 560px) {
+      .chaos-headline { font-size: calc(2rem - 2px); margin-bottom: calc(1.25rem + 40px); }
+      .chaos-sub { font-size: 20px; }
+      .chaos-pain-title { font-size: 24px; }
+      .chaos-pain-desc { font-size: 21px; }
+      .desktop-br { display: none; }
+    }
   </style>
 </head>
 <body>
