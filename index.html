@@ -398,35 +398,45 @@
     }
     @media (max-width: 560px) {
       .pain-grid, .diag-grid { grid-template-columns: 1fr; }
+      /* HERO */
       .hero { padding: 120px 1.25rem 90px; }
       .hero-eyebrow { font-size: 16px; margin-bottom: 1.5rem; }
       .hero-h1 { font-size: 2.8rem; margin-bottom: 2.5rem; }
       .hero-sub { font-size: 1.35rem; line-height: 1.6; margin-bottom: 2rem; }
-      .btn-primary { height: 58px; font-size: 17px; padding: 0 28px; }
-      .btn-ghost-light { height: 58px; font-size: 17px; padding: 0 22px; }
+      .btn-primary { height: 64px; font-size: 19px; padding: 0 32px; }
+      .btn-ghost-light { height: 64px; font-size: 19px; padding: 0 26px; }
       .hero-stats { max-width: 100%; margin-top: 3rem; grid-template-columns: 1fr; }
-      .stat-item { padding: 1.75rem 1.5rem; white-space: normal; }
+      .stat-item { padding: 1.75rem 2rem; white-space: normal; }
       .stat-num { font-size: 3.2rem; }
       .stat-label { font-size: 18px; }
+      /* TICKER */
+      .ticker { padding: 17px 0; }
+      /* GENERAL */
       section { padding: 5rem 1.25rem; }
       .section-label { font-size: 16px; }
       .section-h2 { font-size: 2.4rem; margin-bottom: 3rem; }
       .section-sub { font-size: 1.4rem; margin-bottom: 2.5rem; line-height: 1.6; }
       .ticker-item { font-size: 17px; padding: 0 1.75rem; }
+      .mobile-br { display: block; }
+      .desktop-br { display: none; }
+      /* PROBLEMA (chaos) */
+      .chaos-headline { margin-bottom: calc(1.25rem + 20px); }
+      .chaos-sub { font-size: calc(1.3rem + 1px); }
+      .chaos-pain-title { font-size: 21px; }
+      .chaos-pain-desc { font-size: 19px; }
       .problema-intro p { font-size: 1.35rem; line-height: 1.6; }
       .problema-intro { margin-top: 4rem; }
       .pain-title { font-size: 22px; }
       .pain-desc { font-size: 20px; line-height: 1.6; }
       .pain-item { padding: 1.75rem; }
+      /* SOLUCIÓN */
       .solucion-intro { font-size: 1.35rem; line-height: 1.35; white-space: normal; }
       .solucion-tag { font-size: 19px; padding: 18px 24px; line-height: 1.5; margin-bottom: calc(1.5rem + 10px); }
-      .prod-headline { font-size: 2rem; }
-      .prod-sub { font-size: 20px; margin-bottom: 2.5rem; }
+      .prod-headline { font-size: 2rem; margin-bottom: calc(1.25rem + 20px); }
+      .prod-sub { font-size: 20px; margin-bottom: calc(2.5rem + 20px); }
       .prod-card-title { font-size: 20px; }
-      .ia-headline { font-size: 2.2rem; }
-      .ia-sub { font-size: 17px; }
-      .ia-label-el { font-size: 9px; letter-spacing: 0.08em; }
-      .mobile-br { display: block; }
+      /* MÉTODO */
+      #metodo .section-sub { font-size: calc(1.4rem - 2px); }
       .nivel-card { padding: calc(1.75rem + 20px) 1.75rem; }
       .nivel-num { min-height: 0; padding: 0.42rem 0.72rem; font-size: 15px; }
       .nivel-title { font-size: 24px; }
@@ -436,20 +446,32 @@
       .fase-num { font-size: 20px; }
       .fase-title { font-size: 24px; }
       .fase-desc { font-size: 20px; line-height: 1.6; }
+      /* HUMANOS CON IA */
+      .ia-section { padding-top: calc(4rem + 20px); }
+      .ia-headline { font-size: calc(2.2rem + 10px); }
+      .ia-sub { font-size: 20px; margin-bottom: 50px; }
+      .ia-label-el { font-size: 9px; letter-spacing: 0.08em; }
+      /* CÓMO EMPEZAR */
+      #diagnostico { padding-top: calc(5rem + 40px); }
       .diag-header p { font-size: 1.35rem; }
       .diag-step-card { padding: 1.5rem 1.25rem; }
       .diag-step-num { font-size: 14px; letter-spacing: 0.1em; }
       .diag-step-icon { width: 44px; height: 44px; }
       .diag-step-title { font-size: 22px; }
       .diag-step-desc { font-size: 19px; line-height: 1.65; }
+      #diagnostico .btn-primary { height: 64px; font-size: 19px; padding: 0 32px; }
+      /* ESTO NO ES */
+      #paraquien .section-h2 { font-size: calc(2.4rem - 3px); }
+      #paraquien > div { width: 98% !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
       .pq-card { padding: 1.75rem; }
       .pq-heading { font-size: 17px; }
       .pq-list li { font-size: 20px; line-height: 1.55; }
+      /* CTA */
       .cta-section { padding: 3.5rem 1.25rem; }
       .cta-bullet span { font-size: 21px; line-height: 1.5; }
       .cta-card { padding: calc(2rem + 20px) 2rem !important; }
       .cta-card-title { font-size: 30px !important; margin-bottom: 1.25rem !important; }
-      .cta-card-sub { font-size: 21px !important; margin-bottom: 2rem !important; }
+      .cta-card-sub { font-size: 19px !important; margin-bottom: 2rem !important; }
       .cta-card-btn { font-size: 19px !important; height: 70px !important; }
       .cta-card-note { font-size: 16px !important; margin-top: 1.25rem !important; }
     }
@@ -617,7 +639,7 @@
       .chaos-section { padding: 5rem 1.5rem 4rem; }
       .chaos-pain-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 560px) { .chaos-headline { font-size: 2rem; } }
+    @media (max-width: 560px) { .chaos-headline { font-size: 2rem; } .desktop-br { display: none; } }
   </style>
 </head>
 <body>
@@ -676,7 +698,7 @@
 
 <!-- ░░ CHAOS — light ░░ -->
 <section class="chaos-section" id="problema">
-  <h2 class="chaos-headline reveal">El <em>40% del tiempo</em> de tu equipo<br>se va en resolver lo que <em>ya debería funcionar.</em></h2>
+  <h2 class="chaos-headline reveal">El <em>40% del tiempo</em> de tu equipo<br class="desktop-br">se va en resolver lo que <em>ya debería funcionar.</em></h2>
   <p class="chaos-sub reveal reveal-delay-1">Operar sin procesos efectivos es un costo invisible que se acumula cada semana.</p>
 
   <div class="chaos-visual reveal reveal-delay-2" id="chaos-visual">
@@ -714,7 +736,7 @@
   <div class="sec-grid"></div>
   <div class="sec-glow c"></div>
   <div class="container" style="position:relative;z-index:1;">
-    <h2 class="prod-headline reveal">Todo lo que necesitas para una <em>operación predecible y efectiva</em></h2>
+    <h2 class="prod-headline reveal">Todo lo que necesitas <br class="mobile-br">para una <em>operación predecible y efectiva</em></h2>
     <p class="prod-sub reveal reveal-delay-1">No dejamos un PDF. Instalamos el sistema completo.</p>
 
     <div class="prod-grid-wrap" style="position:relative;">
@@ -906,7 +928,7 @@
 <!-- ░░ HUMANOS CON IA ░░ -->
 <section class="light-s ia-section" id="ia">
   <div class="ia-gradient-box"></div>
-  <h2 class="ia-headline">Humanos con IA, <em>una nueva era</em></h2>
+  <h2 class="ia-headline">Humanos con IA, <br class="mobile-br"><em>una nueva era</em></h2>
   <p class="ia-sub">Tu equipo se multiplica, sin contratar una sola persona más.</p>
   <div class="ia-visual-area" id="ia-visual">
     <div class="ia-img-wrap" id="ia-img-wrap">
@@ -928,7 +950,7 @@
   <div class="container">
     <div class="diag-header reveal" style="text-align:center;">
       <div class="section-label section-label-light" style="display:inline-flex;margin-left:auto;margin-right:auto;">Cómo empezar</div>
-      <h2 class="section-h2" style="text-align:center;margin-left:auto;margin-right:auto;">3 pasos. <em>Sin compromiso hasta que haga sentido.</em></h2>
+      <h2 class="section-h2" style="text-align:center;margin-left:auto;margin-right:auto;">3 pasos. <em>Sin compromiso hasta <br class="mobile-br">que haga sentido.</em></h2>
       <p style="text-align:center;">Así es el camino desde que nos contactas hasta que arrancamos.</p>
     </div>
     <div class="diag-grid reveal reveal-delay-1">
